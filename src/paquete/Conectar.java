@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * Clase que gestiona la conexion con una base de datos MySQL mediante la funcion conectar().
+ */
 public class Conectar {
 
 	/**
@@ -17,7 +20,7 @@ public class Conectar {
 	 */
 	public static Connection conectar(String url, String usuario, String contrasennia) {
 
-		// Objeto Connection que sera devuelto por la fucion.
+		// Objeto Connection que sera devuelto por la funcion.
 		Connection conn = null;
 
 		try {
@@ -25,18 +28,19 @@ public class Conectar {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			// Establece la conexion utilizando los parametros proporcionados.
 			conn = DriverManager.getConnection(url, usuario, contrasennia);
-			
+
 			// Captura excepciones si el controlador JDBC no se encuentra en el classpath.
 		} catch (ClassNotFoundException e) {
 			System.err.println("Error: Controlador JDBC no encontrado.");
 			e.printStackTrace();
+			
 			// Captura excepciones relacionadas con errores de conexion, como credenciales
 			// incorrectas o URL invalida.
 		} catch (SQLException e) {
 			System.err.println("Error: No se pudo establecer la conexión con la base de datos.");
 			e.printStackTrace();
 		}
-		
+
 		// Retorna la conexión si fue exitosa; de lo contrario, retorna null.
 		return conn;
 
