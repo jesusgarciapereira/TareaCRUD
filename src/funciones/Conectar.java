@@ -1,4 +1,4 @@
-package paquete;
+package funciones;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
