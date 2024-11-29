@@ -63,9 +63,8 @@ public class CrearTabla {
                         + "    CONSTRAINT FK_Alumnos FOREIGN KEY (idAlumno) REFERENCES Alumnos (idAlumno)\n"
                         + ");";
                     break;
-
+                   	// Si el nombre no es valido.
                 default:
-                	// Si el nombre no es valido.
                     System.err.println("Error: El nombre de la tabla especificado no es válido.");
                     
             }

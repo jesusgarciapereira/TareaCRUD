@@ -21,7 +21,8 @@ public class InsertarDato {
 			// Selecciona la consulta SQL
 			sql += "INSERT INTO " + nombreTabla + " VALUES ";
 
-			// Concatena los campos en la consulta SQL segun el nombre de la tabla especificado.
+			// Concatena los campos en la consulta SQL segun el nombre de la tabla
+			// especificado.
 			switch (nombreTabla) {
 			case "Profesores":
 				sql += "(NULL, '" + campos[0] + "', '" + campos[1] + "', '" + campos[2] + "', " + campos[3] + ");";
@@ -29,13 +30,11 @@ public class InsertarDato {
 			case "Alumnos":
 				sql += "(NULL, '" + campos[0] + "', '" + campos[1] + "', '" + campos[2] + "');";
 				break;
-
 			case "Matriculas":
 				sql += "(NULL, " + campos[0] + ", " + campos[1] + ", '" + campos[2] + "', " + campos[3] + ");";
 				break;
-
+			// Si el nombre no es valido.
 			default:
-				// Si el nombre no es valido.
 				System.err.println("Error: El nombre de la tabla especificado no es válido.");
 
 			}
