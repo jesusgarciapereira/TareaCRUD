@@ -4,73 +4,88 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * Clase que gestiona la creación de tablas en una base de datos MySQL.
+ */
 public class CrearTabla {
-	// Ofrecer al usuario la opcion de crear las 3 tablas o solo una
-	public static boolean crearTabla(Connection conn, String nombreTabla) throws SQLException {
-		Statement stmt = null;
-		String sql = "";
-		
-		boolean creacionCompletada = false;
-		
-		try {
-			stmt = conn.createStatement();
-			
-			switch (nombreTabla) {
-			case "Profesores":
-				sql += "CREATE TABLE Profesores (\r\n"
-						+ "    idProfesor INT AUTO_INCREMENT,\r\n"
-						+ "    Nombre VARCHAR(45),\r\n"
-						+ "    Apellidos VARCHAR(45),\r\n"
-						+ "    FechaNacimiento DATE,\r\n"
-						+ "    Antiguedad INT,\r\n"
-						+ "\r\n"
-						+ "	CONSTRAINT PK_Profesores PRIMARY KEY (idProfesor)\r\n"
-						+ ");";
-				break;
-				
-			case "Alumnos":
-				sql += "CREATE TABLE Alumnos (\r\n"
-						+ "    idAlumno INT AUTO_INCREMENT,\r\n"
-						+ "    Nombre VARCHAR(45),\r\n"
-						+ "    Apellidos VARCHAR(45),\r\n"
-						+ "    FechaNacimiento DATE,\r\n"
-						+ "\r\n"
-						+ "	CONSTRAINT PK_Alumnos PRIMARY KEY (idAlumno)\r\n"
-						+ ");";
-				break;
-				
-			case "Matriculas":
-				sql += "CREATE TABLE Matriculas (\r\n"
-						+ "    idMatricula INT AUTO_INCREMENT,\r\n"
-						+ "    idProfesor INT,\r\n"
-						+ "    idAlumno INT,\r\n"
-						+ "    Asignatura VARCHAR(45),\r\n"
-						+ "    Curso INT,\r\n"
-						+ "\r\n"
-						+ "	CONSTRAINT PK_Matriculas PRIMARY KEY (idMatricula),\r\n"
-						+ "    CONSTRAINT FK_Profesores FOREIGN KEY (idProfesor) REFERENCES Profesores (idProfesor),\r\n"
-						+ "    CONSTRAINT FK_Alumnos FOREIGN KEY (idAlumno) REFERENCES Alumnos (idAlumno)\r\n"
-						+ ");";
-				break;
 
-			default:
+    /**
+     * Crea una tabla en la base de datos según el nombre proporcionado.
+     * 
+     * @param conn       Conexion activa a la base de datos.
+     * @param nombreTabla Nombre de la tabla a crear. Valores validos: "Profesores", "Alumnos", "Matriculas".
+     * @return `true` si la tabla se creo con éxito; `false` si ocurrio algún error.
+     * @throws SQLException En caso de errores relacionados con la conexión o SQL.
+     */
+    public static boolean crearTabla(Connection conn, String nombreTabla) throws SQLException {
+        // Declaracion de objetos necesarios para la ejecución de la consulta.
+        Statement stmt = null;
+        String sql = ""; // Variable para almacenar la consulta SQL.
+        
+        boolean creacionCompletada = false; // Indicador de exito en la creacion de la tabla.
 
-				break;
-			}
-			
-			stmt.executeUpdate(sql);
-			creacionCompletada = true;
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			stmt.close();
-			conn.close();
-		}
+        try {
+            // Inicializa el objeto Statement para ejecutar consultas SQL.
+            stmt = conn.createStatement();
 
+            // Selecciona la consulta SQL segun el nombre de la tabla especificado.
+            switch (nombreTabla) {
+                case "Profesores":
+                    sql += "CREATE TABLE Profesores (\n"
+                        + "    idProfesor INT AUTO_INCREMENT,\n"
+                        + "    Nombre VARCHAR(45),\n"
+                        + "    Apellidos VARCHAR(45),\n"
+                        + "    FechaNacimiento DATE,\n"
+                        + "    Antiguedad INT,\n"
+                        + "    CONSTRAINT PK_Profesores PRIMARY KEY (idProfesor)\n"
+                        + ");";
+                    break;
 
-		
-		return creacionCompletada;
-	}
+                case "Alumnos":
+                    sql += "CREATE TABLE Alumnos (\n"
+                        + "    idAlumno INT AUTO_INCREMENT,\n"
+                        + "    Nombre VARCHAR(45),\n"
+                        + "    Apellidos VARCHAR(45),\n"
+                        + "    FechaNacimiento DATE,\n"
+                        + "    CONSTRAINT PK_Alumnos PRIMARY KEY (idAlumno)\n"
+                        + ");";
+                    break;
+
+                case "Matriculas":
+                    sql += "CREATE TABLE Matriculas (\n"
+                        + "    idMatricula INT AUTO_INCREMENT,\n"
+                        + "    idProfesor INT,\n"
+                        + "    idAlumno INT,\n"
+                        + "    Asignatura VARCHAR(45),\n"
+                        + "    Curso INT,\n"
+                        + "    CONSTRAINT PK_Matriculas PRIMARY KEY (idMatricula),\n"
+                        + "    CONSTRAINT FK_Profesores FOREIGN KEY (idProfesor) REFERENCES Profesores (idProfesor),\n"
+                        + "    CONSTRAINT FK_Alumnos FOREIGN KEY (idAlumno) REFERENCES Alumnos (idAlumno)\n"
+                        + ");";
+                    break;
+
+                default:
+                	// Si el nombre no es valido.
+                    System.err.println("Error: El nombre de la tabla especificado no es válido.");
+                    
+            }
+
+            // Ejecuta la consulta SQL para crear la tabla.
+            stmt.executeUpdate(sql);
+            creacionCompletada = true; // Marca la creacion como exitosa.
+            
+            // Captura errores relacionados con la ejecucion de la consulta SQL.
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        } finally {
+            // Libera recursos utilizados por el objeto Statement.
+                stmt.close();
+            // Cierra la conexion para evitar fugas de recursos.
+                conn.close();
+        }
+
+        // Retorna el estado de la creacion de la tabla.
+        return creacionCompletada;
+    }
 }
