@@ -1,6 +1,7 @@
 package funciones;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -77,4 +78,16 @@ public class BorrarDatos {
 
 	}
 
+	public static boolean borrarDatoConcreto(Connection conn, String nombreTabla, String filtro, boolean confirmar) {
+		
+		// Declaracion de objetos necesarios para la ejecución de la consulta.
+		PreparedStatement  stmt = null;
+				String sql = ""; // Variable para almacenar la consulta SQL.
+				int filasAfectadas;
+
+				boolean borradoCompletado = false; // Indicador de exito en el borrado de campos.
+				
+				return borradoCompletado;
+		
+	}
 }
