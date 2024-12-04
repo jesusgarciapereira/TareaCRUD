@@ -7,7 +7,7 @@ import java.sql.Statement;
 /**
  * Clase que gestiona la creación de tablas en una base de datos MySQL.
  */
-public class CrearTabla {
+public class CrearTablas {
 
     /**
      * Crea una tabla en la base de datos segun el nombre proporcionado.

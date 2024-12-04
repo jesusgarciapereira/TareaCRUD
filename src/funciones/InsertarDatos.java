@@ -7,7 +7,7 @@ import java.sql.Statement;
 /**
  * Clase que gestiona la insercion de datos en una base de datos MySQL.
  */
-public class InsertarDato {
+public class InsertarDatos {
 
 	/**
 	 * Inserta un dato en una tabla de la base de datos segun los parametros

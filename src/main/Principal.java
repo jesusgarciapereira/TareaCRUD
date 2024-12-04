@@ -1,56 +1,74 @@
 package main;
 
-import java.io.Console;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Arrays;
 
 import funciones.BorrarDatos;
+import funciones.BorrarTablas;
 import funciones.Conectar;
-import funciones.CrearTabla;
-import funciones.InsertarDato;
 
 public class Principal {
 
 	public static void main(String[] args) {
 
-		// COMPROBAR BORRAR UN DATO
+		// COMPROBAR BORRAR TABLA
 		Connection conexion = Conectar.conectar("jdbc:mysql://dns11036.phdns11.es:3306/ad2425_jgarcia", "jgarcia",
 				"12345");
-		boolean borradoCompletado = false;
-//		String nombreTabla = "Profesores";
-		
-//		String nombreColumna = "Nombre";
-//		String nombreColumna = "Apellidos";
-//		String nombreColumna = "FechaNacimiento";
-//		String nombreColumna = "Antiguedad";
-
-		String nombreTabla = "Alumnos";
-		
-		String nombreColumna = "Nombre";
-//		String nombreColumna = "Apellidos";
-//		String nombreColumna = "FechaNacimiento";		
-		
+		boolean tablaBorrada = false;
+		String nombreTabla = "Profesores";
+//		String nombreTabla = "Alumnos";
 //		String nombreTabla = "Matriculas";
-//		
-//		String nombreColumna = "Asignatura";
-//		String nombreColumna = "Curso";
 
-		String nombreDato = "Carlos";
-
-		System.out.println("¿Seguro que quieres borrar este dato de la tabla " + nombreTabla + "?");
 		try {
-			borradoCompletado = BorrarDatos.borrarDatoConcreto(conexion, nombreTabla, nombreColumna, nombreDato, true);
-			if (borradoCompletado) {
-				System.out.println("Dato borrado correctamente de la tabla " + nombreTabla);
+			tablaBorrada = BorrarTablas.borrarTabla(conexion, nombreTabla);
+			if (tablaBorrada) {
+				System.out.println("Tabla " + nombreTabla + " borrada correctamente");
 			} else {
-				System.err.println("Error: No se han podido borrar los datos de la tabla " + nombreTabla);
+				System.err.println("Error: No se ha podido borrar la tabla " + nombreTabla);
 			}
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+//		// COMPROBAR BORRAR UN DATO
+//		Connection conexion = Conectar.conectar("jdbc:mysql://dns11036.phdns11.es:3306/ad2425_jgarcia", "jgarcia",
+//				"12345");
+//		boolean borradoCompletado = false;
+//		String nombreTabla = "Profesores";
+//		
+////		String nombreColumna = "Nombre";
+////		String nombreColumna = "Apellidos";
+//		String nombreColumna = "FechaNacimiento";
+////		String nombreColumna = "Antiguedad";
+//
+////		String nombreTabla = "Alumnos";
+//		
+////		String nombreColumna = "Nombre";
+////		String nombreColumna = "Apellidos";
+////		String nombreColumna = "FechaNacimiento";		
+//		
+////		String nombreTabla = "Matriculas";
+////		
+////		String nombreColumna = "Asignatura";
+////		String nombreColumna = "Curso";
+//
+//		String nombreDato = "1980-05-15";
+//
+//		System.out.println("¿Seguro que quieres borrar este dato de la tabla " + nombreTabla + "?");
+//		try {
+//			borradoCompletado = BorrarDatos.borrarDatoConcreto(conexion, nombreTabla, nombreColumna, nombreDato, false);
+//			if (borradoCompletado) {
+//				System.out.println("Dato borrado correctamente de la tabla " + nombreTabla);
+//			} else {
+//				System.err.println("Error: No se ha podido borrar los datos de la tabla " + nombreTabla);
+//			}
+//
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 
 //		// COMPROBAR BORRAR TODOS LOS DATOS
 //		Connection conexion = Conectar.conectar("jdbc:mysql://dns11036.phdns11.es:3306/ad2425_jgarcia", "jgarcia",
