@@ -4,7 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 
+import entidades.Alumno;
+import entidades.Matricula;
 import entidades.Profesor;
 
 /**
@@ -80,7 +83,8 @@ public class BorrarDatos {
 
 	}
 
-	public static boolean borrarDatoConcreto(Connection conn, String nombreTabla, String columna, String dato, boolean confirmar) {
+	public static boolean borrarDatoConcreto(Connection conn, String nombreTabla, String nombreColumna,
+			String nombreDato, boolean confirmar) throws SQLException {
 
 		// Declaracion de objetos necesarios para la ejecución de la consulta.
 		PreparedStatement stmt = null;
@@ -90,128 +94,168 @@ public class BorrarDatos {
 		boolean borradoCompletado = false; // Indicador de exito en el borrado de campos.
 
 		try {
+
+			// Desactivar el modo de autocommit para manejar transacciones manualmente
+			conn.setAutoCommit(false);
+
 			// Selecciona la consulta SQL
-			sql += "DELETE FROM " + nombreTabla + "WHERE " + columna + " =?;";
+			sql += "DELETE FROM " + nombreTabla + " WHERE " + nombreColumna + " = ?;";
 
 			stmt = conn.prepareStatement(sql);
-			
+
 			switch (nombreTabla) {
 			case "Profesores":
-				
+
 				Profesor profesor = new Profesor();
-				
-				switch (columna) {
+
+				switch (nombreColumna) {
 				case "Nombre":
-					profesor.setNombre(dato);
+					profesor.setNombre(nombreDato);
 					stmt.setString(1, profesor.getNombre());
 					break;
 				case "Apellidos":
-					sql += "WHERE " + columna + " =?;";
+					profesor.setApellidos(nombreDato);
+					stmt.setString(1, profesor.getApellidos());
 					break;
 				case "FechaNacimiento":
-					sql += "WHERE " + columna + " =?;";
+					profesor.setFechaNacimiento(LocalDate.parse(nombreDato)); // 2000-05-15
+					stmt.setString(1, profesor.getFechaNacimiento().toString());
 					break;
 				case "Antiguedad":
-					sql += "WHERE " + columna + " =?;";
+					profesor.setAntiguedad(Integer.parseInt(nombreDato));
+					stmt.setInt(1, profesor.getAntiguedad());
 					break;
 				default:
 					System.err.println("Error: El nombre del campo especificado no es válido.");
 					break;
 				}
+				break;
 			case "Alumnos":
-				switch (columna) {
+
+				Alumno alumno = new Alumno();
+
+				switch (nombreColumna) {
 				case "Nombre":
-					sql += "WHERE " + columna + " =?;";
+					alumno.setNombre(nombreDato);
+					stmt.setString(1, alumno.getNombre());
 					break;
 				case "Apellidos":
-					sql += "WHERE " + columna + " =?;";
+					alumno.setApellidos(nombreDato);
+					stmt.setString(1, alumno.getApellidos());
 					break;
 				case "FechaNacimiento":
-					sql += "WHERE " + columna + " =?;";
+					alumno.setFechaNacimiento(LocalDate.parse(nombreDato)); // 2000-05-15
+					stmt.setString(1, alumno.getFechaNacimiento().toString());
 					break;
 				default:
 					System.err.println("Error: El nombre del campo especificado no es válido.");
 					break;
 				}
+				break;
 			case "Matriculas":
-				switch (columna) {
+
+				Matricula matricula = new Matricula();
+
+				switch (nombreColumna) {
 				case "Asignatura":
-					sql += "WHERE " + columna + " =?;";
+					matricula.setAsignatura(nombreDato);
+					stmt.setString(1, matricula.getAsignatura());
 					break;
 				case "Curso":
-					sql += "WHERE " + columna + " =?;";
+					matricula.setCurso(Integer.parseInt(nombreDato));
+					stmt.setInt(1, matricula.getCurso());
 					break;
 				default:
 					System.err.println("Error: El nombre del campo especificado no es válido.");
 					break;
 				}
-				// Si el nombre no es valido.
+				break;
+			// Si el nombre no es valido.
 			default:
 				System.err.println("Error: El nombre de la tabla especificado no es válido.");
-
+				break;
 			}
-			
-			
+
+			stmt.execute();
+
+			// Segun la confirmacion del usuario
+			if (confirmar) {
+				conn.commit(); // Confirmamos la transaccion
+				borradoCompletado = true; // Marca el borrado como exitoso.
+				// System.out.println("Cambios confirmados");
+				// System.out.println("Cambios confirmados. Filas afectadas: " +
+				// filasAfectadas);
+
+			} else {
+				conn.rollback(); // Revertimos la transaccion
+				// System.out.println("Cambios revertidos.");
+			}
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			// Libera recursos utilizados por el objeto Statement.
+			stmt.close();
+			// Cierra la conexion para evitar fugas de recursos.
+			conn.close();
 		}
-
-		// Concatena los campos en la consulta SQL segun el nombre de la tabla
-		// especificado.
-//		switch (nombreTabla) {
-//		case "Profesores":
-//			switch (filtro) {
-//			case "Nombre":
-//				sql += "WHERE " + filtro + " =?;";
-//				break;
-//			case "Apellidos":
-//				sql += "WHERE " + filtro + " =?;";
-//				break;
-//			case "FechaNacimiento":
-//				sql += "WHERE " + filtro + " =?;";
-//				break;
-//			case "Antiguedad":
-//				sql += "WHERE " + filtro + " =?;";
-//				break;
-//			default:
-//				System.err.println("Error: El nombre del campo especificado no es válido.");
-//				break;
-//			}
-//		case "Alumnos":
-//			switch (filtro) {
-//			case "Nombre":
-//				sql += "WHERE " + filtro + " =?;";
-//				break;
-//			case "Apellidos":
-//				sql += "WHERE " + filtro + " =?;";
-//				break;
-//			case "FechaNacimiento":
-//				sql += "WHERE " + filtro + " =?;";
-//				break;
-//			default:
-//				System.err.println("Error: El nombre del campo especificado no es válido.");
-//				break;
-//			}
-//		case "Matriculas":
-//			switch (filtro) {
-//			case "Asignatura":
-//				sql += "WHERE " + filtro + " =?;";
-//				break;
-//			case "Curso":
-//				sql += "WHERE " + filtro + " =?;";
-//				break;
-//			default:
-//				System.err.println("Error: El nombre del campo especificado no es válido.");
-//				break;
-//			}
-//			// Si el nombre no es valido.
-//		default:
-//			System.err.println("Error: El nombre de la tabla especificado no es válido.");
-//
-//		}
 
 		return borradoCompletado;
 
 	}
 }
+
+// Concatena los campos en la consulta SQL segun el nombre de la tabla
+// especificado.
+//switch (nombreTabla) {
+//case "Profesores":
+//	switch (filtro) {
+//	case "Nombre":
+//		sql += "WHERE " + filtro + " =?;";
+//		break;
+//	case "Apellidos":
+//		sql += "WHERE " + filtro + " =?;";
+//		break;
+//	case "FechaNacimiento":
+//		sql += "WHERE " + filtro + " =?;";
+//		break;
+//	case "Antiguedad":
+//		sql += "WHERE " + filtro + " =?;";
+//		break;
+//	default:
+//		System.err.println("Error: El nombre del campo especificado no es válido.");
+//		break;
+//	}
+//case "Alumnos":
+//	switch (filtro) {
+//	case "Nombre":
+//		sql += "WHERE " + filtro + " =?;";
+//		break;
+//	case "Apellidos":
+//		sql += "WHERE " + filtro + " =?;";
+//		break;
+//	case "FechaNacimiento":
+//		sql += "WHERE " + filtro + " =?;";
+//		break;
+//	default:
+//		System.err.println("Error: El nombre del campo especificado no es válido.");
+//		break;
+//	}
+//case "Matriculas":
+//	switch (filtro) {
+//	case "Asignatura":
+//		sql += "WHERE " + filtro + " =?;";
+//		break;
+//	case "Curso":
+//		sql += "WHERE " + filtro + " =?;";
+//		break;
+//	default:
+//		System.err.println("Error: El nombre del campo especificado no es válido.");
+//		break;
+//	}
+//	// Si el nombre no es valido.
+//default:
+//	System.err.println("Error: El nombre de la tabla especificado no es válido.");
+//
+//}
