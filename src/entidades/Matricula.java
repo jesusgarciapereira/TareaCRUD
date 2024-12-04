@@ -62,12 +62,30 @@ public class Matricula {
     }
 
     /**
+     * Establece el identificador unico de la matricula.
+     *
+     * @param idMatricula El nuevo identificador unico de la matricula.
+     */
+    public void setIdMatricula(int idMatricula) {
+        this.idMatricula = idMatricula;
+    }
+
+    /**
      * Obtiene el identificador unico del alumno.
      *
      * @return El identificador unico del alumno.
      */
     public int getIdAlumno() {
         return idAlumno;
+    }
+
+    /**
+     * Establece el identificador unico del alumno.
+     *
+     * @param idAlumno El nuevo identificador unico del alumno.
+     */
+    public void setIdAlumno(int idAlumno) {
+        this.idAlumno = idAlumno;
     }
 
     /**
@@ -80,12 +98,30 @@ public class Matricula {
     }
 
     /**
+     * Establece el identificador unico del profesor.
+     *
+     * @param idProfesor El nuevo identificador unico del profesor.
+     */
+    public void setIdProfesor(int idProfesor) {
+        this.idProfesor = idProfesor;
+    }
+
+    /**
      * Obtiene el nombre de la asignatura asociada a la matricula.
      *
      * @return El nombre de la asignatura.
      */
     public String getAsignatura() {
         return asignatura;
+    }
+
+    /**
+     * Establece el nombre de la asignatura asociada a la matricula.
+     *
+     * @param asignatura El nuevo nombre de la asignatura.
+     */
+    public void setAsignatura(String asignatura) {
+        this.asignatura = asignatura;
     }
 
     /**
@@ -96,5 +132,13 @@ public class Matricula {
     public int getCurso() {
         return curso;
     }
-}
 
+    /**
+     * Establece el curso academico al que pertenece la matricula.
+     *
+     * @param curso El nuevo curso academico de la matricula.
+     */
+    public void setCurso(int curso) {
+        this.curso = curso;
+    }
+}

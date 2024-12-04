@@ -37,9 +37,9 @@ public class Alumno {
      * Constructor que inicializa todos los atributos del alumno.
      *
      * @param idAlumno              Identificador unico del alumno.
-     * @param nombre          Nombre del alumno.
-     * @param apellidos       Apellidos del alumno.
-     * @param fechaNacimiento Fecha de nacimiento del alumno.
+     * @param nombre                Nombre del alumno.
+     * @param apellidos             Apellidos del alumno.
+     * @param fechaNacimiento       Fecha de nacimiento del alumno.
      */
     public Alumno(int idAlumno, String nombre, String apellidos, LocalDate fechaNacimiento) {
         this.idAlumno = idAlumno;
@@ -58,12 +58,30 @@ public class Alumno {
     }
 
     /**
+     * Establece el identificador unico del alumno.
+     *
+     * @param idAlumno El nuevo identificador del alumno.
+     */
+    public void setIdAlumno(int idAlumno) {
+        this.idAlumno = idAlumno;
+    }
+
+    /**
      * Obtiene el nombre del alumno.
      *
      * @return El nombre del alumno.
      */
     public String getNombre() {
         return nombre;
+    }
+
+    /**
+     * Establece el nombre del alumno.
+     *
+     * @param nombre El nuevo nombre del alumno.
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     /**
@@ -76,11 +94,29 @@ public class Alumno {
     }
 
     /**
+     * Establece los apellidos del alumno.
+     *
+     * @param apellidos Los nuevos apellidos del alumno.
+     */
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    /**
      * Obtiene la fecha de nacimiento del alumno.
      *
      * @return La fecha de nacimiento del alumno.
      */
     public LocalDate getFechaNacimiento() {
         return fechaNacimiento;
+    }
+
+    /**
+     * Establece la fecha de nacimiento del alumno.
+     *
+     * @param fechaNacimiento La nueva fecha de nacimiento del alumno.
+     */
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
 }

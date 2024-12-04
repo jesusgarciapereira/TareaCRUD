@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import entidades.Profesor;
+
 /**
  * Clase que gestiona el borrado de datos en una base de datos MySQL.
  */
@@ -78,16 +80,138 @@ public class BorrarDatos {
 
 	}
 
-	public static boolean borrarDatoConcreto(Connection conn, String nombreTabla, String filtro, boolean confirmar) {
-		
-		// Declaracion de objetos necesarios para la ejecución de la consulta.
-		PreparedStatement  stmt = null;
-				String sql = ""; // Variable para almacenar la consulta SQL.
-				int filasAfectadas;
+	public static boolean borrarDatoConcreto(Connection conn, String nombreTabla, String columna, String dato, boolean confirmar) {
 
-				boolean borradoCompletado = false; // Indicador de exito en el borrado de campos.
+		// Declaracion de objetos necesarios para la ejecución de la consulta.
+		PreparedStatement stmt = null;
+		String sql = ""; // Variable para almacenar la consulta SQL.
+		int filasAfectadas;
+
+		boolean borradoCompletado = false; // Indicador de exito en el borrado de campos.
+
+		try {
+			// Selecciona la consulta SQL
+			sql += "DELETE FROM " + nombreTabla + "WHERE " + columna + " =?;";
+
+			stmt = conn.prepareStatement(sql);
+			
+			switch (nombreTabla) {
+			case "Profesores":
 				
-				return borradoCompletado;
-		
+				Profesor profesor = new Profesor();
+				
+				switch (columna) {
+				case "Nombre":
+					profesor.setNombre(dato);
+					stmt.setString(1, profesor.getNombre());
+					break;
+				case "Apellidos":
+					sql += "WHERE " + columna + " =?;";
+					break;
+				case "FechaNacimiento":
+					sql += "WHERE " + columna + " =?;";
+					break;
+				case "Antiguedad":
+					sql += "WHERE " + columna + " =?;";
+					break;
+				default:
+					System.err.println("Error: El nombre del campo especificado no es válido.");
+					break;
+				}
+			case "Alumnos":
+				switch (columna) {
+				case "Nombre":
+					sql += "WHERE " + columna + " =?;";
+					break;
+				case "Apellidos":
+					sql += "WHERE " + columna + " =?;";
+					break;
+				case "FechaNacimiento":
+					sql += "WHERE " + columna + " =?;";
+					break;
+				default:
+					System.err.println("Error: El nombre del campo especificado no es válido.");
+					break;
+				}
+			case "Matriculas":
+				switch (columna) {
+				case "Asignatura":
+					sql += "WHERE " + columna + " =?;";
+					break;
+				case "Curso":
+					sql += "WHERE " + columna + " =?;";
+					break;
+				default:
+					System.err.println("Error: El nombre del campo especificado no es válido.");
+					break;
+				}
+				// Si el nombre no es valido.
+			default:
+				System.err.println("Error: El nombre de la tabla especificado no es válido.");
+
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		// Concatena los campos en la consulta SQL segun el nombre de la tabla
+		// especificado.
+//		switch (nombreTabla) {
+//		case "Profesores":
+//			switch (filtro) {
+//			case "Nombre":
+//				sql += "WHERE " + filtro + " =?;";
+//				break;
+//			case "Apellidos":
+//				sql += "WHERE " + filtro + " =?;";
+//				break;
+//			case "FechaNacimiento":
+//				sql += "WHERE " + filtro + " =?;";
+//				break;
+//			case "Antiguedad":
+//				sql += "WHERE " + filtro + " =?;";
+//				break;
+//			default:
+//				System.err.println("Error: El nombre del campo especificado no es válido.");
+//				break;
+//			}
+//		case "Alumnos":
+//			switch (filtro) {
+//			case "Nombre":
+//				sql += "WHERE " + filtro + " =?;";
+//				break;
+//			case "Apellidos":
+//				sql += "WHERE " + filtro + " =?;";
+//				break;
+//			case "FechaNacimiento":
+//				sql += "WHERE " + filtro + " =?;";
+//				break;
+//			default:
+//				System.err.println("Error: El nombre del campo especificado no es válido.");
+//				break;
+//			}
+//		case "Matriculas":
+//			switch (filtro) {
+//			case "Asignatura":
+//				sql += "WHERE " + filtro + " =?;";
+//				break;
+//			case "Curso":
+//				sql += "WHERE " + filtro + " =?;";
+//				break;
+//			default:
+//				System.err.println("Error: El nombre del campo especificado no es válido.");
+//				break;
+//			}
+//			// Si el nombre no es valido.
+//		default:
+//			System.err.println("Error: El nombre de la tabla especificado no es válido.");
+//
+//		}
+
+		return borradoCompletado;
+
 	}
 }

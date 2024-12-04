@@ -66,7 +66,7 @@ public class CrearTabla {
                    	// Si el nombre no es valido.
                 default:
                     System.err.println("Error: El nombre de la tabla especificado no es válido.");
-                    
+                    break;
             }
 
             // Ejecuta la consulta SQL para crear la tabla.
