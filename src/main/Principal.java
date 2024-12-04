@@ -1,8 +1,11 @@
 package main;
 
+import java.io.Console;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Arrays;
 
+import funciones.BorrarDatos;
 import funciones.Conectar;
 import funciones.CrearTabla;
 import funciones.InsertarDato;
@@ -11,31 +14,54 @@ public class Principal {
 
 	public static void main(String[] args) {
 
+		// COMPROBAR BORRAR TODOS LOS DATOS
 		Connection conexion = Conectar.conectar("jdbc:mysql://dns11036.phdns11.es:3306/ad2425_jgarcia", "jgarcia",
 				"12345");
-		boolean datoInsertado = false;
+		boolean borradoCompletado = false;
 //		String nombreTabla = "Profesores";
-//		String[] campos = {"Juan", "Pérez", "1980-05-12", "10"};
 //		String nombreTabla = "Alumnos";
-//		String[] campos = {"Carlos", "López", "2005-07-12"};
 		String nombreTabla = "Matriculas";
-		String[] campos = {"4", "4", "Matemáticas", "2023"};
 
+		System.out.println("¿Seguro que quieres borrar todos los datos de la tabla " + nombreTabla + "?");
 		try {
-			datoInsertado = InsertarDato.insertarDato(conexion, nombreTabla, campos);
-
-			if (datoInsertado) {
-				System.out.println("Datos insertados correctamente en le tabla " + nombreTabla);
+			borradoCompletado = BorrarDatos.borrarTodosDatos(conexion, nombreTabla, false);
+			if (borradoCompletado) {
+				System.out.println("Datos borrados correctamente de la tabla " + nombreTabla);
 			} else {
-				System.err.println("Error: No se ha podido insertar los datos en la tabla " + nombreTabla);
+				System.err.println("Error: No se han podido borrados los datos de la tabla " + nombreTabla);
 			}
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		// COMPROBAR INSERTAR DATO
+//		Connection conexion = Conectar.conectar("jdbc:mysql://dns11036.phdns11.es:3306/ad2425_jgarcia", "jgarcia",
+//				"12345");
+//		boolean datoInsertado = false;
+////		String nombreTabla = "Profesores";
+////		String[] campos = {"Juan", "Pérez", "1980-05-12", "10"};
+////		String nombreTabla = "Alumnos";
+////		String[] campos = {"Carlos", "López", "2005-07-12"};
+//		String nombreTabla = "Matriculas";
+//		String[] campos = {"1", "1", "Matemáticas", "2023"};
+//
+//		try {
+//			datoInsertado = InsertarDato.insertarDato(conexion, nombreTabla, campos);
+//
+//			if (datoInsertado) {
+//				System.out.println("Datos insertados correctamente en la tabla " + nombreTabla);
+//			} else {
+//				System.err.println("Error: No se ha podido insertar los datos en la tabla " + nombreTabla);
+//			}
+//
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 
-		// COMPROBAR CCREAR TABLA
+		// COMPROBAR CREAR TABLA
 //		Connection conexion = Conectar.conectar("jdbc:mysql://dns11036.phdns11.es:3306/ad2425_jgarcia", "jgarcia", "12345");
 //		boolean tablaCreada = false;
 //		String nombreTabla = "Matriculas";
@@ -61,6 +87,12 @@ public class Principal {
 //		} else {
 //			System.out.println("Conexión exitosa");
 //		}
+		
+		// CONTRASEÑA
+		
+//		Console console = System.console();
+//		char[] passwordArray = console.readPassword("Introduce la contraseña");
+//		Arrays.fill(passwordArray, ' ');
 
 	}
 

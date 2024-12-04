@@ -10,12 +10,12 @@ import java.sql.Statement;
 public class CrearTabla {
 
     /**
-     * Crea una tabla en la base de datos según el nombre proporcionado.
+     * Crea una tabla en la base de datos segun el nombre proporcionado.
      * 
      * @param conn       Conexion activa a la base de datos.
      * @param nombreTabla Nombre de la tabla a crear. Valores validos: "Profesores", "Alumnos", "Matriculas".
-     * @return `true` si la tabla se creo con éxito; `false` si ocurrio algún error.
-     * @throws SQLException En caso de errores relacionados con la conexión o SQL.
+     * @return `true` si la tabla se creo con exito; `false` si ocurrio algún error.
+     * @throws SQLException En caso de errores relacionados con la conexion o SQL.
      */
     public static boolean crearTabla(Connection conn, String nombreTabla) throws SQLException {
         // Declaracion de objetos necesarios para la ejecución de la consulta.
