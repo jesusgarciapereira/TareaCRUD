@@ -3,7 +3,7 @@ package main;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import funciones.ActualizarDatos;
+import funciones.ModificarDatos;
 import funciones.BorrarDatos;
 import funciones.BorrarTablas;
 import funciones.Conectar;
@@ -12,49 +12,49 @@ public class Principal {
 
 	public static void main(String[] args) {
 		
-		// COMPROBAR ACTUALIZAR DATO
+		// COMPROBAR MODIFICAR DATO (No lo he probado todo pero aparentemente funciona)
 		Connection conexion = Conectar.conectar("jdbc:mysql://dns11036.phdns11.es:3306/ad2425_jgarcia", "jgarcia",
 				"12345");
-		boolean tablaActualizada = false;
+		boolean tablaModificada = true;
 		String nombreTabla = "Profesores";
 		
-		String nombreColumnaAntigua = "idProfesor";
-//		String nombreColumnaAntigua = "Nombre";
-//		String nombreColumnaAntigua = "Apellidos";
-//		String nombreColumnaAntigua = "FechaNacimiento";
-//		String nombreColumnaAntigua = "Antiguedad";
+//		String nombreColumnaFiltro = "idProfesor";
+		String nombreColumnaFiltro = "Nombre";
+//		String nombreColumnaFiltro = "Apellidos";
+//		String nombreColumnaFiltro = "FechaNacimiento";
+//		String nombreColumnaFiltro = "Antiguedad";
 
 //		String nombreTabla = "Alumnos"
 
-//		String nombreColumnaAntigua = "idAlumno";
-//		String nombreColumnaAntigua = "Nombre";
-//		String nombreColumnaAntigua = "Apellidos";
-//		String nombreColumnaAntigua = "FechaNacimiento";		
+//		String nombreColumnaFiltro = "idAlumno";
+//		String nombreColumnaFiltro = "Nombre";
+//		String nombreColumnaFiltro = "Apellidos";
+//		String nombreColumnaFiltro = "FechaNacimiento";		
 		
 //		String nombreTabla = "Matriculas";
 		
-//		String nombreColumnaAntigua = "idMatricula";
-//		String nombreColumnaAntigua = "idProfesor";
-//		String nombreColumnaAntigua = "idAlumno";
-//		String nombreColumnaAntigua = "Asignatura";
-//		String nombreColumnaAntigua = "Curso";
+//		String nombreColumnaFiltro = "idMatricula";
+//		String nombreColumnaFiltro = "idProfesor";
+//		String nombreColumnaFiltro = "idAlumno";
+//		String nombreColumnaFiltro = "Asignatura";
+//		String nombreColumnaFiltro = "Curso";
 		
-		String nombreColumnaNueva = "Nombre";
-		String nombreDatoAntiguo = "1";
+		String nombreDatoFiltro = "Ana";
 		
-		
+		String nombreColumnaModificada = "idProfesor";
+		String nombreDatoNuevo = "1";
 		
 		try {
-			tablaActualizada = ActualizarDatos.actualizarDato(conexion, nombreTabla, nombreColumnaAntigua, nombreColumnaNueva, nombreTabla, nombreTabla, tablaActualizada);
+			tablaModificada = ModificarDatos.modificarDato(conexion, nombreTabla, nombreColumnaModificada, nombreDatoNuevo, nombreColumnaFiltro, nombreDatoFiltro, tablaModificada);
 			
 			/*
-			Connection conn, String nombreTabla, String nombreColumnaAntigua, String nombreColumnaNueva,
-			String nombreDatoAntiguo, String nombreDatoNuevo, boolean confirmar
+			Connection conn, String nombreTabla, String nombreColumnaModificada,
+			String nombreDatoNuevo, String nombreColumnaFiltro, String nombreDatoFiltro, boolean confirmar
 			*/
-			if (tablaActualizada) {
-				System.out.println("Tabla " + nombreTabla + " actualizada correctamente");
+			if (tablaModificada) {
+				System.out.println("Tabla " + nombreTabla + " modificada correctamente");
 			} else {
-				System.err.println("Error: No se ha podido actualizar la tabla " + nombreTabla);
+				System.err.println("Error: No se ha podido modificar la tabla " + nombreTabla);
 			}
 
 		} catch (SQLException e) {
@@ -84,7 +84,7 @@ public class Principal {
 //			e.printStackTrace();
 //		}
 
-//		// COMPROBAR BORRAR UN DATO
+//		// COMPROBAR BORRAR UN DATO (Aun no he probado con ids)
 //		Connection conexion = Conectar.conectar("jdbc:mysql://dns11036.phdns11.es:3306/ad2425_jgarcia", "jgarcia",
 //				"12345");
 //		boolean borradoCompletado = false;

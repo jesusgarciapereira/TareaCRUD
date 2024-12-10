@@ -107,6 +107,7 @@ public class BorrarDatos {
 			// Selecciona la consulta SQL
 			sql += "DELETE FROM " + nombreTabla + " WHERE " + nombreColumna + " = ?;";
 
+			// Pasamos la consulta al objeto PreparedStatement
 			stmt = conn.prepareStatement(sql);
 
 			// Dependiendo del nombre de la tabla, inicializa el objeto correspondiente
@@ -117,6 +118,11 @@ public class BorrarDatos {
 
 				// Segun el nombre de la columna, establece el valor que se va a buscar
 				switch (nombreColumna) {
+				case "idProfesor":
+					// Convierte el dato a un numero entero
+					profesor.setIdProfesor(Integer.parseInt(nombreDato));
+					stmt.setInt(1, profesor.getIdProfesor()); // Asigna el valor al PreparedStatement
+					break;
 				case "Nombre":
 					profesor.setNombre(nombreDato);
 					stmt.setString(1, profesor.getNombre()); // Asigna el valor al PreparedStatement
@@ -147,6 +153,11 @@ public class BorrarDatos {
 
 				// Segun el nombre de la columna, establece el valor que se va a buscar
 				switch (nombreColumna) {
+				case "idAlumno":
+					// Convierte el dato a un numero entero
+					alumno.setIdAlumno(Integer.parseInt(nombreDato));
+					stmt.setInt(1, alumno.getIdAlumno()); // Asigna el valor al PreparedStatement
+					break;
 				case "Nombre":
 					alumno.setNombre(nombreDato);
 					stmt.setString(1, alumno.getNombre()); // Asigna el valor al PreparedStatement
@@ -172,6 +183,21 @@ public class BorrarDatos {
 
 				// Segun el nombre de la columna, establece el valor que se va a buscar
 				switch (nombreColumna) {
+				case "idMatricula":
+					// Convierte el dato a un numero entero
+					matricula.setIdMatricula(Integer.parseInt(nombreDato));
+					stmt.setInt(1, matricula.getIdMatricula()); // Asigna el valor al PreparedStatement
+					break;
+				case "idProfesor":
+					// Convierte el dato a un numero entero
+					matricula.setIdProfesor(Integer.parseInt(nombreDato));
+					stmt.setInt(1, matricula.getIdProfesor()); // Asigna el valor al PreparedStatement
+					break;
+				case "idAlumno":
+					// Convierte el dato a un numero entero
+					matricula.setIdAlumno(Integer.parseInt(nombreDato));
+					stmt.setInt(1, matricula.getIdAlumno()); // Asigna el valor al PreparedStatement
+					break;
 				case "Asignatura":
 					matricula.setAsignatura(nombreDato);
 					stmt.setString(1, matricula.getAsignatura()); // Asigna el valor al PreparedStatement
