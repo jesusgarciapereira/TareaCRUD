@@ -3,6 +3,7 @@ package main;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import funciones.ActualizarDatos;
 import funciones.BorrarDatos;
 import funciones.BorrarTablas;
 import funciones.Conectar;
@@ -10,27 +11,78 @@ import funciones.Conectar;
 public class Principal {
 
 	public static void main(String[] args) {
-
-		// COMPROBAR BORRAR TABLA
+		
+		// COMPROBAR ACTUALIZAR DATO
 		Connection conexion = Conectar.conectar("jdbc:mysql://dns11036.phdns11.es:3306/ad2425_jgarcia", "jgarcia",
 				"12345");
-		boolean tablaBorrada = false;
+		boolean tablaActualizada = false;
 		String nombreTabla = "Profesores";
-//		String nombreTabla = "Alumnos";
-//		String nombreTabla = "Matriculas";
+		
+		String nombreColumnaAntigua = "idProfesor";
+//		String nombreColumnaAntigua = "Nombre";
+//		String nombreColumnaAntigua = "Apellidos";
+//		String nombreColumnaAntigua = "FechaNacimiento";
+//		String nombreColumnaAntigua = "Antiguedad";
 
+//		String nombreTabla = "Alumnos"
+
+//		String nombreColumnaAntigua = "idAlumno";
+//		String nombreColumnaAntigua = "Nombre";
+//		String nombreColumnaAntigua = "Apellidos";
+//		String nombreColumnaAntigua = "FechaNacimiento";		
+		
+//		String nombreTabla = "Matriculas";
+		
+//		String nombreColumnaAntigua = "idMatricula";
+//		String nombreColumnaAntigua = "idProfesor";
+//		String nombreColumnaAntigua = "idAlumno";
+//		String nombreColumnaAntigua = "Asignatura";
+//		String nombreColumnaAntigua = "Curso";
+		
+		String nombreColumnaNueva = "Nombre";
+		String nombreDatoAntiguo = "1";
+		
+		
+		
 		try {
-			tablaBorrada = BorrarTablas.borrarTabla(conexion, nombreTabla);
-			if (tablaBorrada) {
-				System.out.println("Tabla " + nombreTabla + " borrada correctamente");
+			tablaActualizada = ActualizarDatos.actualizarDato(conexion, nombreTabla, nombreColumnaAntigua, nombreColumnaNueva, nombreTabla, nombreTabla, tablaActualizada);
+			
+			/*
+			Connection conn, String nombreTabla, String nombreColumnaAntigua, String nombreColumnaNueva,
+			String nombreDatoAntiguo, String nombreDatoNuevo, boolean confirmar
+			*/
+			if (tablaActualizada) {
+				System.out.println("Tabla " + nombreTabla + " actualizada correctamente");
 			} else {
-				System.err.println("Error: No se ha podido borrar la tabla " + nombreTabla);
+				System.err.println("Error: No se ha podido actualizar la tabla " + nombreTabla);
 			}
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+
+		// COMPROBAR BORRAR TABLA
+//		Connection conexion = Conectar.conectar("jdbc:mysql://dns11036.phdns11.es:3306/ad2425_jgarcia", "jgarcia",
+//				"12345");
+//		boolean tablaBorrada = false;
+//		String nombreTabla = "Profesores";
+////		String nombreTabla = "Alumnos";
+////		String nombreTabla = "Matriculas";
+//
+//		try {
+//			tablaBorrada = BorrarTablas.borrarTabla(conexion, nombreTabla);
+//			if (tablaBorrada) {
+//				System.out.println("Tabla " + nombreTabla + " borrada correctamente");
+//			} else {
+//				System.err.println("Error: No se ha podido borrar la tabla " + nombreTabla);
+//			}
+//
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 
 //		// COMPROBAR BORRAR UN DATO
 //		Connection conexion = Conectar.conectar("jdbc:mysql://dns11036.phdns11.es:3306/ad2425_jgarcia", "jgarcia",

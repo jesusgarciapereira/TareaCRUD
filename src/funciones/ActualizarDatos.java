@@ -3,18 +3,13 @@ package funciones;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
-
-import entidades.Alumno;
-import entidades.Matricula;
-import entidades.Profesor;
 
 /**
  * Clase que gestiona la actualizacion de datos en una base de datos MySQL.
  */
 public class ActualizarDatos {
 
-	public static boolean insertarDato(Connection conn, String nombreTabla, String nombreColumnaAntiguo, String nombreColumnaNuevo,
+	public static boolean actualizarDato(Connection conn, String nombreTabla, String nombreColumnaAntigua, String nombreColumnaNueva,
 			String nombreDatoAntiguo, String nombreDatoNuevo, boolean confirmar) throws SQLException {
 
 		// Declaracion de objetos necesarios para la ejecucion de la consulta.
@@ -32,7 +27,7 @@ public class ActualizarDatos {
 					conn.setAutoCommit(false);
 
 					// Selecciona la consulta SQL
-					sql += "UPDATE " + nombreTabla + " SET " + nombreColumnaNuevo + " = " + nombreDatoNuevo + " WHERE " + nombreColumnaAntiguo + " = " + nombreDatoAntiguo + ";";
+					sql += "UPDATE " + nombreTabla + " SET " + nombreColumnaNueva + " = " + nombreDatoNuevo + " WHERE " + nombreColumnaAntigua + " = " + nombreDatoAntiguo + ";";
 
 					stmt.executeUpdate(sql);
 					
