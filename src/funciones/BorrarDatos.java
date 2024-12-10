@@ -68,7 +68,7 @@ public class BorrarDatos {
 		} finally {
 			// Libera recursos utilizados por el objeto Statement.
 			stmt.close();
-			// Cierra la conexion para evitar fugas de recursos.
+			// Cierra la conexion para evitar fugas de recurso.
 			conn.close();
 		}
 		// Retorna el estado del borrado.
