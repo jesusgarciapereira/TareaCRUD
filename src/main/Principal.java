@@ -7,61 +7,75 @@ import funciones.ModificarDatos;
 import funciones.BorrarDatos;
 import funciones.BorrarTablas;
 import funciones.Conectar;
+import funciones.ListarTablas;
 
 public class Principal {
 
 	public static void main(String[] args) {
 		
-		// COMPROBAR MODIFICAR DATO (No lo he probado todo pero aparentemente funciona)
+		
+		// COMPROBAR LISTAR TABLA
 		Connection conexion = Conectar.conectar("jdbc:mysql://dns11036.phdns11.es:3306/ad2425_jgarcia", "jgarcia",
 				"12345");
-		boolean tablaModificada = true;
-		String nombreTabla = "Profesores";
-		
-//		String nombreColumnaFiltro = "idProfesor";
-		String nombreColumnaFiltro = "Nombre";
-//		String nombreColumnaFiltro = "Apellidos";
-//		String nombreColumnaFiltro = "FechaNacimiento";
-//		String nombreColumnaFiltro = "Antiguedad";
-
-//		String nombreTabla = "Alumnos"
-
-//		String nombreColumnaFiltro = "idAlumno";
-//		String nombreColumnaFiltro = "Nombre";
-//		String nombreColumnaFiltro = "Apellidos";
-//		String nombreColumnaFiltro = "FechaNacimiento";		
-		
-//		String nombreTabla = "Matriculas";
-		
-//		String nombreColumnaFiltro = "idMatricula";
-//		String nombreColumnaFiltro = "idProfesor";
-//		String nombreColumnaFiltro = "idAlumno";
-//		String nombreColumnaFiltro = "Asignatura";
-//		String nombreColumnaFiltro = "Curso";
-		
-		String nombreDatoFiltro = "Ana";
-		
-		String nombreColumnaModificada = "idProfesor";
-		String nombreDatoNuevo = "1";
+		String nombreTabla = "Matriculas";
 		
 		try {
-			tablaModificada = ModificarDatos.modificarDato(conexion, nombreTabla, nombreColumnaModificada, nombreDatoNuevo, nombreColumnaFiltro, nombreDatoFiltro, tablaModificada);
-			
-			/*
-			Connection conn, String nombreTabla, String nombreColumnaModificada,
-			String nombreDatoNuevo, String nombreColumnaFiltro, String nombreDatoFiltro, boolean confirmar
-			*/
-			if (tablaModificada) {
-				System.out.println("Tabla " + nombreTabla + " modificada correctamente");
-			} else {
-				System.err.println("Error: No se ha podido modificar la tabla " + nombreTabla);
-			}
-
+			ListarTablas.listarTodo(conexion, nombreTabla);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+//		// COMPROBAR MODIFICAR DATO (No lo he probado todo pero aparentemente funciona)
+//		Connection conexion = Conectar.conectar("jdbc:mysql://dns11036.phdns11.es:3306/ad2425_jgarcia", "jgarcia",
+//				"12345");
+//		boolean tablaModificada = true;
+//		String nombreTabla = "Profesores";
+//		
+////		String nombreColumnaFiltro = "idProfesor";
+//		String nombreColumnaFiltro = "Nombre";
+////		String nombreColumnaFiltro = "Apellidos";
+////		String nombreColumnaFiltro = "FechaNacimiento";
+////		String nombreColumnaFiltro = "Antiguedad";
+//
+////		String nombreTabla = "Alumnos"
+//
+////		String nombreColumnaFiltro = "idAlumno";
+////		String nombreColumnaFiltro = "Nombre";
+////		String nombreColumnaFiltro = "Apellidos";
+////		String nombreColumnaFiltro = "FechaNacimiento";		
+//		
+////		String nombreTabla = "Matriculas";
+//		
+////		String nombreColumnaFiltro = "idMatricula";
+////		String nombreColumnaFiltro = "idProfesor";
+////		String nombreColumnaFiltro = "idAlumno";
+////		String nombreColumnaFiltro = "Asignatura";
+////		String nombreColumnaFiltro = "Curso";
+//		
+//		String nombreDatoFiltro = "Ana";
+//		
+//		String nombreColumnaModificada = "idProfesor";
+//		String nombreDatoNuevo = "1";
+//		
+//		try {
+//			tablaModificada = ModificarDatos.modificarDato(conexion, nombreTabla, nombreColumnaModificada, nombreDatoNuevo, nombreColumnaFiltro, nombreDatoFiltro, tablaModificada);
+//			
+//			/*
+//			Connection conn, String nombreTabla, String nombreColumnaModificada,
+//			String nombreDatoNuevo, String nombreColumnaFiltro, String nombreDatoFiltro, boolean confirmar
+//			*/
+//			if (tablaModificada) {
+//				System.out.println("Tabla " + nombreTabla + " modificada correctamente");
+//			} else {
+//				System.err.println("Error: No se ha podido modificar la tabla " + nombreTabla);
+//			}
+//
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
 
 		// COMPROBAR BORRAR TABLA
 //		Connection conexion = Conectar.conectar("jdbc:mysql://dns11036.phdns11.es:3306/ad2425_jgarcia", "jgarcia",
