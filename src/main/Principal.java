@@ -13,18 +13,38 @@ public class Principal {
 
 	public static void main(String[] args) {
 		
+		// COMPROBAR LISTAR TABLA TOTAL CON FILTRO
+				Connection conexion = Conectar.conectar("jdbc:mysql://dns11036.phdns11.es:3306/ad2425_jgarcia", "jgarcia",
+						"12345");
+				String nombreTabla = "Profesores";
+				String nombreColumnaFiltro = "Nombre";
+				
+				String opcionFiltro = "=";
+				String nombreDatoFiltro = "'Ana'";
+				
+//				String opcionFiltro = "LIKE";
+//				String nombreDatoFiltro = "'%z%'";
+				
+//				String opcionFiltro = "=";
+//				String nombreDatoFiltro = "5";
+				try {
+					ListarTablas.listarFiltrado(conexion, nombreTabla, nombreColumnaFiltro, opcionFiltro, nombreDatoFiltro);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		
-		// COMPROBAR LISTAR TABLA
-		Connection conexion = Conectar.conectar("jdbc:mysql://dns11036.phdns11.es:3306/ad2425_jgarcia", "jgarcia",
-				"12345");
-		String nombreTabla = "Matriculas";
-		
-		try {
-			ListarTablas.listarTodo(conexion, nombreTabla);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		// COMPROBAR LISTAR TABLA TOTAL
+//		Connection conexion = Conectar.conectar("jdbc:mysql://dns11036.phdns11.es:3306/ad2425_jgarcia", "jgarcia",
+//				"12345");
+//		String nombreTabla = "Matriculas";
+//		
+//		try {
+//			ListarTablas.listarTodo(conexion, nombreTabla);
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 //		// COMPROBAR MODIFICAR DATO (No lo he probado todo pero aparentemente funciona)
 //		Connection conexion = Conectar.conectar("jdbc:mysql://dns11036.phdns11.es:3306/ad2425_jgarcia", "jgarcia",
