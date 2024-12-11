@@ -49,11 +49,14 @@ public class BorrarTablas {
 }
 
 /*
- * finally { try { // Verifica si el objeto stmt no es nulo antes de cerrarlo
- * para evitar excepciones. if (stmt != null) stmt.close(); // Libera recursos
- * utilizados por el objeto Statement.
+ * finally { try { 
+ * // Verifica si el objeto stmt no es nulo antes de cerrarlo para evitar excepciones. 
+ * if (stmt != null) 
+ * stmt.close(); // Libera recursos utilizados por el objeto Statement.
  * 
- * // Cierra la conexion para liberar recursos del sistema. conn.close(); }
+ * // Cierra la conexion para liberar recursos del sistema. 
+ * conn.close(); 
+ * }
  * catch (SQLException se) { // Manejo de excepciones al intentar cerrar stmt o
  * conn. System.out.println("No se ha podido cerrar la conexion."); } }
  */

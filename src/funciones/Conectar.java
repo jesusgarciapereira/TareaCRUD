@@ -32,13 +32,13 @@ public class Conectar {
 			// Captura excepciones si el controlador JDBC no se encuentra en el classpath.
 		} catch (ClassNotFoundException e) {
 			System.err.println("Error: Controlador JDBC no encontrado.");
-			e.printStackTrace();
 			
 			// Captura excepciones relacionadas con errores de conexion, como credenciales
 			// incorrectas o URL invalida.
 		} catch (SQLException e) {
-			System.err.println("Error: No se pudo establecer la conexión con la base de datos.");
-			e.printStackTrace();
+			System.err.println("Error: Dirección, usuario y/o contraseña incorrectos.");
+			// System.err.println("Error: " + e.getMessage()); Por si es un problema de internet
+
 		}
 
 		// Retorna la conexión si fue exitosa; de lo contrario, retorna null.

@@ -1,15 +1,15 @@
-package main;
+package principal;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import funciones.ModificarDatos;
 import funciones.BorrarDatos;
 import funciones.BorrarTablas;
 import funciones.Conectar;
 import funciones.ListarTablas;
+import funciones.ModificarDatos;
 
-public class Principal {
+public class Probando {
 
 	public static void main(String[] args) {
 		
