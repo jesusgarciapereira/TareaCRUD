@@ -47,7 +47,9 @@ public class Principal {
 				conexion = Conectar.conectar(url, usuario, contrasennia);
 
 				if (conexion == null) {
-					System.err.println("Error: No se ha podido llevar a cabo la conexion");
+					System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
+					System.out.println("No se ha podido llevar a cabo la conexión");
+
 				} else {
 					System.out.println("Conexión exitosa con la Base de Datos");
 				}
@@ -69,25 +71,24 @@ public class Principal {
 							if (hecho) {
 								System.out.println("Tabla " + nombreTabla + " creada con éxito");
 							}
-							
+
 							nombreTabla = "Alumnos";
 							hecho = CrearTablas.crearTabla(conexion, nombreTabla);
 							if (hecho) {
 								System.out.println("Tabla " + nombreTabla + " creada con éxito");
 							}
-							
+
 							nombreTabla = "Matriculas";
 							hecho = CrearTablas.crearTabla(conexion, nombreTabla);
 							if (hecho) {
 								System.out.println("Tabla " + nombreTabla + " creada con éxito");
 							}
-							
+
 						} else {
-							System.err.println("Error: No estás conectado a la Base de Datos");
-							System.err.flush(); // Asegura que el mensaje de error se vacíe inmediatamente
+							System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
+							System.out.println("No estás conectado a la Base de Datos");
 							System.out.println(
 									"Sugerencia: Primero, siga los pasos de la opción 1 (Conectar con la Base de Datos) e intente crear las Tablas de nuevo");
-							System.out.flush(); // Asegura que el mensaje sugerencia se vacíe inmediatamente
 						}
 						System.out.println();
 						break;
@@ -95,19 +96,22 @@ public class Principal {
 						break;
 
 					default:
-						System.err.println("Error: Opción no disponible");
+						System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
+						System.out.println("Opción no disponible, elija del 0 al 2");
+						System.out.println();
 						break;
 					} // Cierre del switch secundario
-					break;
 				} // Cierre del while secundario
+				break;
 			case 0:
 				break;
 
 			default:
-				System.err.println("Error: Opción no disponible");
+				System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
+				System.out.println("Opción no disponible, elija del 0 al 7");
+				System.out.println();
 				break;
 			}// Cierre del switch principal
-
 		} // Cierre del while principal
 
 		System.out.println("Saliendo del programa...");
@@ -120,6 +124,7 @@ public class Principal {
 			}
 			// Manejo de excepciones al intentar la conexion.
 		} catch (SQLException se) {
+			System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
 			System.out.println("No se ha podido cerrar la conexion.");
 		}
 
@@ -155,6 +160,7 @@ public class Principal {
 	 * 
 	 * System.out.println(); }
 	 */
+
 	/**
 	 * Menu principal del programa que muestra las diferentes opciones
 	 */
@@ -189,7 +195,8 @@ public class Principal {
 			// Si se produce un InputMismatchException
 		} catch (InputMismatchException e) {
 			// Mostrará este mensaje
-			System.err.println("Error: El valor introducido no es un número entero");
+			System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
+			System.out.println("El valor introducido no es un número entero");
 		} finally {
 			// Siempre limpiamos el buffer
 			sc.nextLine();
