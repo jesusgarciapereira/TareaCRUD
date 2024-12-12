@@ -18,6 +18,9 @@ public class Principal {
 		int opcionSubmenuA;
 		int opcionSubmenuB;
 
+		String url = "";
+		String usuario = "";
+		String contrasennia = "";
 		Connection conexion = null;
 		// Para que esté conectada siempre, borrala despues
 		conexion = Conectar.conectar("jdbc:mysql://dns11036.phdns11.es:3306/ad2425_jgarcia", "jgarcia", "12345");
@@ -34,7 +37,27 @@ public class Principal {
 
 			switch (opcionMenu) {
 			case 1:
-				conexion = peticionesOpcion1(sc);
+				System.out.println(
+						"Introduzca la dirección de la Base de Datos en formato JDBC (Tal que así: jdbc:mysql://dns11036.phdns11.es:3306/ad2425_jgarcia)");
+				url = sc.nextLine();
+				System.out.println("Introduzca el nombre de usuario (Tal que así: jgarcia)");
+				usuario = sc.nextLine();
+				System.out.println("Introduzca la contraseña (Tal que así: 12345)");
+				contrasennia = sc.nextLine();
+
+				System.out.println();
+
+				conexion = Conectar.conectar(url, usuario, contrasennia);
+
+				if (conexion == null) {
+					System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
+					System.out.println("No se ha podido llevar a cabo la conexión");
+
+				} else {
+					System.out.println("Conexión exitosa con la Base de Datos");
+				}
+
+				System.out.println();
 				break;
 			case 2:
 				opcionSubmenuA = -1;
@@ -164,35 +187,38 @@ public class Principal {
 
 	}
 
-	private static Connection peticionesOpcion1(Scanner sc) {
-		String url;
-		String usuario;
-		String contrasennia;
-		Connection conexion;
-		System.out.println(
-				"Introduzca la dirección de la Base de Datos en formato JDBC (Tal que así: jdbc:mysql://dns11036.phdns11.es:3306/ad2425_jgarcia)");
-		url = sc.nextLine();
-		System.out.println("Introduzca el nombre de usuario (Tal que así: jgarcia)");
-		usuario = sc.nextLine();
-		System.out.println("Introduzca la contraseña (Tal que así: 12345)");
-		contrasennia = sc.nextLine();
+//	private static Connection peticionesOpcion1(Scanner sc) {
+//		String url;
+//		String usuario;
+//		String contrasennia;
+//		Connection conexion;
+//		System.out.println(
+//				"Introduzca la dirección de la Base de Datos en formato JDBC (Tal que así: jdbc:mysql://dns11036.phdns11.es:3306/ad2425_jgarcia)");
+//		url = sc.nextLine();
+//		System.out.println("Introduzca el nombre de usuario (Tal que así: jgarcia)");
+//		usuario = sc.nextLine();
+//		System.out.println("Introduzca la contraseña (Tal que así: 12345)");
+//		contrasennia = sc.nextLine();
+//
+//		System.out.println();
+//
+//		conexion = Conectar.conectar(url, usuario, contrasennia);
+//
+//		if (conexion == null) {
+//			System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
+//			System.out.println("No se ha podido llevar a cabo la conexión");
+//
+//		} else {
+//			System.out.println("Conexión exitosa con la Base de Datos");
+//		}
+//
+//		System.out.println();
+//		return conexion;
+//	}
 
-		System.out.println();
-
-		conexion = Conectar.conectar(url, usuario, contrasennia);
-
-		if (conexion == null) {
-			System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
-			System.out.println("No se ha podido llevar a cabo la conexión");
-
-		} else {
-			System.out.println("Conexión exitosa con la Base de Datos");
-		}
-
-		System.out.println();
-		return conexion;
-	}
-
+	/**
+	 * Submenu de Crear Tablas
+	 */
 	private static void subMenuCrearTablas() {
 		System.out.println("Crear Tablas:");
 		System.out.println("=============");
@@ -203,10 +229,12 @@ public class Principal {
 		System.out.print("Escriba una opción: ");
 	}
 
+	/**
+	 * Submenu de Crear una Tabla en concreto
+	 */
 	private static void subMenuCrearUnaTablaConcreta() {
 		System.out.println("Crear una Tabla en concreto:");
 		System.out.println("===========================");
-
 		System.out.println("1. Profesores.");
 		System.out.println("2. Alumnos.");
 		System.out.println("3. Matriculas.");
@@ -216,24 +244,7 @@ public class Principal {
 	}
 
 	// Pendiente
-	/*
-	 * private static void peticionesOpcion1(Scanner sc) { String url; String
-	 * usuario; String contrasennia; Connection conexion; System.out.
-	 * println("Introduzca la dirección de la Base de Datos en formato JDBC (Tal que así: jdbc:mysql://dns11036.phdns11.es:3306)"
-	 * ); url = sc.nextLine();
-	 * System.out.println("Introduzca el nombre de usuario (Tal que así: jgarcia)");
-	 * usuario = sc.nextLine();
-	 * System.out.println("Introduzca la contraseña (Tal que así: 12345)");
-	 * contrasennia = sc.nextLine();
-	 * 
-	 * conexion = Conectar.conectar(url, usuario, contrasennia);
-	 * 
-	 * if (conexion == null) {
-	 * System.err.println("Error: No se ha podido llevar a cabo la conexion"); }
-	 * else { System.out.println("Conexión exitosa con la Base de Datos"); }
-	 * 
-	 * System.out.println(); }
-	 */
+
 
 	/**
 	 * Menu principal del programa que muestra las diferentes opciones
