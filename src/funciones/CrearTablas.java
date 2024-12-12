@@ -66,11 +66,15 @@ public class CrearTablas {
 			System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
 
 			if (e.getSQLState().equals("42S01")) {
-				System.out.println("La tabla '" + nombreTabla + "' ya existe");
+				System.out.println("La tabla '" + nombreTabla + "' ya existe en la Base de Datos");
+			}
+			else if (e.getSQLState().equals("HY000")) {
+				System.out.println("No se pudo crear la tabla '" + nombreTabla + "' porque tiene relaciones con tablas maestras que aún no existen");
+				System.out.println("Sugerencia: Crear primero la tabla 'Profesores' y la tabla 'Alumnos'");
 			}
 //				 Para averiguar lo que debe salir 
-			System.out.println(e.getMessage());
-			System.out.println("Estado SQL " + e.getSQLState());
+//			System.out.println(e.getMessage());
+//			System.out.println("Estado SQL " + e.getSQLState());
 
 		} finally {
 			try {

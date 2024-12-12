@@ -18,9 +18,6 @@ public class Principal {
 		int opcionSubmenuA;
 		int opcionSubmenuB;
 
-		String url = "";
-		String usuario = "";
-		String contrasennia = "";
 		Connection conexion = null;
 		// Para que esté conectada siempre, borrala despues
 		conexion = Conectar.conectar("jdbc:mysql://dns11036.phdns11.es:3306/ad2425_jgarcia", "jgarcia", "12345");
@@ -37,27 +34,7 @@ public class Principal {
 
 			switch (opcionMenu) {
 			case 1:
-				System.out.println(
-						"Introduzca la dirección de la Base de Datos en formato JDBC (Tal que así: jdbc:mysql://dns11036.phdns11.es:3306/ad2425_jgarcia)");
-				url = sc.nextLine();
-				System.out.println("Introduzca el nombre de usuario (Tal que así: jgarcia)");
-				usuario = sc.nextLine();
-				System.out.println("Introduzca la contraseña (Tal que así: 12345)");
-				contrasennia = sc.nextLine();
-
-				System.out.println();
-
-				conexion = Conectar.conectar(url, usuario, contrasennia);
-
-				if (conexion == null) {
-					System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
-					System.out.println("No se ha podido llevar a cabo la conexión");
-
-				} else {
-					System.out.println("Conexión exitosa con la Base de Datos");
-				}
-
-				System.out.println();
+				conexion = peticionesOpcion1(sc);
 				break;
 			case 2:
 				opcionSubmenuA = -1;
@@ -71,23 +48,21 @@ public class Principal {
 						if (conexion != null) {
 							nombreTabla = "Profesores";
 							tablaCreada = CrearTablas.crearTabla(conexion, nombreTabla);
-							System.out.println((tablaCreada) ? "Tabla '" + nombreTabla + "' creada con éxito" : "");
+							System.out.print((tablaCreada) ? "Tabla '" + nombreTabla + "' creada con éxito\n" : "");
 
 							nombreTabla = "Alumnos";
 							tablaCreada = CrearTablas.crearTabla(conexion, nombreTabla);
-							System.out.println((tablaCreada) ? "Tabla '" + nombreTabla + "' creada con éxito" : "");
+							System.out.print((tablaCreada) ? "Tabla '" + nombreTabla + "' creada con éxito\n" : "");
 
 							nombreTabla = "Matriculas";
 							tablaCreada = CrearTablas.crearTabla(conexion, nombreTabla);
-							System.out.println((tablaCreada) ? "Tabla '" + nombreTabla + "' creada con éxito" : "");
-
+							System.out.print((tablaCreada) ? "Tabla '" + nombreTabla + "' creada con éxito\n" : "");
 						} else {
 							System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
 							System.out.println("No estás conectado a la Base de Datos");
 							System.out.println(
 									"Sugerencia: Primero, siga los pasos de la opción 1 (Conectar con la Base de Datos) e intente crear las Tablas de nuevo");
 						}
-
 						System.out.println();
 
 						opcionSubmenuA = 0;
@@ -95,11 +70,13 @@ public class Principal {
 						nombreTabla = "";
 						break;
 					case 2:
-						if (conexion != null) {
-							opcionSubmenuB = -1;
-							while (opcionSubmenuB != 0) {
+						opcionSubmenuB = -1;
+
+						while (opcionSubmenuB != 0) {
+							if (conexion != null) {
 								subMenuCrearUnaTablaConcreta();
 								opcionSubmenuB = leeInt(sc);
+								System.out.println();
 
 								switch (opcionSubmenuB) {
 								case 1:
@@ -125,23 +102,25 @@ public class Principal {
 
 								if (!nombreTabla.equals("")) {
 									tablaCreada = CrearTablas.crearTabla(conexion, nombreTabla);
-									System.out.println(
-											(tablaCreada) ? "Tabla '" + nombreTabla + "' creada con éxito" : "");
+									System.out.print(
+											(tablaCreada) ? "Tabla '" + nombreTabla + "' creada con éxito\n" : "");
+									opcionSubmenuB = 0;
+									opcionSubmenuA = 0;
+									tablaCreada = false;
+									nombreTabla = "";
 								}
-							} // Cierre del while terciario
+							} else {
+								System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el
+																				// "error"
+								System.out.println("No estás conectado a la Base de Datos");
+								System.out.println(
+										"Sugerencia: Primero, siga los pasos de la opción 1 (Conectar con la Base de Datos) e intente crear las Tablas de nuevo");
+								opcionSubmenuB = 0;
+								opcionSubmenuA = 0;
+							}
 
-						} else {
-							System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
-							System.out.println("No estás conectado a la Base de Datos");
-							System.out.println(
-									"Sugerencia: Primero, siga los pasos de la opción 1 (Conectar con la Base de Datos) e intente crear las Tablas de nuevo");
-						}
-
+						} // Cierre del while terciario
 						System.out.println();
-
-						opcionSubmenuB = 0;
-						tablaCreada = false;
-						nombreTabla = "";
 						break;
 					case 0:
 						break;
@@ -167,7 +146,9 @@ public class Principal {
 
 		System.out.println("Saliendo del programa...");
 
-		try {
+		try
+
+		{
 			// Se asegura de que la conexion no sea null para cerrarla
 			if (conexion != null) {
 				// Cierra la conexion para liberar recursos del sistema.
@@ -181,6 +162,35 @@ public class Principal {
 
 		sc.close();
 
+	}
+
+	private static Connection peticionesOpcion1(Scanner sc) {
+		String url;
+		String usuario;
+		String contrasennia;
+		Connection conexion;
+		System.out.println(
+				"Introduzca la dirección de la Base de Datos en formato JDBC (Tal que así: jdbc:mysql://dns11036.phdns11.es:3306/ad2425_jgarcia)");
+		url = sc.nextLine();
+		System.out.println("Introduzca el nombre de usuario (Tal que así: jgarcia)");
+		usuario = sc.nextLine();
+		System.out.println("Introduzca la contraseña (Tal que así: 12345)");
+		contrasennia = sc.nextLine();
+
+		System.out.println();
+
+		conexion = Conectar.conectar(url, usuario, contrasennia);
+
+		if (conexion == null) {
+			System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
+			System.out.println("No se ha podido llevar a cabo la conexión");
+
+		} else {
+			System.out.println("Conexión exitosa con la Base de Datos");
+		}
+
+		System.out.println();
+		return conexion;
 	}
 
 	private static void subMenuCrearTablas() {
