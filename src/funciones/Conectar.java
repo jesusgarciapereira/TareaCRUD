@@ -5,7 +5,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- * Clase que gestiona la conexion con una base de datos MySQL mediante la funcion conectar().
+ * Clase que gestiona la conexion con una base de datos MySQL mediante la
+ * funcion conectar().
  */
 public class Conectar {
 
@@ -31,16 +32,24 @@ public class Conectar {
 
 			// Captura excepciones si el controlador JDBC no se encuentra en el classpath.
 		} catch (ClassNotFoundException e) {
-			System.err.println("Error: Controlador JDBC no encontrado.");
-			System.err.flush(); // Asegura que el mensaje de error se vacíe inmediatamente
-			
+			System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
+			System.out.println("Controlador JDBC no encontrado.");
+
 			// Captura excepciones relacionadas con errores de conexion, como credenciales
 			// incorrectas o URL invalida.
 		} catch (SQLException e) {
 			System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
-			System.out.println("Dirección, usuario y/o contraseña incorrectos.");
 
-			// System.out.println("Error: " + e.getMessage()); Por si es un problema de internet
+			if (e.getSQLState().equals("08S01"))
+				System.out.println(
+						"No se puede conectar al servidor. Es posible que no haya conexión a Internet o ésta sea muy lenta.");
+			else if (e.getSQLState().equals("08001") || e.getSQLState().equals("28000")) {
+				System.out.println("Dirección, usuario y/o contraseña incorrectos.");
+			}
+
+//			 Para averiguar lo que debe salir 
+//			 System.out.println(e.getMessage());
+//			 System.out.println("Estado SQL " + e.getSQLState());
 
 		}
 

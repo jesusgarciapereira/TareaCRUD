@@ -15,16 +15,19 @@ public class Principal {
 		Scanner sc = new Scanner(System.in);
 
 		int opcionMenu;
-		int opcionSubmenu;
+		int opcionSubmenuA;
+		int opcionSubmenuB;
 
 		String url = "";
 		String usuario = "";
 		String contrasennia = "";
 		Connection conexion = null;
+		// Para que esté conectada siempre, borrala despues
+		conexion = Conectar.conectar("jdbc:mysql://dns11036.phdns11.es:3306/ad2425_jgarcia", "jgarcia", "12345");
 
 		String nombreTabla = "";
 
-		boolean hecho = false;
+		boolean tablaCreada = false;
 
 		opcionMenu = -1;
 		while (opcionMenu != 0) {
@@ -57,32 +60,26 @@ public class Principal {
 				System.out.println();
 				break;
 			case 2:
-				opcionSubmenu = -1;
-				while (opcionSubmenu != 0) {
-					subMenu2();
-					opcionSubmenu = leeInt(sc);
+				opcionSubmenuA = -1;
+				while (opcionSubmenuA != 0) {
+					subMenuCrearTablas();
+					opcionSubmenuA = leeInt(sc);
 					System.out.println();
 
-					switch (opcionSubmenu) {
+					switch (opcionSubmenuA) {
 					case 1:
 						if (conexion != null) {
 							nombreTabla = "Profesores";
-							hecho = CrearTablas.crearTabla(conexion, nombreTabla);
-							if (hecho) {
-								System.out.println("Tabla " + nombreTabla + " creada con éxito");
-							}
+							tablaCreada = CrearTablas.crearTabla(conexion, nombreTabla);
+							System.out.println((tablaCreada) ? "Tabla '" + nombreTabla + "' creada con éxito" : "");
 
 							nombreTabla = "Alumnos";
-							hecho = CrearTablas.crearTabla(conexion, nombreTabla);
-							if (hecho) {
-								System.out.println("Tabla " + nombreTabla + " creada con éxito");
-							}
+							tablaCreada = CrearTablas.crearTabla(conexion, nombreTabla);
+							System.out.println((tablaCreada) ? "Tabla '" + nombreTabla + "' creada con éxito" : "");
 
 							nombreTabla = "Matriculas";
-							hecho = CrearTablas.crearTabla(conexion, nombreTabla);
-							if (hecho) {
-								System.out.println("Tabla " + nombreTabla + " creada con éxito");
-							}
+							tablaCreada = CrearTablas.crearTabla(conexion, nombreTabla);
+							System.out.println((tablaCreada) ? "Tabla '" + nombreTabla + "' creada con éxito" : "");
 
 						} else {
 							System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
@@ -90,7 +87,61 @@ public class Principal {
 							System.out.println(
 									"Sugerencia: Primero, siga los pasos de la opción 1 (Conectar con la Base de Datos) e intente crear las Tablas de nuevo");
 						}
+
 						System.out.println();
+
+						opcionSubmenuA = 0;
+						tablaCreada = false;
+						nombreTabla = "";
+						break;
+					case 2:
+						if (conexion != null) {
+							opcionSubmenuB = -1;
+							while (opcionSubmenuB != 0) {
+								subMenuCrearUnaTablaConcreta();
+								opcionSubmenuB = leeInt(sc);
+
+								switch (opcionSubmenuB) {
+								case 1:
+									nombreTabla = "Profesores";
+									break;
+								case 2:
+									nombreTabla = "Alumnos";
+									break;
+								case 3:
+									nombreTabla = "Matriculas";
+									break;
+
+								case 0:
+									break;
+
+								default:
+									System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el
+																					// "error"
+									System.out.println("Opción no disponible, elija del 0 al 3");
+									System.out.println();
+									break;
+								} // Cierre del switch terciario
+
+								if (!nombreTabla.equals("")) {
+									tablaCreada = CrearTablas.crearTabla(conexion, nombreTabla);
+									System.out.println(
+											(tablaCreada) ? "Tabla '" + nombreTabla + "' creada con éxito" : "");
+								}
+							} // Cierre del while terciario
+
+						} else {
+							System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
+							System.out.println("No estás conectado a la Base de Datos");
+							System.out.println(
+									"Sugerencia: Primero, siga los pasos de la opción 1 (Conectar con la Base de Datos) e intente crear las Tablas de nuevo");
+						}
+
+						System.out.println();
+
+						opcionSubmenuB = 0;
+						tablaCreada = false;
+						nombreTabla = "";
 						break;
 					case 0:
 						break;
@@ -132,10 +183,23 @@ public class Principal {
 
 	}
 
-	private static void subMenu2() {
+	private static void subMenuCrearTablas() {
 		System.out.println("Crear Tablas:");
+		System.out.println("=============");
 		System.out.println("1. Crear todas las Tablas.");
 		System.out.println("2. Crear una Tabla en concreto.");
+		System.out.println("0. Volver al Menú anterior.");
+		System.out.println();
+		System.out.print("Escriba una opción: ");
+	}
+
+	private static void subMenuCrearUnaTablaConcreta() {
+		System.out.println("Crear una Tabla en concreto:");
+		System.out.println("===========================");
+
+		System.out.println("1. Profesores.");
+		System.out.println("2. Alumnos.");
+		System.out.println("3. Matriculas.");
 		System.out.println("0. Volver al Menú anterior.");
 		System.out.println();
 		System.out.print("Escriba una opción: ");
@@ -166,6 +230,7 @@ public class Principal {
 	 */
 	private static void menuPrincipal() {
 		System.out.println("Menú Principal:");
+		System.out.println("===============");
 		System.out.println("1. Conectar con la Base de Datos.");
 		System.out.println("2. Crear Tablas.");
 		System.out.println("3. Eliminar Tablas.");

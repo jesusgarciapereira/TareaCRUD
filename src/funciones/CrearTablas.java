@@ -52,7 +52,8 @@ public class CrearTablas {
 				break;
 			// Si el nombre no es valido.
 			default:
-				System.err.println("Error: El nombre de la tabla especificado no es válido.");
+				System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
+				System.out.println("El nombre de la tabla '" + nombreTabla + "' no es válido.");
 				break;
 			}
 
@@ -63,18 +64,26 @@ public class CrearTablas {
 			// Captura errores relacionados con la ejecucion de la consulta SQL.
 		} catch (SQLException e) {
 			System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
+
+			if (e.getSQLState().equals("42S01")) {
+				System.out.println("La tabla '" + nombreTabla + "' ya existe");
+			}
+//				 Para averiguar lo que debe salir 
 			System.out.println(e.getMessage());
+			System.out.println("Estado SQL " + e.getSQLState());
 
 		} finally {
 			try {
-				// Verifica si el objeto stmt no es nulo antes de cerrarlo para evitar excepciones. 
+				// Verifica si el objeto stmt no es nulo antes de cerrarlo para evitar
+				// excepciones.
 				if (stmt != null)
 					stmt.close(); // Libera recursos utilizados por el objeto Statement.
 
 				// Manejo de excepciones al intentar cerrar el Statement.
-			} catch (SQLException se) { 
+			} catch (SQLException se) {
 				System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
 				System.out.println("No se ha podido cerrar la conexión.");
+
 			}
 		}
 
