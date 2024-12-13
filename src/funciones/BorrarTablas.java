@@ -39,13 +39,13 @@ public class BorrarTablas {
 			if (e.getSQLState().equals("42S02")) {
 				System.out.println("La tabla '" + nombreTabla + "' no existe en la Base de Datos, puede que aún no la hayas creado o la hayas borrado con anterioridad");
 			}
-			else if (e.getSQLState().equals("HY000")) {
-				System.out.println("No se pudo crear la tabla '" + nombreTabla + "' porque tiene relaciones con tablas maestras que aún no existen");
-				System.out.println("Sugerencia: Crear primero la tabla 'Profesores' y la tabla 'Alumnos'");
+			else if (e.getSQLState().equals("23000")) {
+				System.out.println("No se pudo borrar la tabla '" + nombreTabla + "' porque está referenciada en otra tabla");
+				System.out.println("Sugerencia: Borrar primero la tabla 'Matriculas'");
 			}
 //				 Para averiguar lo que debe salir 
-			System.out.println(e.getMessage());
-			System.out.println("Estado SQL " + e.getSQLState());
+//			System.out.println(e.getMessage());
+//			System.out.println("Estado SQL " + e.getSQLState());
 		} finally {
 			try {
 				// Verifica si el objeto stmt no es nulo antes de cerrarlo para evitar

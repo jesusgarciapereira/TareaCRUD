@@ -24,9 +24,9 @@ public class Principal {
 		String contrasennia = "";
 		Connection conexion = null;
 		// Para que esté conectada siempre, borrala despues
-		// conexion =
-		// Conectar.conectar("jdbc:mysql://dns11036.phdns11.es:3306/ad2425_jgarcia",
-		// "jgarcia", "12345");
+		 conexion =
+		 Conectar.conectar("jdbc:mysql://dns11036.phdns11.es:3306/ad2425_jgarcia",
+		 "jgarcia", "12345");
 
 		String nombreTabla = "";
 
@@ -200,7 +200,7 @@ public class Principal {
 
 							while (opcionSubmenuB != 0) {
 
-								subMenuCrearUnaTablaConcreta();
+								subMenuEliminarUnaTablaConcreta();
 								opcionSubmenuB = leeInt(sc);
 								System.out.println();
 
@@ -227,9 +227,9 @@ public class Principal {
 								} // Cierre del switch terciario
 
 								if (!nombreTabla.equals("")) {
-									operacionRealizada = CrearTablas.crearTabla(conexion, nombreTabla);
+									operacionRealizada = BorrarTablas.borrarTabla(conexion, nombreTabla);
 									System.out.print(
-											(operacionRealizada) ? "Tabla '" + nombreTabla + "' creada con éxito\n"
+											(operacionRealizada) ? "Tabla '" + nombreTabla + "' borrada con éxito\n"
 													: "");
 									opcionSubmenuB = 0;
 									opcionSubmenuA = 0;
@@ -324,13 +324,27 @@ public class Principal {
 //		return conexion;
 //	}
 	/**
-	 * Submenu de Crear Tablas
+	 * Submenu de eliminar Tablas
 	 */
 	private static void subMenuEliminarTablas() {
 		System.out.println("Eliminar Tablas:");
 		System.out.println("=============");
 		System.out.println("1. Eliminar todas las Tablas.");
 		System.out.println("2. Eliminar una Tabla en concreto.");
+		System.out.println("0. Volver al Menú anterior.");
+		System.out.println();
+		System.out.print("Escriba una opción: ");
+	}
+	
+	/**
+	 * Submenu de Eliminar una Tabla en concreto
+	 */
+	private static void subMenuEliminarUnaTablaConcreta() {
+		System.out.println("Eliminar una Tabla en concreto:");
+		System.out.println("===========================");
+		System.out.println("1. Profesores.");
+		System.out.println("2. Alumnos.");
+		System.out.println("3. Matriculas.");
 		System.out.println("0. Volver al Menú anterior.");
 		System.out.println();
 		System.out.print("Escriba una opción: ");
