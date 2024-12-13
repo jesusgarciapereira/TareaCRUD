@@ -8,27 +8,30 @@ import java.util.Scanner;
 import funciones.BorrarTablas;
 import funciones.Conectar;
 import funciones.CrearTablas;
+import funciones.ListarTablas;
 
 public class Principal {
 
-	static Scanner sc = new Scanner(System.in);
+	public static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {
 
 		int opcionMenu;
 		int opcionSubmenuA;
 		int opcionSubmenuB;
+		int opcionSubmenuC;
 
 		String url = "";
 		String usuario = "";
 		String contrasennia = "";
 		Connection conexion = null;
 		// Para que esté conectada siempre, borrala despues
-		 conexion =
-		 Conectar.conectar("jdbc:mysql://dns11036.phdns11.es:3306/ad2425_jgarcia",
-		 "jgarcia", "12345");
+		conexion = Conectar.conectar("jdbc:mysql://dns11036.phdns11.es:3306/ad2425_jgarcia", "jgarcia", "12345");
 
 		String nombreTabla = "";
+		String nombreColumnaFiltro = "";
+		String opcionFiltro = "";
+		String nombreDatoFiltro = "";
 
 		boolean operacionRealizada = false;
 
@@ -61,7 +64,7 @@ public class Principal {
 				}
 
 				System.out.println();
-				break;
+				break; // Cierre case 1 opcionMenu
 			case 2:
 				if (conexion != null) {
 					opcionSubmenuA = -1;
@@ -92,7 +95,7 @@ public class Principal {
 							opcionSubmenuA = 0;
 							operacionRealizada = false;
 							nombreTabla = "";
-							break;
+							break; // Cierre case 1 opcionSubmenuA
 						case 2:
 							opcionSubmenuB = -1;
 
@@ -137,7 +140,7 @@ public class Principal {
 
 							} // Cierre del while terciario
 							System.out.println();
-							break;
+							break; // Cierre case 2 opcionSubmenuA
 						case 0:
 							break;
 
@@ -160,7 +163,7 @@ public class Principal {
 					opcionSubmenuB = 0;
 					opcionSubmenuA = 0;
 				}
-				break;
+				break; // Cierre case 2 opcionMenu
 
 			case 3:
 				if (conexion != null) {
@@ -172,12 +175,12 @@ public class Principal {
 
 						switch (opcionSubmenuA) {
 						case 1:
-							
+
 							nombreTabla = "Matriculas";
 							operacionRealizada = BorrarTablas.borrarTabla(conexion, nombreTabla);
 							System.out.print(
 									(operacionRealizada) ? "Tabla '" + nombreTabla + "' borrada con éxito\n" : "");
-							
+
 							nombreTabla = "Profesores";
 							operacionRealizada = BorrarTablas.borrarTabla(conexion, nombreTabla);
 							System.out.print(
@@ -187,14 +190,13 @@ public class Principal {
 							operacionRealizada = BorrarTablas.borrarTabla(conexion, nombreTabla);
 							System.out.print(
 									(operacionRealizada) ? "Tabla '" + nombreTabla + "' borrada con éxito\n" : "");
-				
 
 							System.out.println();
 
 							opcionSubmenuA = 0;
 							operacionRealizada = false;
 							nombreTabla = "";
-							break;
+							break; // Cierre case 1 opcionSubmenuA
 						case 2:
 							opcionSubmenuB = -1;
 
@@ -239,7 +241,7 @@ public class Principal {
 
 							} // Cierre del while terciario
 							System.out.println();
-							break;
+							break;// Cierre case 2 opcionSubmenuA
 						case 0:
 							break;
 
@@ -257,12 +259,171 @@ public class Principal {
 					System.out.println("No estás conectado a la Base de Datos");
 					System.out.println(
 							"Sugerencia: Primero, siga los pasos de la opción 1 (Conectar con la Base de Datos) e intente crear las Tablas de nuevo");
-					
+
 					System.out.println();
 					opcionSubmenuB = 0;
 					opcionSubmenuA = 0;
 				}
-				break;
+				break; // Cierre case 3 opcionMenu
+			case 4:
+				if (conexion != null) {
+					opcionSubmenuA = -1;
+					while (opcionSubmenuA != 0) {
+						subMenuListarTablas();
+						opcionSubmenuA = leeInt(sc);
+						System.out.println();
+
+						switch (opcionSubmenuA) {
+						case 1:
+
+							nombreTabla = "Profesores";
+							ListarTablas.listarTodo(conexion, nombreTabla);
+
+							nombreTabla = "Alumnos";
+							ListarTablas.listarTodo(conexion, nombreTabla);
+
+							nombreTabla = "Matriculas";
+							ListarTablas.listarTodo(conexion, nombreTabla);
+
+							System.out.println();
+
+							opcionSubmenuA = 0;
+							nombreTabla = "";
+							break; // Cierre case 1 opcionSubmenuA
+						case 2:
+							opcionSubmenuB = -1;
+
+							while (opcionSubmenuB != 0) {
+
+								subMenuListarUnaTablaConcreta();
+								opcionSubmenuB = leeInt(sc);
+								System.out.println();
+
+								switch (opcionSubmenuB) {
+								case 1:
+									nombreTabla = "Profesores";
+
+									/*
+									 * if (!nombreTabla.equals(""){ opcionSubmenuC = -1;
+									 * 
+									 * while (opcionSubmenuC != 0) { submenuCompletoOFiltrado(nombreTabla);
+									 * opcionSubmenuC = leeInt(sc); System.out.println();
+									 * 
+									 * switch (opcionSubmenuC) { case 1: ListarTablas.listarTodo(conexion,
+									 * nombreTabla);
+									 * 
+									 * opcionSubmenuC = 0; opcionSubmenuB = 0; opcionSubmenuA = 0; nombreTabla = "";
+									 * 
+									 * break; case 2: nombreTabla = "Alumnos"; break;
+									 * 
+									 * case 0: break;
+									 * 
+									 * default: System.out.print("\u001B[91mError: \u001B[0m"); // Color
+									 * personalizado para // el // "error"
+									 * System.out.println("Opción no disponible, elija del 0 al 2");
+									 * System.out.println(); break; } // Cierre del switch cuaternario } // Cierre
+									 * del while cuaternario´ }
+									 */
+									break;
+								case 2:
+									nombreTabla = "Alumnos";
+									break;
+								case 3:
+									nombreTabla = "Matriculas";
+									break;
+
+								case 0:
+									break;
+
+								default:
+									System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el
+																					// "error"
+									System.out.println("Opción no disponible, elija del 0 al 3");
+									System.out.println();
+									break;
+								} // Cierre del switch terciario
+
+								if (!nombreTabla.equals("")) {
+									opcionSubmenuC = -1;
+
+									while (opcionSubmenuC != 0) {
+										submenuCompletoOFiltrado(nombreTabla);
+										opcionSubmenuC = leeInt(sc);
+										System.out.println();
+
+										switch (opcionSubmenuC) {
+										case 1:
+											ListarTablas.listarTodo(conexion, nombreTabla);
+											System.out.println("Ésta es la Tabla '" + nombreTabla + "' completa");
+
+											opcionSubmenuC = 0;
+											opcionSubmenuB = 0;
+											opcionSubmenuA = 0;
+											nombreTabla = "";
+
+											break;
+										case 2:
+											switch (nombreTabla) {
+											case "Profesores":
+												submenuFiltrarColumnasProfesores();
+												break;
+											case "Alumnos":
+												submenuFiltrarColumnasAlumnos();
+
+												break;
+											case "Matriculas":
+												submenuFiltrarColumnasMatriculas();
+
+												break;
+
+											default:
+												break;
+											}
+											// Preguntar columna de filtrado
+											// Preguntar opcion de filtrado
+											// Preguntar nombre dato de filtrado
+											break;
+
+										case 0:
+											break;
+
+										default:
+											System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para
+																							// el
+																							// "error"
+											System.out.println("Opción no disponible, elija del 0 al 2");
+											System.out.println();
+											break;
+										} // Cierre del switch cuaternario
+									} // Cierre del while cuaternario´
+								}
+
+							} // Cierre del while terciario
+							System.out.println();
+							break;// Cierre case 2 opcionSubmenuA
+						case 0:
+							break;
+
+						default:
+							System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
+							System.out.println("Opción no disponible, elija del 0 al 2");
+							System.out.println();
+							break;
+
+						} // Cierre del switch secundario
+					} // Cierre del while secundario
+				} else {
+					System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el
+																	// "error"
+					System.out.println("No estás conectado a la Base de Datos");
+					System.out.println(
+							"Sugerencia: Primero, siga los pasos de la opción 1 (Conectar con la Base de Datos) e intente crear las Tablas de nuevo");
+
+					System.out.println();
+					opcionSubmenuB = 0;
+					opcionSubmenuA = 0;
+				}
+				break; // Cierre case 4 opcionMenu
 
 			case 0:
 				break;
@@ -277,9 +438,7 @@ public class Principal {
 
 		System.out.println("Saliendo del programa...");
 
-		try
-
-		{
+		try {
 			// Se asegura de que la conexion no sea null para cerrarla
 			if (conexion != null) {
 				// Cierra la conexion para liberar recursos del sistema.
@@ -291,6 +450,7 @@ public class Principal {
 			System.out.println("No se ha podido cerrar la conexion.");
 		}
 
+		// Cerramos el Scanner
 		sc.close();
 
 	}
@@ -323,25 +483,88 @@ public class Principal {
 //		System.out.println();
 //		return conexion;
 //	}
-	/**
-	 * Submenu de eliminar Tablas
-	 */
-	private static void subMenuEliminarTablas() {
-		System.out.println("Eliminar Tablas:");
-		System.out.println("=============");
-		System.out.println("1. Eliminar todas las Tablas.");
-		System.out.println("2. Eliminar una Tabla en concreto.");
+
+	private static void submenuFiltrarColumnasProfesores() {
+		System.out.println("Filtrado de Tabla 'Profesores:");
+		System.out.println("==============================");
+		System.out.println("1. idProfesor.");
+		System.out.println("2. Nombre.");
+		System.out.println("3. Apellidos.");
+		System.out.println("4. FechaNacimiento");
+		System.out.println("5. Antiguedad.");
 		System.out.println("0. Volver al Menú anterior.");
 		System.out.println();
 		System.out.print("Escriba una opción: ");
 	}
-	
+
+	private static void submenuFiltrarColumnasAlumnos() {
+		System.out.println("Filtrado de Tabla 'Alumnos:");
+		System.out.println("===========================");
+		System.out.println("1. idAlumno.");
+		System.out.println("2. Nombre.");
+		System.out.println("3. Apellidos.");
+		System.out.println("4. FechaNacimiento");
+		System.out.println("0. Volver al Menú anterior.");
+		System.out.println();
+		System.out.print("Escriba una opción: ");
+	}
+
+	private static void submenuFiltrarColumnasMatriculas() {
+		System.out.println("Filtrado de Tabla 'Matriculas:");
+		System.out.println("==============================");
+		System.out.println("1. idMatricula.");
+		System.out.println("2. idProfesor.");
+		System.out.println("3. idAlumno.");
+		System.out.println("4. Asignatura.");
+		System.out.println("5. Codigo.");
+		System.out.println("0. Volver al Menú anterior.");
+		System.out.println();
+		System.out.print("Escriba una opción: ");
+	}
+
+	private static void submenuCompletoOFiltrado(String nombreTabla) {
+		System.out.println("Listar Tabla '" + nombreTabla + "':");
+		System.out.println("=========================");
+		System.out.println("1. Completa.");
+		System.out.println("2. Filtrada.");
+		System.out.println("0. Volver al Menú anterior.");
+		System.out.println();
+		System.out.print("Escriba una opción: ");
+	}
+
+	/**
+	 * Submenu de Listar una Tabla en concreto
+	 */
+	private static void subMenuListarUnaTablaConcreta() {
+		System.out.println("Listar una Tabla en concreto:");
+		System.out.println("=============================");
+		System.out.println("1. Profesores.");
+		System.out.println("2. Alumnos.");
+		System.out.println("3. Matriculas.");
+		System.out.println("0. Volver al Menú anterior.");
+		System.out.println();
+		System.out.print("Escriba una opción: ");
+	}
+
+	/**
+	 * Submenu de Crear Tablas
+	 */
+	private static void subMenuListarTablas() {
+		System.out.println("Listar Tablas:");
+		System.out.println("==============");
+		System.out.println("1. Listar todas las Tablas.");
+		System.out.println("2. Listar una Tabla en concreto.");
+		System.out.println("0. Volver al Menú anterior.");
+		System.out.println();
+		System.out.print("Escriba una opción: ");
+	}
+
 	/**
 	 * Submenu de Eliminar una Tabla en concreto
 	 */
 	private static void subMenuEliminarUnaTablaConcreta() {
 		System.out.println("Eliminar una Tabla en concreto:");
-		System.out.println("===========================");
+		System.out.println("===============================");
 		System.out.println("1. Profesores.");
 		System.out.println("2. Alumnos.");
 		System.out.println("3. Matriculas.");
@@ -368,7 +591,7 @@ public class Principal {
 	 */
 	private static void subMenuCrearUnaTablaConcreta() {
 		System.out.println("Crear una Tabla en concreto:");
-		System.out.println("===========================");
+		System.out.println("============================");
 		System.out.println("1. Profesores.");
 		System.out.println("2. Alumnos.");
 		System.out.println("3. Matriculas.");
@@ -378,6 +601,19 @@ public class Principal {
 	}
 
 	// Pendiente
+
+	/**
+	 * Submenu de eliminar Tablas
+	 */
+	private static void subMenuEliminarTablas() {
+		System.out.println("Eliminar Tablas:");
+		System.out.println("================");
+		System.out.println("1. Eliminar todas las Tablas.");
+		System.out.println("2. Eliminar una Tabla en concreto.");
+		System.out.println("0. Volver al Menú anterior.");
+		System.out.println();
+		System.out.print("Escriba una opción: ");
+	}
 
 	/**
 	 * Menu principal del programa que muestra las diferentes opciones

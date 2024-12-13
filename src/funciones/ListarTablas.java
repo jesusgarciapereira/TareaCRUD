@@ -10,7 +10,7 @@ import java.sql.SQLException;
  */
 public class ListarTablas {
 
-	public static void listarTodo(Connection conn, String nombreTabla) throws SQLException {
+	public static void listarTodo(Connection conn, String nombreTabla) {
 		// Declaracion de objetos necesarios para la ejecucion de la consulta.
 		PreparedStatement stmt = null;
 		ResultSet resultado = null;
@@ -27,46 +27,53 @@ public class ListarTablas {
 			resultado = stmt.executeQuery();
 
 			// Muestra el nombre de la tabla a listar
-			System.out.println("Tabla " + nombreTabla);
+
+			System.out.println(!nombreTabla.equals("Alumnos") ? "--------------" : "-----------");
+			System.out.println("| " + nombreTabla + " |");
+			System.out.println(!nombreTabla.equals("Alumnos") ? "--------------" : "-----------");
 
 			// Dependiendo del nombre de la tabla, mostrara los datos correspondientes
 			switch (nombreTabla) {
 			case "Profesores":
 				// Iteramos por los resultados obtenidos de la consulta.
 				while (resultado.next()) {
-					System.out.println("===============================");
+
 					System.out.println("ID del Profesor: " + resultado.getInt("idProfesor"));
 					System.out.println("Nombre: " + resultado.getString("Nombre"));
 					System.out.println("Apellidos: " + resultado.getString("Apellidos"));
 					System.out.println("Fecha de Nacimiento: " + resultado.getString("FechaNacimiento"));
 					System.out.println("Antigüedad: " + resultado.getInt("Antiguedad"));
+					System.out.println("===============================");
 				}
 				break;
 			case "Alumnos":
 				// Iteramos por los resultados obtenidos de la consulta.
 				while (resultado.next()) {
-					System.out.println("===============================");
+
 					System.out.println("ID del Alumno: " + resultado.getInt("idAlumno"));
 					System.out.println("Nombre: " + resultado.getString("Nombre"));
 					System.out.println("Apellidos: " + resultado.getString("Apellidos"));
 					System.out.println("Fecha de Nacimiento: " + resultado.getString("FechaNacimiento"));
+					System.out.println("===============================");
 				}
 				break;
 			case "Matriculas":
 				// Iteramos por los resultados obtenidos de la consulta.
 				while (resultado.next()) {
-					System.out.println("==========================");
 					System.out.println("ID de la Matrícula: " + resultado.getInt("idMatricula"));
 					System.out.println("ID del Profesor: " + resultado.getInt("idProfesor"));
 					System.out.println("ID del Alumno: " + resultado.getInt("idAlumno"));
 					System.out.println("Nombre: " + resultado.getString("Asignatura"));
 					System.out.println("Curso: " + resultado.getInt("Curso"));
+					System.out.println("==========================");
+
 				}
 				break;
 
 			// Si el nombre de la tabla no es valido
 			default:
-				System.err.println("Error: El nombre de la tabla especificado no es valido.");
+				System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
+				System.out.println("Error: El nombre de la tabla especificado no es valido.");
 				break;
 			}
 
@@ -74,14 +81,23 @@ public class ListarTablas {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			// Libera recursos utilizados por el objeto Statement.
-			stmt.close();
-			// Cierra la conexion para evitar fugas de recursos.
-			conn.close();
+			try {
+				// Verifica si el objeto stmt no es nulo antes de cerrarlo para evitar
+				// excepciones.
+				if (stmt != null)
+					stmt.close(); // Libera recursos utilizados por el objeto Statement.
+
+				// Manejo de excepciones al intentar cerrar el Statement.
+			} catch (SQLException se) {
+				System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
+				System.out.println("No se ha podido cerrar el Statement.");
+
+			}
 		}
 	}
-	
-	public static void listarFiltrado(Connection conn, String nombreTabla, String nombreColumnaFiltro, String opcionFiltro, String nombreDatoFiltro) throws SQLException {
+
+	public static void listarFiltrado(Connection conn, String nombreTabla, String nombreColumnaFiltro,
+			String opcionFiltro, String nombreDatoFiltro) {
 		// Declaracion de objetos necesarios para la ejecucion de la consulta.
 		PreparedStatement stmt = null;
 		ResultSet resultado = null;
@@ -89,7 +105,8 @@ public class ListarTablas {
 
 		try {
 			// Selecciona la consulta SQL
-			sql += "SELECT * FROM " + nombreTabla + " WHERE " + nombreColumnaFiltro + " " + opcionFiltro + " "  + nombreDatoFiltro;
+			sql += "SELECT * FROM " + nombreTabla + " WHERE " + nombreColumnaFiltro + " " + opcionFiltro + " "
+					+ nombreDatoFiltro;
 
 			// Pasamos la consulta al objeto PreparedStatement.
 			stmt = conn.prepareStatement(sql);
@@ -98,46 +115,48 @@ public class ListarTablas {
 			resultado = stmt.executeQuery();
 
 			// Muestra el nombre de la tabla a listar
-			System.out.println("Tabla " + nombreTabla + " filtrada por " + nombreColumnaFiltro + " " + opcionFiltro + " " + nombreDatoFiltro);
+			System.out.println("Tabla " + nombreTabla + " filtrada por " + nombreColumnaFiltro + " " + opcionFiltro
+					+ " " + nombreDatoFiltro);
 
 			// Dependiendo del nombre de la tabla, mostrara los datos correspondientes
 			switch (nombreTabla) {
 			case "Profesores":
 				// Iteramos por los resultados obtenidos de la consulta.
 				while (resultado.next()) {
-					System.out.println("==============================================");
 					System.out.println("ID del Profesor: " + resultado.getInt("idProfesor"));
 					System.out.println("Nombre: " + resultado.getString("Nombre"));
 					System.out.println("Apellidos: " + resultado.getString("Apellidos"));
 					System.out.println("Fecha de Nacimiento: " + resultado.getString("FechaNacimiento"));
 					System.out.println("Antigüedad: " + resultado.getInt("Antiguedad"));
+					System.out.println("==============================================");
 				}
 				break;
 			case "Alumnos":
 				// Iteramos por los resultados obtenidos de la consulta.
 				while (resultado.next()) {
-					System.out.println("==============================================");
 					System.out.println("ID del Alumno: " + resultado.getInt("idAlumno"));
 					System.out.println("Nombre: " + resultado.getString("Nombre"));
 					System.out.println("Apellidos: " + resultado.getString("Apellidos"));
 					System.out.println("Fecha de Nacimiento: " + resultado.getString("FechaNacimiento"));
+					System.out.println("==============================================");
 				}
 				break;
 			case "Matriculas":
 				// Iteramos por los resultados obtenidos de la consulta.
 				while (resultado.next()) {
-					System.out.println("==============================================");
 					System.out.println("ID de la Matrícula: " + resultado.getInt("idMatricula"));
 					System.out.println("ID del Profesor: " + resultado.getInt("idProfesor"));
 					System.out.println("ID del Alumno: " + resultado.getInt("idAlumno"));
 					System.out.println("Nombre: " + resultado.getString("Asignatura"));
 					System.out.println("Curso: " + resultado.getInt("Curso"));
+					System.out.println("==============================================");
 				}
 				break;
 
 			// Si el nombre de la tabla no es valido
 			default:
-				System.err.println("Error: El nombre de la tabla especificado no es valido.");
+				System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
+				System.out.println("Error: El nombre de la tabla especificado no es valido.");
 				break;
 			}
 
@@ -145,10 +164,18 @@ public class ListarTablas {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			// Libera recursos utilizados por el objeto Statement.
-			stmt.close();
-			// Cierra la conexion para evitar fugas de recursos.
-			conn.close();
+			try {
+				// Verifica si el objeto stmt no es nulo antes de cerrarlo para evitar
+				// excepciones.
+				if (stmt != null)
+					stmt.close(); // Libera recursos utilizados por el objeto Statement.
+
+				// Manejo de excepciones al intentar cerrar el Statement.
+			} catch (SQLException se) {
+				System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
+				System.out.println("No se ha podido cerrar el Statement.");
+
+			}
 		}
 	}
 }

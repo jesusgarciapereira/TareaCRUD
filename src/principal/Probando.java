@@ -27,12 +27,8 @@ public class Probando {
 				
 //				String opcionFiltro = "=";
 //				String nombreDatoFiltro = "5";
-				try {
 					ListarTablas.listarFiltrado(conexion, nombreTabla, nombreColumnaFiltro, opcionFiltro, nombreDatoFiltro);
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				
 		
 //		// COMPROBAR LISTAR TABLA TOTAL
 //		Connection conexion = Conectar.conectar("jdbc:mysql://dns11036.phdns11.es:3306/ad2425_jgarcia", "jgarcia",
