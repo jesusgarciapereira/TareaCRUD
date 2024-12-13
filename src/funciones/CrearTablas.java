@@ -86,7 +86,7 @@ public class CrearTablas {
 				// Manejo de excepciones al intentar cerrar el Statement.
 			} catch (SQLException se) {
 				System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
-				System.out.println("No se ha podido cerrar la conexión.");
+				System.out.println("No se ha podido cerrar el Statement.");
 
 			}
 		}
