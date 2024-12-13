@@ -176,10 +176,17 @@ public class ListarTablas {
 		} catch (SQLException e) {
 
 			System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
-//			 Para averiguar lo que debe salir 
-			System.out.println(e.getMessage());
-			System.out.println("Estado SQL " + e.getSQLState());
-			e.printStackTrace();
+			if (e.getSQLState().equals("42S02")) {
+				System.out.println("La tabla '" + nombreTabla + "' no existe en la Base de Datos");
+
+				System.out.println(
+						"Sugerencia: Primero, siga los pasos de la opción 2 (Crear Tablas) y una vez creadas, se podrán mostrar con la opción 4 (Listar Tablas)");
+
+			}
+//		 Para averiguar lo que debe salir 
+//		System.out.println(e.getMessage());
+//		System.out.println("Estado SQL " + e.getSQLState());
+//		e.printStackTrace();
 		} finally {
 			try {
 				// Verifica si el objeto stmt no es nulo antes de cerrarlo para evitar

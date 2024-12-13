@@ -4,8 +4,8 @@ package principal;
  * Clase que gestiona los menus y submenus.
  */
 public class Menus {
-	
-	 static void submenuOpcionFiltroVARCHAR() {
+
+	static void submenuOpcionFiltroVARCHAR() {
 		System.out.println("Opción filtro:");
 		System.out.println("==============");
 		System.out.println("1. =");
@@ -14,8 +14,8 @@ public class Menus {
 		System.out.println();
 		System.out.print("Escriba una opción: ");
 	}
-	
-	 static void submenuOpcionFiltroINT() {
+
+	static void submenuOpcionFiltroINT() {
 		System.out.println("Opción filtro:");
 		System.out.println("==============");
 		System.out.println("1. =");
@@ -27,9 +27,8 @@ public class Menus {
 		System.out.println();
 		System.out.print("Escriba una opción: ");
 	}
-	
-	
-	 static void submenuFiltrarColumnasProfesores() {
+
+	static void submenuFiltrarColumnasProfesores() {
 		System.out.println("Filtrado de Tabla 'Profesores:");
 		System.out.println("==============================");
 		System.out.println("1. idProfesor.");
@@ -42,7 +41,7 @@ public class Menus {
 		System.out.print("Escriba una opción: ");
 	}
 
-	 static void submenuFiltrarColumnasAlumnos() {
+	static void submenuFiltrarColumnasAlumnos() {
 		System.out.println("Filtrado de Tabla 'Alumnos:");
 		System.out.println("===========================");
 		System.out.println("1. idAlumno.");
@@ -54,7 +53,7 @@ public class Menus {
 		System.out.print("Escriba una opción: ");
 	}
 
-	 static void submenuFiltrarColumnasMatriculas() {
+	static void submenuFiltrarColumnasMatriculas() {
 		System.out.println("Filtrado de Tabla 'Matriculas:");
 		System.out.println("==============================");
 		System.out.println("1. idMatricula.");
@@ -67,20 +66,23 @@ public class Menus {
 		System.out.print("Escriba una opción: ");
 	}
 
-	 static void submenuCompletoOFiltrado(String nombreTabla) {
+	static void submenuCompletoOFiltrado(String nombreTabla) {
 		System.out.println("Listar Tabla '" + nombreTabla + "':");
 		System.out.println("=========================");
 		System.out.println("1. Completa.");
 		System.out.println("2. Filtrada.");
 		System.out.println("0. Volver al Menú anterior.");
 		System.out.println();
+		System.out.println(
+				"Consejo: Antes de listar de manera filtrada, asegúrate de que dicha Tabla existe eligiendo primero la opción 1 (Completa)");
+		
 		System.out.print("Escriba una opción: ");
 	}
 
 	/**
 	 * Submenu de Listar una Tabla en concreto
 	 */
-	 static void subMenuListarUnaTablaConcreta() {
+	static void subMenuListarUnaTablaConcreta() {
 		System.out.println("Listar una Tabla en concreto:");
 		System.out.println("=============================");
 		System.out.println("1. Profesores.");
@@ -94,7 +96,7 @@ public class Menus {
 	/**
 	 * Submenu de Crear Tablas
 	 */
-	 static void subMenuListarTablas() {
+	static void subMenuListarTablas() {
 		System.out.println("Listar Tablas:");
 		System.out.println("==============");
 		System.out.println("1. Listar todas las Tablas.");
@@ -107,7 +109,7 @@ public class Menus {
 	/**
 	 * Submenu de Eliminar una Tabla en concreto
 	 */
-	 static void subMenuEliminarUnaTablaConcreta() {
+	static void subMenuEliminarUnaTablaConcreta() {
 		System.out.println("Eliminar una Tabla en concreto:");
 		System.out.println("===============================");
 		System.out.println("1. Profesores.");
@@ -121,7 +123,7 @@ public class Menus {
 	/**
 	 * Submenu de Crear Tablas
 	 */
-	 static void subMenuCrearTablas() {
+	static void subMenuCrearTablas() {
 		System.out.println("Crear Tablas:");
 		System.out.println("=============");
 		System.out.println("1. Crear todas las Tablas.");
@@ -134,7 +136,7 @@ public class Menus {
 	/**
 	 * Submenu de Crear una Tabla en concreto
 	 */
-	 static void subMenuCrearUnaTablaConcreta() {
+	static void subMenuCrearUnaTablaConcreta() {
 		System.out.println("Crear una Tabla en concreto:");
 		System.out.println("============================");
 		System.out.println("1. Profesores.");
@@ -150,7 +152,7 @@ public class Menus {
 	/**
 	 * Submenu de eliminar Tablas
 	 */
-	 static void subMenuEliminarTablas() {
+	static void subMenuEliminarTablas() {
 		System.out.println("Eliminar Tablas:");
 		System.out.println("================");
 		System.out.println("1. Eliminar todas las Tablas.");
@@ -163,7 +165,7 @@ public class Menus {
 	/**
 	 * Menu principal del programa que muestra las diferentes opciones
 	 */
-	 static void menuPrincipal() {
+	static void menuPrincipal() {
 		System.out.println("Menú Principal:");
 		System.out.println("===============");
 		System.out.println("1. Conectar con la Base de Datos.");
