@@ -1077,7 +1077,7 @@ public class Principal {
 															fechaAnnio = 0;
 														}
 														break;
-											
+
 													case 0:
 														break;
 													default:
@@ -1086,7 +1086,7 @@ public class Principal {
 																										// para
 														// el
 														// "error"
-														System.out.println("Opción no disponible, elija del 0 al 5");
+														System.out.println("Opción no disponible, elija del 0 al 4");
 														System.out.println();
 														break;
 													} // Cierre del switch D
@@ -1094,10 +1094,394 @@ public class Principal {
 												} // Cierre del while D
 												break;
 
-								
 											case "Matriculas":
-												Menus.submenuFiltrarColumnasMatriculas();
+												opcionSubmenuD = -1;
+												while (opcionSubmenuD != 0) {
+													Menus.submenuFiltrarColumnasMatriculas();
+													opcionSubmenuD = leeInt(sc);
+													System.out.println();
 
+													switch (opcionSubmenuD) {
+													case 1:
+														nombreColumnaFiltro = "idMatricula";
+
+														opcionSubmenuE = -1;
+														while (opcionSubmenuE != 0) {
+															Menus.submenuOpcionFiltroINT();
+															opcionSubmenuE = leeInt(sc);
+															System.out.println();
+
+															switch (opcionSubmenuE) {
+															case 1:
+																opcionFiltro = "=";
+																opcionSubmenuE = 0;
+																break;
+															case 2:
+																opcionFiltro = ">";
+																opcionSubmenuE = 0;
+																break;
+															case 3:
+																opcionFiltro = "<";
+																opcionSubmenuE = 0;
+																break;
+															case 4:
+																opcionFiltro = ">=";
+																opcionSubmenuE = 0;
+																break;
+															case 5:
+																opcionFiltro = "<=";
+																opcionSubmenuE = 0;
+																break;
+															case 0:
+																break;
+
+															default:
+																System.out.print("\u001B[91mError: \u001B[0m"); // Color
+																// personalizado
+																// para
+																// el
+																// "error"
+																System.out.println(
+																		"Opción no disponible, elija del 0 al 5");
+																System.out.println();
+
+																break;
+															} // Cierre del switch E
+
+														} // Cierre del while E
+
+														if (!opcionFiltro.equals("")) {
+															while (nombreDatoFiltro.equals("")
+																	|| nombreDatoFiltro.equals("-1")) {
+																System.out.print(
+																		"Introduzca el idMatricula (los id son siempre mayores que 0): ");
+																nombreDatoFiltro = String.valueOf(leeInt(sc));
+																System.out.println();
+															}
+
+															ListarTablas.listarFiltrado(conexion, nombreTabla,
+																	nombreColumnaFiltro, opcionFiltro,
+																	nombreDatoFiltro);
+															System.out.println("Ésta es la Consulta: SELECT * FROM "
+																	+ nombreTabla + " WHERE " + nombreColumnaFiltro
+																	+ " " + opcionFiltro + " " + nombreDatoFiltro);
+
+															opcionSubmenuE = 0;
+															opcionSubmenuD = 0;
+															opcionSubmenuC = 0;
+															opcionSubmenuB = 0;
+															opcionSubmenuA = 0;
+															nombreTabla = "";
+															nombreColumnaFiltro = "";
+															opcionFiltro = "";
+															nombreDatoFiltro = "";
+														}
+														break;
+													case 2:
+														nombreColumnaFiltro = "idProfesor";
+
+														opcionSubmenuE = -1;
+														while (opcionSubmenuE != 0) {
+															Menus.submenuOpcionFiltroINT();
+															opcionSubmenuE = leeInt(sc);
+															System.out.println();
+
+															switch (opcionSubmenuE) {
+															case 1:
+																opcionFiltro = "=";
+																opcionSubmenuE = 0;
+																break;
+															case 2:
+																opcionFiltro = ">";
+																opcionSubmenuE = 0;
+																break;
+															case 3:
+																opcionFiltro = "<";
+																opcionSubmenuE = 0;
+																break;
+															case 4:
+																opcionFiltro = ">=";
+																opcionSubmenuE = 0;
+																break;
+															case 5:
+																opcionFiltro = "<=";
+																opcionSubmenuE = 0;
+																break;
+															case 0:
+																break;
+
+															default:
+																System.out.print("\u001B[91mError: \u001B[0m"); // Color
+																// personalizado
+																// para
+																// el
+																// "error"
+																System.out.println(
+																		"Opción no disponible, elija del 0 al 5");
+																System.out.println();
+
+																break;
+															} // Cierre del switch E
+
+														} // Cierre del while E
+
+														if (!opcionFiltro.equals("")) {
+															while (nombreDatoFiltro.equals("")
+																	|| nombreDatoFiltro.equals("-1")) {
+																System.out.print(
+																		"Introduzca el idProfesor (los id son siempre mayores que 0): ");
+																nombreDatoFiltro = String.valueOf(leeInt(sc));
+																System.out.println();
+															}
+
+															ListarTablas.listarFiltrado(conexion, nombreTabla,
+																	nombreColumnaFiltro, opcionFiltro,
+																	nombreDatoFiltro);
+															System.out.println("Ésta es la Consulta: SELECT * FROM "
+																	+ nombreTabla + " WHERE " + nombreColumnaFiltro
+																	+ " " + opcionFiltro + " " + nombreDatoFiltro);
+
+															opcionSubmenuE = 0;
+															opcionSubmenuD = 0;
+															opcionSubmenuC = 0;
+															opcionSubmenuB = 0;
+															opcionSubmenuA = 0;
+															nombreTabla = "";
+															nombreColumnaFiltro = "";
+															opcionFiltro = "";
+															nombreDatoFiltro = "";
+														}
+														break;
+													case 3:
+														nombreColumnaFiltro = "idAlumno";
+
+														opcionSubmenuE = -1;
+														while (opcionSubmenuE != 0) {
+															Menus.submenuOpcionFiltroINT();
+															opcionSubmenuE = leeInt(sc);
+															System.out.println();
+
+															switch (opcionSubmenuE) {
+															case 1:
+																opcionFiltro = "=";
+																opcionSubmenuE = 0;
+																break;
+															case 2:
+																opcionFiltro = ">";
+																opcionSubmenuE = 0;
+																break;
+															case 3:
+																opcionFiltro = "<";
+																opcionSubmenuE = 0;
+																break;
+															case 4:
+																opcionFiltro = ">=";
+																opcionSubmenuE = 0;
+																break;
+															case 5:
+																opcionFiltro = "<=";
+																opcionSubmenuE = 0;
+																break;
+															case 0:
+																break;
+
+															default:
+																System.out.print("\u001B[91mError: \u001B[0m"); // Color
+																// personalizado
+																// para
+																// el
+																// "error"
+																System.out.println(
+																		"Opción no disponible, elija del 0 al 5");
+																System.out.println();
+
+																break;
+															} // Cierre del switch E
+
+														} // Cierre del while E
+
+														if (!opcionFiltro.equals("")) {
+															while (nombreDatoFiltro.equals("")
+																	|| nombreDatoFiltro.equals("-1")) {
+																System.out.print(
+																		"Introduzca el idAlumno (los id son siempre mayores que 0): ");
+																nombreDatoFiltro = String.valueOf(leeInt(sc));
+																System.out.println();
+															}
+
+															ListarTablas.listarFiltrado(conexion, nombreTabla,
+																	nombreColumnaFiltro, opcionFiltro,
+																	nombreDatoFiltro);
+															System.out.println("Ésta es la Consulta: SELECT * FROM "
+																	+ nombreTabla + " WHERE " + nombreColumnaFiltro
+																	+ " " + opcionFiltro + " " + nombreDatoFiltro);
+
+															opcionSubmenuE = 0;
+															opcionSubmenuD = 0;
+															opcionSubmenuC = 0;
+															opcionSubmenuB = 0;
+															opcionSubmenuA = 0;
+															nombreTabla = "";
+															nombreColumnaFiltro = "";
+															opcionFiltro = "";
+															nombreDatoFiltro = "";
+														}
+														break;
+													case 4:
+														nombreColumnaFiltro = "Asignatura";
+
+														opcionSubmenuE = -1;
+														while (opcionSubmenuE != 0) {
+															Menus.submenuOpcionFiltroVARCHAR();
+															opcionSubmenuE = leeInt(sc);
+															System.out.println();
+
+															switch (opcionSubmenuE) {
+															case 1:
+																opcionFiltro = "=";
+																opcionSubmenuE = 0;
+																break;
+															case 2:
+																opcionFiltro = "LIKE";
+																opcionSubmenuE = 0;
+																break;
+
+															case 0:
+																break;
+
+															default:
+																System.out.print("\u001B[91mError: \u001B[0m"); // Color
+																// personalizado
+																// para
+																// el
+																// "error"
+																System.out.println(
+																		"Opción no disponible, elija del 0 al 2");
+																System.out.println();
+
+																break;
+															} // Cierre del switch E
+
+														} // Cierre del while E
+
+														if (!opcionFiltro.equals("")) {
+															while (nombreDatoFiltro.equals("")) {
+																System.out.print("Introduzca la Asignatura: ");
+																if (opcionFiltro.equals("=")) {
+																	nombreDatoFiltro = "'" + sc.nextLine() + "'";
+																} else {
+																	nombreDatoFiltro = "'%" + sc.nextLine() + "%'";
+																}
+																System.out.println();
+															}
+
+															ListarTablas.listarFiltrado(conexion, nombreTabla,
+																	nombreColumnaFiltro, opcionFiltro,
+																	nombreDatoFiltro);
+															System.out.println("Ésta es la Consulta: SELECT * FROM "
+																	+ nombreTabla + " WHERE " + nombreColumnaFiltro
+																	+ " " + opcionFiltro + " " + nombreDatoFiltro);
+
+															opcionSubmenuE = 0;
+															opcionSubmenuD = 0;
+															opcionSubmenuC = 0;
+															opcionSubmenuB = 0;
+															opcionSubmenuA = 0;
+															nombreTabla = "";
+															nombreColumnaFiltro = "";
+															opcionFiltro = "";
+															nombreDatoFiltro = "";
+														}
+														break;
+													case 5:
+														nombreColumnaFiltro = "Curso";
+
+														opcionSubmenuE = -1;
+														while (opcionSubmenuE != 0) {
+															Menus.submenuOpcionFiltroINT();
+															opcionSubmenuE = leeInt(sc);
+															System.out.println();
+
+															switch (opcionSubmenuE) {
+															case 1:
+																opcionFiltro = "=";
+																opcionSubmenuE = 0;
+																break;
+															case 2:
+																opcionFiltro = ">";
+																opcionSubmenuE = 0;
+																break;
+															case 3:
+																opcionFiltro = "<";
+																opcionSubmenuE = 0;
+																break;
+															case 4:
+																opcionFiltro = ">=";
+																opcionSubmenuE = 0;
+																break;
+															case 5:
+																opcionFiltro = "<=";
+																opcionSubmenuE = 0;
+																break;
+															case 0:
+																break;
+
+															default:
+																System.out.print("\u001B[91mError: \u001B[0m"); // Color
+																// personalizado
+																// para
+																// el
+																// "error"
+																System.out.println(
+																		"Opción no disponible, elija del 0 al 5");
+																System.out.println();
+
+																break;
+															} // Cierre del switch E
+
+														} // Cierre del while E
+
+														if (!opcionFiltro.equals("")) {
+															while (nombreDatoFiltro.equals("")
+																	|| nombreDatoFiltro.equals("-1")) {
+																System.out.print(
+																		"Introduzca el curso (mayor que 0): ");
+																nombreDatoFiltro = String.valueOf(leeInt(sc));
+																System.out.println();
+															}
+
+															ListarTablas.listarFiltrado(conexion, nombreTabla,
+																	nombreColumnaFiltro, opcionFiltro,
+																	nombreDatoFiltro);
+															System.out.println("Ésta es la Consulta: SELECT * FROM "
+																	+ nombreTabla + " WHERE " + nombreColumnaFiltro
+																	+ " " + opcionFiltro + " " + nombreDatoFiltro);
+
+															opcionSubmenuE = 0;
+															opcionSubmenuD = 0;
+															opcionSubmenuC = 0;
+															opcionSubmenuB = 0;
+															opcionSubmenuA = 0;
+															nombreTabla = "";
+															nombreColumnaFiltro = "";
+															opcionFiltro = "";
+															nombreDatoFiltro = "";
+														}
+														break;
+													case 0:
+														break;
+													default:
+														System.out.print("\u001B[91mError: \u001B[0m"); // Color
+																										// personalizado
+																										// para
+														// el
+														// "error"
+														System.out.println("Opción no disponible, elija del 0 al 4");
+														System.out.println();
+														break;
+													} // Cierre del switch D
+
+												} // Cierre del while D
 												break;
 
 											default:

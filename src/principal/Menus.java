@@ -60,7 +60,7 @@ public class Menus {
 		System.out.println("2. idProfesor.");
 		System.out.println("3. idAlumno.");
 		System.out.println("4. Asignatura.");
-		System.out.println("5. Codigo.");
+		System.out.println("5. Curso.");
 		System.out.println("0. Volver al Menú anterior.");
 		System.out.println();
 		System.out.print("Escriba una opción: ");
