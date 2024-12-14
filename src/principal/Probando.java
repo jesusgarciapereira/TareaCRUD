@@ -12,22 +12,23 @@ import funciones.ModificarDatos;
 public class Probando {
 
 	public static void main(String[] args) {
-		
+		String campos[] = null;
+		System.out.println(campos);
 		// COMPROBAR LISTAR TABLA TOTAL CON FILTRO
-				Connection conexion = Conectar.conectar("jdbc:mysql://dns11036.phdns11.es:3306/ad2425_jgarcia", "jgarcia",
-						"12345");
-				String nombreTabla = "Profesores";
-				String nombreColumnaFiltro = "Nombre";
-				
-				String opcionFiltro = "=";
-				String nombreDatoFiltro = "'Ana'";
-				
-//				String opcionFiltro = "LIKE";
-//				String nombreDatoFiltro = "'%z%'";
-				
+//				Connection conexion = Conectar.conectar("jdbc:mysql://dns11036.phdns11.es:3306/ad2425_jgarcia", "jgarcia",
+//						"12345");
+//				String nombreTabla = "Profesores";
+//				String nombreColumnaFiltro = "Nombre";
+//				
 //				String opcionFiltro = "=";
-//				String nombreDatoFiltro = "5";
-					ListarTablas.listarFiltrado(conexion, nombreTabla, nombreColumnaFiltro, opcionFiltro, nombreDatoFiltro);
+//				String nombreDatoFiltro = "'Ana'";
+//				
+////				String opcionFiltro = "LIKE";
+////				String nombreDatoFiltro = "'%z%'";
+//				
+////				String opcionFiltro = "=";
+////				String nombreDatoFiltro = "5";
+//					ListarTablas.listarFiltrado(conexion, nombreTabla, nombreColumnaFiltro, opcionFiltro, nombreDatoFiltro);
 				
 		
 //		// COMPROBAR LISTAR TABLA TOTAL

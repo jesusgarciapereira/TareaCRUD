@@ -21,7 +21,7 @@ public class InsertarDatos {
 	 *         error.
 	 * @throws SQLException En caso de errores relacionados con la conexion o SQL.
 	 */
-	public static boolean insertarDato(Connection conn, String nombreTabla, String[] campos) throws SQLException {
+	public static boolean insertarDato(Connection conn, String nombreTabla, String[] campos) {
 
 		// Declaracion de objetos necesarios para la ejecución de la consulta.
 		Statement stmt = null;
@@ -50,7 +50,9 @@ public class InsertarDatos {
 				break;
 			// Si el nombre no es valido.
 			default:
-				System.err.println("Error: El nombre de la tabla especificado no es válido.");
+				System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
+
+				System.out.println("El nombre de la tabla especificado no es válido.");
 				break;
 			}
 			// Ejecuta la consulta SQL para insertar dato.
@@ -59,12 +61,29 @@ public class InsertarDatos {
 
 			// Captura errores relacionados con la ejecucion de la consulta SQL.
 		} catch (SQLException e) {
-			e.printStackTrace();
+			if (e.getSQLState().equals("42S02")) {
+				System.out.println("La tabla '" + nombreTabla + "' no existe en la Base de Datos");
+
+				System.out.println(
+						"Sugerencia: Primero, siga los pasos de la opción 2 (Crear Tablas) y una vez creadas, se podrán mostrar con la opción 4 (Listar Tablas)");
+
+			}
+//			 Para averiguar lo que debe salir 
+		System.out.println(e.getMessage());
+		System.out.println("Estado SQL " + e.getSQLState());
 		} finally {
-			// Libera recursos utilizados por el objeto Statement.
-			stmt.close();
-			// Cierra la conexion para evitar fugas de recursos.
-			conn.close();
+			try {
+				// Verifica si el objeto stmt no es nulo antes de cerrarlo para evitar
+				// excepciones.
+				if (stmt != null)
+					stmt.close(); // Libera recursos utilizados por el objeto Statement.
+
+				// Manejo de excepciones al intentar cerrar el Statement.
+			} catch (SQLException se) {
+				System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
+				System.out.println("No se ha podido cerrar el Statement.");
+
+			}
 		}
 
 		// Retorna el estado de la insercion.

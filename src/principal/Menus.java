@@ -4,6 +4,23 @@ package principal;
  * Clase que gestiona los menus y submenus.
  */
 public class Menus {
+	
+	/**
+	 * Submenu de Insertar Datos
+	 */
+	static void subMenuInsertarDatos() {
+		System.out.println("Insertar Datos:");
+		System.out.println("===============");
+		System.out.println("1. Profesores.");
+		System.out.println("2. Alumnos.");
+		System.out.println("3. Matriculas.");
+		System.out.println("0. Volver al Menú anterior.");
+		System.out.println();
+		System.out.println(
+				"Consejo: Antes de Insertar Datos en una Tabla, asegúrate de que dicha Tabla existe eligiendo primero la opción 4 del Menú Principal (Listar Tablas)");
+		
+		System.out.print("Escriba una opción: ");
+	}
 
 	static void submenuOpcionFiltroVARCHAR() {
 		System.out.println("Opción filtro:");

@@ -9,6 +9,7 @@ import java.util.Scanner;
 import funciones.BorrarTablas;
 import funciones.Conectar;
 import funciones.CrearTablas;
+import funciones.InsertarDatos;
 import funciones.ListarTablas;
 
 public class Principal {
@@ -42,6 +43,8 @@ public class Principal {
 		int fechaMes = 0;
 		int fechaAnnio = 0;
 
+		String campos[] = null;
+
 		boolean operacionRealizada = false;
 
 		opcionMenu = -1;
@@ -51,7 +54,7 @@ public class Principal {
 			System.out.println();
 
 			switch (opcionMenu) {
-			case 1:
+			case 1: // 1. Conectar con la Base de Datos.
 				System.out.println(
 						"Introduzca la dirección de la Base de Datos en formato JDBC (Tal que así: jdbc:mysql://dns11036.phdns11.es:3306/ad2425_jgarcia)");
 				url = sc.nextLine();
@@ -73,8 +76,8 @@ public class Principal {
 				}
 
 				System.out.println();
-				break; // Cierre case 1 opcionMenu
-			case 2:
+				break; // CIERRE 1. Conectar con la Base de Datos.
+			case 2: // 2. Crear Tablas.
 				if (conexion != null) {
 					opcionSubmenuA = -1;
 					while (opcionSubmenuA != 0) {
@@ -172,9 +175,9 @@ public class Principal {
 					opcionSubmenuB = 0;
 					opcionSubmenuA = 0;
 				}
-				break; // Cierre case 2 opcionMenu
+				break; // CIERRE 2. Crear Tablas.
 
-			case 3:
+			case 3: // 3. Eliminar Tablas.
 				if (conexion != null) {
 					opcionSubmenuA = -1;
 					while (opcionSubmenuA != 0) {
@@ -273,8 +276,8 @@ public class Principal {
 					opcionSubmenuB = 0;
 					opcionSubmenuA = 0;
 				}
-				break; // Cierre case 3 opcionMenu
-			case 4:
+				break; // CIERRE 3. Eliminar Tablas.
+			case 4: // 4. Listar Tablas.
 				if (conexion != null) {
 					opcionSubmenuA = -1;
 					while (opcionSubmenuA != 0) {
@@ -1444,8 +1447,7 @@ public class Principal {
 														if (!opcionFiltro.equals("")) {
 															while (nombreDatoFiltro.equals("")
 																	|| nombreDatoFiltro.equals("-1")) {
-																System.out.print(
-																		"Introduzca el curso (mayor que 0): ");
+																System.out.print("Introduzca el curso (mayor que 0): ");
 																nombreDatoFiltro = String.valueOf(leeInt(sc));
 																System.out.println();
 															}
@@ -1531,10 +1533,144 @@ public class Principal {
 					opcionSubmenuB = 0;
 					opcionSubmenuA = 0;
 				}
-				break; // Cierre case 4 opcionMenu
+				break; // CIERRE 4. Listar Tablas.
+			case 5: // 5. Insertar Datos.
+				if (conexion != null) {
+					opcionSubmenuA = -1;
+					while (opcionSubmenuA != 0) {
+						Menus.subMenuInsertarDatos();
+						opcionSubmenuA = leeInt(sc);
+						System.out.println();
 
-			case 0:
-				break;
+						switch (opcionSubmenuA) {
+						case 1:
+							nombreTabla = "Profesores";
+							campos = new String[4];
+							
+							while (campos[0] == null || campos[0].equals("")) {
+								System.out.println("Escriba el Nombre del Profesor: ");
+								campos[0] = sc.nextLine();
+							}
+							while (campos[1] == null || campos[1].equals("")) {
+								System.out.println("Escriba los Apellidos del Profesor: ");
+								campos[1] = sc.nextLine();
+							}
+							while (campos[2] == null || campos[2].equals("")) {
+								while (fechaDia < 1 || fechaDia > 31) {
+									System.out.print(
+											"Introduzca el día de FechaNacimiento del Profesor (entre 1 y 31): ");
+									fechaDia = leeInt(sc);
+								}
+								while (fechaMes < 1 || fechaMes > 12) {
+									System.out.print(
+											"Introduzca el mes de FechaNacimiento del Profesor (entre 1 y 12): ");
+									fechaMes = leeInt(sc);
+								}
+
+								while (fechaAnnio <= 0) {
+									System.out
+											.print("Introduzca el año de FechaNacimiento del Profesor (mayor que 0): ");
+									fechaAnnio = leeInt(sc);
+								}
+								campos[2] = fechaAnnio + "-" + fechaMes + "-" + fechaDia;
+							}
+							while (campos[3] == null || campos[3].equals("") || Integer.valueOf(campos[3])< 0) {
+								System.out.println("Escriba la Antiguedad del Profesor (mayor o igual que 0): ");
+								campos[3] = String.valueOf(leeInt(sc));
+							}
+							
+							operacionRealizada = InsertarDatos.insertarDato(conexion, nombreTabla, campos);
+							
+							System.out.print(
+									(operacionRealizada) ? "Dato introducido correctamente en la Tabla "+ nombreTabla +"\n" : "");
+
+							System.out.println();
+
+							opcionSubmenuA = 0;
+							operacionRealizada = false;
+							nombreTabla = "";
+							campos = null;
+							fechaDia = 0;
+							fechaMes = 0;
+							fechaAnnio = 0;
+							break;
+
+						case 2:
+							nombreTabla = "Alumnos";
+							campos = new String[3];
+							
+							while (campos[0] == null || campos[0].equals("")) {
+								System.out.println("Escriba el Nombre del Alumno: ");
+								campos[0] = sc.nextLine();
+							}
+							while (campos[1] == null || campos[1].equals("")) {
+								System.out.println("Escriba los Apellidos del Alumno: ");
+								campos[1] = sc.nextLine();
+							}
+							while (campos[2] == null || campos[2].equals("")) {
+								while (fechaDia < 1 || fechaDia > 31) {
+									System.out.print(
+											"Introduzca el día de FechaNacimiento del Alumno (entre 1 y 31): ");
+									fechaDia = leeInt(sc);
+								}
+								while (fechaMes < 1 || fechaMes > 12) {
+									System.out.print(
+											"Introduzca el mes de FechaNacimiento del Alumno (entre 1 y 12): ");
+									fechaMes = leeInt(sc);
+								}
+
+								while (fechaAnnio <= 0) {
+									System.out
+											.print("Introduzca el año de FechaNacimiento del Alumno (mayor que 0): ");
+									fechaAnnio = leeInt(sc);
+								}
+								campos[2] = fechaAnnio + "-" + fechaMes + "-" + fechaDia;
+							}
+							
+							operacionRealizada = InsertarDatos.insertarDato(conexion, nombreTabla, campos);
+							
+							System.out.print(
+									(operacionRealizada) ? "Dato introducido correctamente en la Tabla "+ nombreTabla +"\n" : "");
+
+							System.out.println();
+
+							opcionSubmenuA = 0;
+							operacionRealizada = false;
+							nombreTabla = "";
+							campos = null;
+							fechaDia = 0;
+							fechaMes = 0;
+							fechaAnnio = 0;
+							break;
+						case 3:
+							nombreTabla = "Matriculas";
+							campos = new String[4];
+							break;
+						case 0:
+							break;
+
+						default:
+							System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
+							System.out.println("Opción no disponible, elija del 0 al 3");
+							System.out.println();
+							break;
+						} // Cierre del switch secundario
+					} // Cierre del while secundario
+				} else {
+					System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el
+																	// "error"
+					System.out.println("No estás conectado a la Base de Datos");
+					System.out.println(
+							"Sugerencia: Primero, siga los pasos de la opción 1 (Conectar con la Base de Datos) e intente crear las Tablas de nuevo");
+
+					System.out.println();
+					opcionSubmenuB = 0;
+					opcionSubmenuA = 0;
+				}
+				break; // CIERRE 5. Insertar Datos.
+
+			case 0: // 0. Salir del Programa
+				break; // CIERRE 0. Salir del Programa
 
 			default:
 				System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
