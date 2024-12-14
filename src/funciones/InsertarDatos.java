@@ -61,6 +61,7 @@ public class InsertarDatos {
 
 			// Captura errores relacionados con la ejecucion de la consulta SQL.
 		} catch (SQLException e) {
+			System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
 			if (e.getSQLState().equals("42S02")) {
 				System.out.println("La tabla '" + nombreTabla + "' no existe en la Base de Datos");
 
@@ -68,6 +69,14 @@ public class InsertarDatos {
 						"Sugerencia: Primero, siga los pasos de la opción 2 (Crear Tablas) y una vez creadas, se podrán mostrar con la opción 4 (Listar Tablas)");
 
 			}
+			
+			else if (e.getSQLState().equals("23000")) {
+				System.out.println("Violación de restricción de clave foránea definida en la Tabla '" + nombreTabla + "'");
+				System.out.println("Sugerencia: Introduzca un idProfesor presente en la Tabla 'Profesores' y un idAlumno presente en la Tabla 'Alumnos'");
+			
+			}
+			
+			
 //			 Para averiguar lo que debe salir 
 		System.out.println(e.getMessage());
 		System.out.println("Estado SQL " + e.getSQLState());

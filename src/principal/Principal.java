@@ -1579,10 +1579,12 @@ public class Principal {
 								campos[3] = String.valueOf(leeInt(sc));
 							}
 							
+							System.out.println();
+							
 							operacionRealizada = InsertarDatos.insertarDato(conexion, nombreTabla, campos);
 							
 							System.out.print(
-									(operacionRealizada) ? "Dato introducido correctamente en la Tabla "+ nombreTabla +"\n" : "");
+									(operacionRealizada) ? "Dato introducido correctamente en la Tabla '"+ nombreTabla +"'\n" : "");
 
 							System.out.println();
 
@@ -1626,11 +1628,12 @@ public class Principal {
 								}
 								campos[2] = fechaAnnio + "-" + fechaMes + "-" + fechaDia;
 							}
+							System.out.println();
 							
 							operacionRealizada = InsertarDatos.insertarDato(conexion, nombreTabla, campos);
 							
 							System.out.print(
-									(operacionRealizada) ? "Dato introducido correctamente en la Tabla "+ nombreTabla +"\n" : "");
+									(operacionRealizada) ? "Dato introducido correctamente en la Tabla '"+ nombreTabla +"'\n" : "");
 
 							System.out.println();
 
@@ -1645,6 +1648,36 @@ public class Principal {
 						case 3:
 							nombreTabla = "Matriculas";
 							campos = new String[4];
+							
+							while (campos[0] == null || campos[0].equals("") || Integer.valueOf(campos[0]) <= 0) {
+								System.out.println("Escriba el ID del Profesor (mayor que 0): ");
+								campos[0] = String.valueOf(leeInt(sc));
+							}
+							while (campos[1] == null || campos[1].equals("") || Integer.valueOf(campos[0]) <= 0) {
+								System.out.println("Escriba el ID del Alumno (mayor que 0): ");
+								campos[1] = String.valueOf(leeInt(sc));
+							}
+							while (campos[2] == null || campos[2].equals("")) {
+								System.out.println("Escriba la Asignatura de la Matricula: ");
+								campos[2] = sc.nextLine();
+							}
+							while (campos[3] == null || campos[3].equals("") || Integer.valueOf(campos[3]) <= 0) {
+								System.out.println("Escriba el Curso de la Matricula (mayor que 0): ");
+								campos[3] = String.valueOf(leeInt(sc));
+							}
+							System.out.println();
+							
+							operacionRealizada = InsertarDatos.insertarDato(conexion, nombreTabla, campos);
+							
+							System.out.print(
+									(operacionRealizada) ? "Dato introducido correctamente en la Tabla '"+ nombreTabla +"'\n" : "");
+
+							System.out.println();
+
+							opcionSubmenuA = 0;
+							operacionRealizada = false;
+							nombreTabla = "";
+							campos = null;
 							break;
 						case 0:
 							break;
