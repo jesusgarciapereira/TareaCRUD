@@ -5,6 +5,61 @@ package principal;
  */
 public class Menus {
 	
+	static void submenuModificarColumnasProfesores() {
+		System.out.println("Modificado de Tabla 'Profesores:");
+		System.out.println("===============================");
+		System.out.println("1. idProfesor.");
+		System.out.println("2. Nombre.");
+		System.out.println("3. Apellidos.");
+		System.out.println("4. FechaNacimiento");
+		System.out.println("5. Antiguedad.");
+		System.out.println("0. Volver al Menú anterior.");
+		System.out.println();
+		System.out.print("Escriba una opción: ");
+	}
+
+	static void submenuModificarColumnasAlumnos() {
+		System.out.println("Modificado de Tabla 'Alumnos:");
+		System.out.println("============================");
+		System.out.println("1. idAlumno.");
+		System.out.println("2. Nombre.");
+		System.out.println("3. Apellidos.");
+		System.out.println("4. FechaNacimiento");
+		System.out.println("0. Volver al Menú anterior.");
+		System.out.println();
+		System.out.print("Escriba una opción: ");
+	}
+
+	static void submenuModificarColumnasMatriculas() {
+		System.out.println("Modificado de Tabla 'Matriculas:");
+		System.out.println("===============================");
+		System.out.println("1. idMatricula.");
+		System.out.println("2. idProfesor.");
+		System.out.println("3. idAlumno.");
+		System.out.println("4. Asignatura.");
+		System.out.println("5. Curso.");
+		System.out.println("0. Volver al Menú anterior.");
+		System.out.println();
+		System.out.print("Escriba una opción: ");
+	}
+	
+	/**
+	 * Submenu de Modificar Datos
+	 */
+	static void subMenuModificarDatos() {
+		System.out.println("Modificar Datos:");
+		System.out.println("===============");
+		System.out.println("1. Profesores.");
+		System.out.println("2. Alumnos.");
+		System.out.println("3. Matriculas.");
+		System.out.println("0. Volver al Menú anterior.");
+		System.out.println();
+		System.out.println(
+				"Consejo: Antes de Modificar Datos de una Tabla, asegúrate de que dicha Tabla existe eligiendo primero la opción 4 del Menú Principal (Listar Tablas)");
+		
+		System.out.print("Escriba una opción: ");
+	}
+	
 	/**
 	 * Submenu de Insertar Datos
 	 */
@@ -17,7 +72,7 @@ public class Menus {
 		System.out.println("0. Volver al Menú anterior.");
 		System.out.println();
 		System.out.println(
-				"Consejo: Antes de Insertar Datos en una Tabla, asegúrate de que dicha Tabla existe eligiendo primero la opción 4 del Menú Principal (Listar Tablas)");
+				"Consejo: Antes de Insertar Datos en una Tabla, asegúrese de que dicha Tabla existe eligiendo primero la opción 4 del Menú Principal (Listar Tablas)");
 		
 		System.out.print("Escriba una opción: ");
 	}
@@ -91,7 +146,7 @@ public class Menus {
 		System.out.println("0. Volver al Menú anterior.");
 		System.out.println();
 		System.out.println(
-				"Consejo: Antes de listar de manera filtrada, asegúrate de que dicha Tabla existe eligiendo primero la opción 1 (Completa)");
+				"Consejo: Antes de listar de manera filtrada, asegúrese de que dicha Tabla existe eligiendo primero la opción 1 (Completa)");
 		
 		System.out.print("Escriba una opción: ");
 	}

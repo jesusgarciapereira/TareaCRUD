@@ -24,14 +24,13 @@ public class ModificarDatos {
 	 * @param nombreDatoNuevo         Nombre del valor nuevo
 	 * @param nombreColumnaFiltro     Nombre de la columna que se usara como filtro
 	 * @param nombreDatoFiltro        Nombre del valor que se usara como filtro
-	 * @param confirmar
-	 * @return `true` si los datos se modificaron con exito; `false` si ocurrio algun
-	 *         error.
+	 * @param confirmado
+	 * @return `true` si los datos se modificaron con exito; `false` si ocurrio
+	 *         algun error.
 	 * @throws SQLException En caso de errores relacionados con la conexion o SQL.
 	 */
 	public static boolean modificarDato(Connection conn, String nombreTabla, String nombreColumnaModificada,
-			String nombreDatoNuevo, String nombreColumnaFiltro, String nombreDatoFiltro, boolean confirmar)
-			throws SQLException {
+			String nombreDatoNuevo, String nombreColumnaFiltro, String nombreDatoFiltro, boolean confirmado) {
 
 		// Declaracion de objetos necesarios para la ejecucion de la consulta.
 		PreparedStatement stmt = null;
@@ -84,8 +83,10 @@ public class ModificarDatos {
 					stmt.setInt(1, profesor.getAntiguedad()); // Asigna el valor al PreparedStatement
 					break;
 				default:
+					System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
+
 					// Si el nombre de columna no es valido
-					System.err.println("Error: El nombre del campo especificado no es valido.");
+					System.out.println("El nombre del campo especificado no es valido.");
 					break;
 				}
 
@@ -116,8 +117,10 @@ public class ModificarDatos {
 					stmt.setInt(2, profesor.getAntiguedad()); // Asigna el valor al PreparedStatement
 					break;
 				default:
+					System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
+
 					// Si el nombre de columna no es valido
-					System.err.println("Error: El nombre del campo especificado no es valido.");
+					System.out.println("El nombre del campo especificado no es valido.");
 					break;
 				}
 				break;
@@ -148,8 +151,10 @@ public class ModificarDatos {
 					stmt.setString(1, alumno.getFechaNacimiento().toString()); // Asigna el valor al PreparedStatement
 					break;
 				default:
+					System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
+
 					// Si el nombre de columna no es valido
-					System.err.println("Error: El nombre del campo especificado no es valido.");
+					System.out.println("El nombre del campo especificado no es valido.");
 					break;
 				}
 
@@ -175,8 +180,10 @@ public class ModificarDatos {
 					stmt.setString(2, alumno.getFechaNacimiento().toString()); // Asigna el valor al PreparedStatement
 					break;
 				default:
+					System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
+
 					// Si el nombre de columna no es valido
-					System.err.println("Error: El nombre del campo especificado no es valido.");
+					System.out.println("El nombre del campo especificado no es valido.");
 					break;
 				}
 				break;
@@ -212,8 +219,10 @@ public class ModificarDatos {
 					stmt.setInt(1, matricula.getCurso()); // Asigna el valor al PreparedStatement
 					break;
 				default:
+					System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
+
 					// Si el nombre de columna no es valido
-					System.err.println("Error: El nombre del campo especificado no es valido.");
+					System.out.println("El nombre del campo especificado no es valido.");
 					break;
 				}
 
@@ -245,15 +254,19 @@ public class ModificarDatos {
 					stmt.setInt(2, matricula.getCurso()); // Asigna el valor al PreparedStatement
 					break;
 				default:
+					System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
+
 					// Si el nombre de columna no es valido
-					System.err.println("Error: El nombre del campo especificado no es valido.");
+					System.out.println("El nombre del campo especificado no es valido.");
 					break;
 				}
 				break;
 
 			// Si el nombre de la tabla no es valido
 			default:
-				System.err.println("Error: El nombre de la tabla especificado no es valido.");
+				System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
+
+				System.out.println("El nombre de la tabla especificado no es valido.");
 				break;
 			}
 
@@ -261,7 +274,7 @@ public class ModificarDatos {
 			stmt.execute();
 
 			// Segun la confirmacion del usuario
-			if (confirmar) {
+			if (confirmado) {
 				conn.commit(); // Confirmamos la transaccion
 				modificadoCompleto = true; // Marca el actualizado como exitoso.
 				// System.out.println("Cambios confirmados");
@@ -274,12 +287,22 @@ public class ModificarDatos {
 			}
 			// Captura errores relacionados con la ejecucion de la consulta SQL.
 		} catch (SQLException e) {
-			e.printStackTrace();
+//			 Para averiguar lo que debe salir 
+		System.out.println(e.getMessage());
+		System.out.println("Estado SQL " + e.getSQLState());
 		} finally {
-			// Libera recursos utilizados por el objeto Statement.
-			stmt.close();
-			// Cierra la conexion para evitar fugas de recursos.
-			conn.close();
+			try {
+				// Verifica si el objeto stmt no es nulo antes de cerrarlo para evitar
+				// excepciones.
+				if (stmt != null)
+					stmt.close(); // Libera recursos utilizados por el objeto Statement.
+
+				// Manejo de excepciones al intentar cerrar el Statement.
+			} catch (SQLException se) {
+				System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
+				System.out.println("No se ha podido cerrar el Statement.");
+
+			}
 		}
 
 		// Retorna si la modificacion fue exitosa o no.

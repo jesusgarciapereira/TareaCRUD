@@ -78,8 +78,8 @@ public class InsertarDatos {
 			
 			
 //			 Para averiguar lo que debe salir 
-		System.out.println(e.getMessage());
-		System.out.println("Estado SQL " + e.getSQLState());
+//		System.out.println(e.getMessage());
+//		System.out.println("Estado SQL " + e.getSQLState());
 		} finally {
 			try {
 				// Verifica si el objeto stmt no es nulo antes de cerrarlo para evitar

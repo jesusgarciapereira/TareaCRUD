@@ -1,6 +1,5 @@
 package principal;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.InputMismatchException;
@@ -11,6 +10,7 @@ import funciones.Conectar;
 import funciones.CrearTablas;
 import funciones.InsertarDatos;
 import funciones.ListarTablas;
+import funciones.ModificarDatos;
 
 public class Principal {
 
@@ -38,6 +38,8 @@ public class Principal {
 		String nombreColumnaFiltro = "";
 		String opcionFiltro = "";
 		String nombreDatoFiltro = "";
+		String nombreColumnaModificada = "";
+		String nombreDatoNuevo = "";
 
 		int fechaDia = 0;
 		int fechaMes = 0;
@@ -46,6 +48,8 @@ public class Principal {
 		String campos[] = null;
 
 		boolean operacionRealizada = false;
+		boolean confirmado = false;
+		String textoConfirmado = "";
 
 		opcionMenu = -1;
 		while (opcionMenu != 0) {
@@ -314,28 +318,6 @@ public class Principal {
 								switch (opcionSubmenuB) {
 								case 1:
 									nombreTabla = "Profesores";
-
-									/*
-									 * if (!nombreTabla.equals(""){ opcionSubmenuC = -1;
-									 * 
-									 * while (opcionSubmenuC != 0) { submenuCompletoOFiltrado(nombreTabla);
-									 * opcionSubmenuC = leeInt(sc); System.out.println();
-									 * 
-									 * switch (opcionSubmenuC) { case 1: ListarTablas.listarTodo(conexion,
-									 * nombreTabla);
-									 * 
-									 * opcionSubmenuC = 0; opcionSubmenuB = 0; opcionSubmenuA = 0; nombreTabla = "";
-									 * 
-									 * break; case 2: nombreTabla = "Alumnos"; break;
-									 * 
-									 * case 0: break;
-									 * 
-									 * default: System.out.print("\u001B[91mError: \u001B[0m"); // Color
-									 * personalizado para // el // "error"
-									 * System.out.println("Opción no disponible, elija del 0 al 2");
-									 * System.out.println(); break; } // Cierre del switch cuaternario } // Cierre
-									 * del while cuaternario´ }
-									 */
 									break;
 								case 2:
 									nombreTabla = "Alumnos";
@@ -1546,7 +1528,7 @@ public class Principal {
 						case 1:
 							nombreTabla = "Profesores";
 							campos = new String[4];
-							
+
 							while (campos[0] == null || campos[0].equals("")) {
 								System.out.println("Escriba el Nombre del Profesor: ");
 								campos[0] = sc.nextLine();
@@ -1574,17 +1556,18 @@ public class Principal {
 								}
 								campos[2] = fechaAnnio + "-" + fechaMes + "-" + fechaDia;
 							}
-							while (campos[3] == null || campos[3].equals("") || Integer.valueOf(campos[3])< 0) {
+							while (campos[3] == null || campos[3].equals("") || Integer.valueOf(campos[3]) < 0) {
 								System.out.println("Escriba la Antiguedad del Profesor (mayor o igual que 0): ");
 								campos[3] = String.valueOf(leeInt(sc));
 							}
-							
+
 							System.out.println();
-							
+
 							operacionRealizada = InsertarDatos.insertarDato(conexion, nombreTabla, campos);
-							
-							System.out.print(
-									(operacionRealizada) ? "Dato introducido correctamente en la Tabla '"+ nombreTabla +"'\n" : "");
+
+							System.out.print((operacionRealizada)
+									? "Dato introducido correctamente en la Tabla '" + nombreTabla + "'\n"
+									: "");
 
 							System.out.println();
 
@@ -1600,7 +1583,7 @@ public class Principal {
 						case 2:
 							nombreTabla = "Alumnos";
 							campos = new String[3];
-							
+
 							while (campos[0] == null || campos[0].equals("")) {
 								System.out.println("Escriba el Nombre del Alumno: ");
 								campos[0] = sc.nextLine();
@@ -1611,29 +1594,29 @@ public class Principal {
 							}
 							while (campos[2] == null || campos[2].equals("")) {
 								while (fechaDia < 1 || fechaDia > 31) {
-									System.out.print(
-											"Introduzca el día de FechaNacimiento del Alumno (entre 1 y 31): ");
+									System.out
+											.print("Introduzca el día de FechaNacimiento del Alumno (entre 1 y 31): ");
 									fechaDia = leeInt(sc);
 								}
 								while (fechaMes < 1 || fechaMes > 12) {
-									System.out.print(
-											"Introduzca el mes de FechaNacimiento del Alumno (entre 1 y 12): ");
+									System.out
+											.print("Introduzca el mes de FechaNacimiento del Alumno (entre 1 y 12): ");
 									fechaMes = leeInt(sc);
 								}
 
 								while (fechaAnnio <= 0) {
-									System.out
-											.print("Introduzca el año de FechaNacimiento del Alumno (mayor que 0): ");
+									System.out.print("Introduzca el año de FechaNacimiento del Alumno (mayor que 0): ");
 									fechaAnnio = leeInt(sc);
 								}
 								campos[2] = fechaAnnio + "-" + fechaMes + "-" + fechaDia;
 							}
 							System.out.println();
-							
+
 							operacionRealizada = InsertarDatos.insertarDato(conexion, nombreTabla, campos);
-							
-							System.out.print(
-									(operacionRealizada) ? "Dato introducido correctamente en la Tabla '"+ nombreTabla +"'\n" : "");
+
+							System.out.print((operacionRealizada)
+									? "Dato introducido correctamente en la Tabla '" + nombreTabla + "'\n"
+									: "");
 
 							System.out.println();
 
@@ -1648,7 +1631,7 @@ public class Principal {
 						case 3:
 							nombreTabla = "Matriculas";
 							campos = new String[4];
-							
+
 							while (campos[0] == null || campos[0].equals("") || Integer.valueOf(campos[0]) <= 0) {
 								System.out.println("Escriba el ID del Profesor (mayor que 0): ");
 								campos[0] = String.valueOf(leeInt(sc));
@@ -1666,11 +1649,12 @@ public class Principal {
 								campos[3] = String.valueOf(leeInt(sc));
 							}
 							System.out.println();
-							
+
 							operacionRealizada = InsertarDatos.insertarDato(conexion, nombreTabla, campos);
-							
-							System.out.print(
-									(operacionRealizada) ? "Dato introducido correctamente en la Tabla '"+ nombreTabla +"'\n" : "");
+
+							System.out.print((operacionRealizada)
+									? "Dato introducido correctamente en la Tabla '" + nombreTabla + "'\n"
+									: "");
 
 							System.out.println();
 
@@ -1679,6 +1663,7 @@ public class Principal {
 							nombreTabla = "";
 							campos = null;
 							break;
+
 						case 0:
 							break;
 
@@ -1689,6 +1674,7 @@ public class Principal {
 							break;
 						} // Cierre del switch secundario
 					} // Cierre del while secundario
+
 				} else {
 					System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el
 																	// "error"
@@ -1701,7 +1687,248 @@ public class Principal {
 					opcionSubmenuA = 0;
 				}
 				break; // CIERRE 5. Insertar Datos.
+			case 6: // 6. Modificar Datos.
+				if (conexion != null) {
+					opcionSubmenuA = -1;
+					while (opcionSubmenuA != 0) {
+						Menus.subMenuModificarDatos();
+						opcionSubmenuA = leeInt(sc);
+						System.out.println();
+						switch (opcionSubmenuA) {
+						case 1:
+							nombreTabla = "Profesores";
 
+							opcionSubmenuB = -1;
+							while (opcionSubmenuB != 0) {
+								Menus.submenuModificarColumnasProfesores();
+								opcionSubmenuB = leeInt(sc);
+								System.out.println();
+
+								switch (opcionSubmenuB) {
+								case 1:
+									nombreColumnaModificada = "idProfesor";
+
+									while (nombreDatoNuevo == null || nombreDatoNuevo.equals("")
+											|| Integer.valueOf(nombreDatoNuevo) < 0) {
+										System.out.println("Escriba el nuevo idProfesor del Profesor (mayor que 0): ");
+										nombreDatoNuevo = String.valueOf(leeInt(sc));
+									}
+
+									opcionSubmenuC = -1;
+									while (opcionSubmenuC != 0) {
+										Menus.submenuFiltrarColumnasProfesores();
+										opcionSubmenuC = leeInt(sc);
+										System.out.println();
+
+										switch (opcionSubmenuC) {
+										case 1:
+											nombreColumnaFiltro = "idProfesor";
+
+											while (nombreDatoFiltro == null || nombreDatoFiltro.equals("")
+													|| Integer.valueOf(nombreDatoFiltro) < 0) {
+												System.out.println(
+														"Escriba el antiguo idProfesor del Profesor (mayor que 0): ");
+												nombreDatoFiltro = String.valueOf(leeInt(sc));
+											}
+											
+											while (!(textoConfirmado.equals("s") || textoConfirmado.equals("n"))) {
+												System.out.println(
+														"¿Está seguro de que quiere llevar a cabo la modificación? (s/n): ");
+												textoConfirmado = sc.nextLine();
+											}
+
+											confirmado = (textoConfirmado.equals("s")) ? true : false;
+
+											operacionRealizada = ModificarDatos.modificarDato(conexion, nombreTabla,
+													nombreColumnaModificada, nombreDatoNuevo, nombreColumnaFiltro,
+													nombreDatoFiltro, confirmado);
+
+											if (operacionRealizada) {
+												System.out.println("Dato modificado correctamente en la Tabla '" + nombreTabla + "'");
+												System.out.println("El comando ejecutado ha sido: UPDATE " + nombreTabla
+														+ " SET " + nombreColumnaModificada + " = " + nombreDatoNuevo
+														+ " WHERE " + nombreColumnaFiltro + " = " + nombreDatoFiltro + ";");
+												System.out.println();
+											}
+											
+											opcionSubmenuC = 0;
+											opcionSubmenuB = 0;
+											opcionSubmenuA = 0;
+											confirmado = false;
+											operacionRealizada = false;
+											nombreTabla = "";
+											nombreColumnaModificada = "";
+											nombreDatoNuevo = "";
+											nombreColumnaFiltro = "";
+											nombreDatoFiltro = "";
+											fechaDia = 0;
+											fechaMes = 0;
+											fechaAnnio = 0;
+											break;
+										case 2:
+											nombreColumnaFiltro = "Nombre";
+
+											while (nombreDatoFiltro == null || nombreDatoFiltro.equals("")) {
+												System.out.println("Escriba el antiguo Nombre del Profesor: ");
+												nombreDatoFiltro = sc.nextLine();
+											}
+											break;
+										case 3:
+											nombreColumnaFiltro = "Apellidos";
+
+											while (nombreDatoFiltro == null || nombreDatoFiltro.equals("")) {
+												System.out.println("Escriba los antiguos Apellidos del Profesor: ");
+												nombreDatoFiltro = sc.nextLine();
+											}
+											break;
+										case 4:
+											nombreColumnaFiltro = "FechaNacimiento";
+
+											while (nombreDatoFiltro == null || nombreDatoFiltro.equals("")) {
+												while (fechaDia < 1 || fechaDia > 31) {
+													System.out.print(
+															"Introduzca el nuevo día de FechaNacimiento del Profesor (entre 1 y 31): ");
+													fechaDia = leeInt(sc);
+												}
+												while (fechaMes < 1 || fechaMes > 12) {
+													System.out.print(
+															"Introduzca el nuevo mes de FechaNacimiento del Profesor (entre 1 y 12): ");
+													fechaMes = leeInt(sc);
+												}
+
+												while (fechaAnnio <= 0) {
+													System.out.print(
+															"Introduzca el nuevo año de FechaNacimiento del Profesor (mayor que 0): ");
+													fechaAnnio = leeInt(sc);
+												}
+												nombreDatoFiltro = fechaAnnio + "-" + fechaMes + "-" + fechaDia;
+											}
+
+											break;
+										case 5:
+											nombreColumnaFiltro = "Antiguedad";
+
+											while (nombreDatoFiltro == null || nombreDatoFiltro.equals("")
+													|| Integer.valueOf(nombreDatoFiltro) < 0) {
+												System.out.println(
+														"Escriba la nueva Antiguedad del Profesor (mayor o igual que 0): ");
+												nombreDatoFiltro = String.valueOf(leeInt(sc));
+											}
+											break;
+
+										case 0:
+											nombreDatoNuevo = "";
+											break;
+										default:
+											System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para
+																							// el
+																							// "error"
+											System.out.println("Opción no disponible, elija del 0 al 5");
+											System.out.println();
+											break;
+										} // CIERRE switch Submenu C
+									} // CIERRE while Submenu C
+									
+									break;
+								case 2:
+									nombreColumnaModificada = "Nombre";
+
+									while (nombreDatoNuevo == null || nombreDatoNuevo.equals("")) {
+										System.out.println("Escriba el nuevo Nombre del Profesor: ");
+										nombreDatoNuevo = sc.nextLine();
+									}
+									break;
+								case 3:
+									nombreColumnaModificada = "Apellidos";
+
+									while (nombreDatoNuevo == null || nombreDatoNuevo.equals("")) {
+										System.out.println("Escriba los nuevos Apellidos del Profesor: ");
+										nombreDatoNuevo = sc.nextLine();
+									}
+									break;
+								case 4:
+									nombreColumnaModificada = "FechaNacimiento";
+
+									while (nombreDatoNuevo == null || nombreDatoNuevo.equals("")) {
+										while (fechaDia < 1 || fechaDia > 31) {
+											System.out.print(
+													"Introduzca el nuevo día de FechaNacimiento del Profesor (entre 1 y 31): ");
+											fechaDia = leeInt(sc);
+										}
+										while (fechaMes < 1 || fechaMes > 12) {
+											System.out.print(
+													"Introduzca el nuevo mes de FechaNacimiento del Profesor (entre 1 y 12): ");
+											fechaMes = leeInt(sc);
+										}
+
+										while (fechaAnnio <= 0) {
+											System.out.print(
+													"Introduzca el nuevo año de FechaNacimiento del Profesor (mayor que 0): ");
+											fechaAnnio = leeInt(sc);
+										}
+										nombreDatoNuevo = fechaAnnio + "-" + fechaMes + "-" + fechaDia;
+
+										fechaDia = 0;
+										fechaMes = 0;
+										fechaAnnio = 0;
+									}
+
+									break;
+								case 5:
+									nombreColumnaModificada = "Antiguedad";
+
+									while (nombreDatoNuevo == null || nombreDatoNuevo.equals("")
+											|| Integer.valueOf(nombreDatoNuevo) < 0) {
+										System.out.println(
+												"Escriba la nueva Antiguedad del Profesor (mayor o igual que 0): ");
+										nombreDatoNuevo = String.valueOf(leeInt(sc));
+									}
+									break;
+
+								case 0:
+									break;
+
+								default:
+									System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el
+																					// "error"
+									System.out.println("Opción no disponible, elija del 0 al 5");
+									System.out.println();
+									break;
+								} // CIERRE switch Submenu B
+
+							} // CIERRE while Submenu B
+
+							break;
+						case 2:
+							nombreTabla = "Alumnos";
+							break;
+						case 3:
+							nombreTabla = "Matriculas";
+							break;
+
+						case 0:
+							break;
+
+						default:
+							System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el
+																			// "error"
+							System.out.println("Opción no disponible, elija del 0 al 3");
+							System.out.println();
+							break;
+						}// Cierre switch Submenu A
+					} // Cierre while Submenu A
+				} else {
+					System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el
+					// "error"
+					System.out.println("No estás conectado a la Base de Datos");
+					System.out.println(
+							"Sugerencia: Primero, siga los pasos de la opción 1 (Conectar con la Base de Datos) e intente crear las Tablas de nuevo");
+
+					System.out.println();
+					opcionSubmenuB = 0;
+					opcionSubmenuA = 0;
+				}
+				break; // CIERRE 6. Modificar Datos.
 			case 0: // 0. Salir del Programa
 				break; // CIERRE 0. Salir del Programa
 
@@ -1731,35 +1958,6 @@ public class Principal {
 		sc.close();
 
 	}
-
-//	private static Connection peticionesOpcion1(Scanner sc) {
-//		String url;
-//		String usuario;
-//		String contrasennia;
-//		Connection conexion;
-//		System.out.println(
-//				"Introduzca la dirección de la Base de Datos en formato JDBC (Tal que así: jdbc:mysql://dns11036.phdns11.es:3306/ad2425_jgarcia)");
-//		url = sc.nextLine();
-//		System.out.println("Introduzca el nombre de usuario (Tal que así: jgarcia)");
-//		usuario = sc.nextLine();
-//		System.out.println("Introduzca la contraseña (Tal que así: 12345)");
-//		contrasennia = sc.nextLine();
-//
-//		System.out.println();
-//
-//		conexion = Conectar.conectar(url, usuario, contrasennia);
-//
-//		if (conexion == null) {
-//			System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
-//			System.out.println("No se ha podido llevar a cabo la conexión");
-//
-//		} else {
-//			System.out.println("Conexión exitosa con la Base de Datos");
-//		}
-//
-//		System.out.println();
-//		return conexion;
-//	}
 
 	/**
 	 * Funcion que devuelve el numero entero escrito por teclado
