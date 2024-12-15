@@ -3166,6 +3166,1015 @@ public class Principal {
 							break;
 						case 2:
 							nombreTabla = "Alumnos";
+							
+							opcionSubmenuB = -1;
+							while (opcionSubmenuB != 0) {
+								Menus.submenuModificarColumnasAlumnos();
+								opcionSubmenuB = leeInt(sc);
+								System.out.println();
+
+								switch (opcionSubmenuB) {
+								case 1:
+									nombreColumnaModificada = "idAlumno";
+
+									while (nombreDatoNuevo == null || nombreDatoNuevo.equals("")
+											|| Integer.valueOf(nombreDatoNuevo) < 0) {
+										System.out.println("Escriba el nuevo idAlumno del Alumno (mayor que 0): ");
+										nombreDatoNuevo = String.valueOf(leeInt(sc));
+									}
+
+									opcionSubmenuC = -1;
+									while (opcionSubmenuC != 0) {
+										Menus.submenuFiltrarColumnasAlumnos();
+										opcionSubmenuC = leeInt(sc);
+										System.out.println();
+
+										switch (opcionSubmenuC) {
+										case 1:
+											nombreColumnaFiltro = "idAlumno";
+
+											while (nombreDatoFiltro == null || nombreDatoFiltro.equals("")
+													|| Integer.valueOf(nombreDatoFiltro) < 0) {
+												System.out.println(
+														"Escriba el actual idAlumno del Alumno (mayor que 0): ");
+												nombreDatoFiltro = String.valueOf(leeInt(sc));
+											}
+											
+											while (!(textoConfirmado.equals("s") || textoConfirmado.equals("n"))) {
+												System.out.println(
+														"¿Está seguro de que quiere llevar a cabo la modificación? (s/n): ");
+												textoConfirmado = sc.nextLine();
+											}
+
+											confirmado = (textoConfirmado.equals("s")) ? true : false;
+
+											operacionRealizada = ModificarDatos.modificarDato(conexion, nombreTabla,
+													nombreColumnaModificada, nombreDatoNuevo, nombreColumnaFiltro,
+													nombreDatoFiltro, confirmado);
+
+											if (operacionRealizada) {
+												System.out.println("Dato modificado correctamente en la Tabla '" + nombreTabla + "'");
+												System.out.println("El comando ejecutado ha sido: UPDATE " + nombreTabla
+														+ " SET " + nombreColumnaModificada + " = " + nombreDatoNuevo
+														+ " WHERE " + nombreColumnaFiltro + " = " + nombreDatoFiltro + ";");
+												System.out.println();
+											}
+											
+											opcionSubmenuC = 0;
+											opcionSubmenuB = 0;
+											opcionSubmenuA = 0;
+											confirmado = false;
+											operacionRealizada = false;
+											nombreTabla = "";
+											nombreColumnaModificada = "";
+											nombreDatoNuevo = "";
+											nombreColumnaFiltro = "";
+											nombreDatoFiltro = "";
+											fechaDia = 0;
+											fechaMes = 0;
+											fechaAnnio = 0;
+											break;
+										case 2:
+											nombreColumnaFiltro = "Nombre";
+
+											while (nombreDatoFiltro == null || nombreDatoFiltro.equals("")) {
+												System.out.println("Escriba el actual Nombre del Alumno: ");
+												nombreDatoFiltro = sc.nextLine();
+											}
+											
+											while (!(textoConfirmado.equals("s") || textoConfirmado.equals("n"))) {
+												System.out.println(
+														"¿Está seguro de que quiere llevar a cabo la modificación? (s/n): ");
+												textoConfirmado = sc.nextLine();
+											}
+
+											confirmado = (textoConfirmado.equals("s")) ? true : false;
+
+											operacionRealizada = ModificarDatos.modificarDato(conexion, nombreTabla,
+													nombreColumnaModificada, nombreDatoNuevo, nombreColumnaFiltro,
+													nombreDatoFiltro, confirmado);
+
+											if (operacionRealizada) {
+												System.out.println("Dato modificado correctamente en la Tabla '" + nombreTabla + "'");
+												System.out.println("El comando ejecutado ha sido: UPDATE " + nombreTabla
+														+ " SET " + nombreColumnaModificada + " = " + nombreDatoNuevo
+														+ " WHERE " + nombreColumnaFiltro + " = " + nombreDatoFiltro + ";");
+												System.out.println();
+											}
+											
+											opcionSubmenuC = 0;
+											opcionSubmenuB = 0;
+											opcionSubmenuA = 0;
+											confirmado = false;
+											operacionRealizada = false;
+											nombreTabla = "";
+											nombreColumnaModificada = "";
+											nombreDatoNuevo = "";
+											nombreColumnaFiltro = "";
+											nombreDatoFiltro = "";
+											fechaDia = 0;
+											fechaMes = 0;
+											fechaAnnio = 0;
+											
+											break;
+										case 3:
+											nombreColumnaFiltro = "Apellidos";
+
+											while (nombreDatoFiltro == null || nombreDatoFiltro.equals("")) {
+												System.out.println("Escriba los actuales Apellidos del Alumno: ");
+												nombreDatoFiltro = sc.nextLine();
+											}
+											
+											while (!(textoConfirmado.equals("s") || textoConfirmado.equals("n"))) {
+												System.out.println(
+														"¿Está seguro de que quiere llevar a cabo la modificación? (s/n): ");
+												textoConfirmado = sc.nextLine();
+											}
+
+											confirmado = (textoConfirmado.equals("s")) ? true : false;
+
+											operacionRealizada = ModificarDatos.modificarDato(conexion, nombreTabla,
+													nombreColumnaModificada, nombreDatoNuevo, nombreColumnaFiltro,
+													nombreDatoFiltro, confirmado);
+
+											if (operacionRealizada) {
+												System.out.println("Dato modificado correctamente en la Tabla '" + nombreTabla + "'");
+												System.out.println("El comando ejecutado ha sido: UPDATE " + nombreTabla
+														+ " SET " + nombreColumnaModificada + " = " + nombreDatoNuevo
+														+ " WHERE " + nombreColumnaFiltro + " = " + nombreDatoFiltro + ";");
+												System.out.println();
+											}
+											
+											opcionSubmenuC = 0;
+											opcionSubmenuB = 0;
+											opcionSubmenuA = 0;
+											confirmado = false;
+											operacionRealizada = false;
+											nombreTabla = "";
+											nombreColumnaModificada = "";
+											nombreDatoNuevo = "";
+											nombreColumnaFiltro = "";
+											nombreDatoFiltro = "";
+											fechaDia = 0;
+											fechaMes = 0;
+											fechaAnnio = 0;
+											break;
+										case 4:
+											nombreColumnaFiltro = "FechaNacimiento";
+
+											while (nombreDatoFiltro == null || nombreDatoFiltro.equals("")) {
+												while (fechaDia < 1 || fechaDia > 31) {
+													System.out.print(
+															"Introduzca el actual día de FechaNacimiento del Alumno (entre 1 y 31): ");
+													fechaDia = leeInt(sc);
+												}
+												while (fechaMes < 1 || fechaMes > 12) {
+													System.out.print(
+															"Introduzca el actual mes de FechaNacimiento del Alumno (entre 1 y 12): ");
+													fechaMes = leeInt(sc);
+												}
+
+												while (fechaAnnio <= 0) {
+													System.out.print(
+															"Introduzca el actual año de FechaNacimiento del Alumno (mayor que 0): ");
+													fechaAnnio = leeInt(sc);
+												}
+												
+												if (fechaAnnio < 1000) {
+													nombreDatoFiltro += "0";
+													if (fechaAnnio < 100) {
+														nombreDatoFiltro += "0";
+														if (fechaAnnio < 10) {
+															nombreDatoFiltro += "0";
+														}
+													}
+												}
+												nombreDatoFiltro += fechaAnnio + "-";
+												
+												if (fechaMes < 10) {
+													nombreDatoFiltro += "0";
+												}
+												nombreDatoFiltro += fechaMes + "-";
+												
+												if (fechaDia < 10) {
+													nombreDatoFiltro += "0";
+												}
+												nombreDatoFiltro += fechaDia;
+											}
+											
+											while (!(textoConfirmado.equals("s") || textoConfirmado.equals("n"))) {
+												System.out.println(
+														"¿Está seguro de que quiere llevar a cabo la modificación? (s/n): ");
+												textoConfirmado = sc.nextLine();
+											}
+
+											confirmado = (textoConfirmado.equals("s")) ? true : false;
+
+											operacionRealizada = ModificarDatos.modificarDato(conexion, nombreTabla,
+													nombreColumnaModificada, nombreDatoNuevo, nombreColumnaFiltro,
+													nombreDatoFiltro, confirmado);
+
+											if (operacionRealizada) {
+												System.out.println("Dato modificado correctamente en la Tabla '" + nombreTabla + "'");
+												System.out.println("El comando ejecutado ha sido: UPDATE " + nombreTabla
+														+ " SET " + nombreColumnaModificada + " = " + nombreDatoNuevo
+														+ " WHERE " + nombreColumnaFiltro + " = " + nombreDatoFiltro + ";");
+												System.out.println();
+											}
+											
+											opcionSubmenuC = 0;
+											opcionSubmenuB = 0;
+											opcionSubmenuA = 0;
+											confirmado = false;
+											operacionRealizada = false;
+											nombreTabla = "";
+											nombreColumnaModificada = "";
+											nombreDatoNuevo = "";
+											nombreColumnaFiltro = "";
+											nombreDatoFiltro = "";
+											fechaDia = 0;
+											fechaMes = 0;
+											fechaAnnio = 0;
+
+											break;
+										
+										case 0:
+											nombreDatoNuevo = "";
+											break;
+										default:
+											System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para
+																							// el
+																							// "error"
+											System.out.println("Opción no disponible, elija del 0 al 4");
+											System.out.println();
+											break;
+										} // CIERRE switch Submenu C
+									} // CIERRE while Submenu C
+									
+									break;
+								case 2:
+									nombreColumnaModificada = "Nombre";
+
+									while (nombreDatoNuevo == null || nombreDatoNuevo.equals("")) {
+										System.out.println("Escriba el nuevo Nombre del Alumno: ");
+										nombreDatoNuevo = sc.nextLine();
+									}
+									
+									opcionSubmenuC = -1;
+									while (opcionSubmenuC != 0) {
+										Menus.submenuFiltrarColumnasAlumnos();
+										opcionSubmenuC = leeInt(sc);
+										System.out.println();
+
+										switch (opcionSubmenuC) {
+										case 1:
+											nombreColumnaFiltro = "idAlumno";
+
+											while (nombreDatoFiltro == null || nombreDatoFiltro.equals("")
+													|| Integer.valueOf(nombreDatoFiltro) < 0) {
+												System.out.println(
+														"Escriba el actual idAlumno del Alumno (mayor que 0): ");
+												nombreDatoFiltro = String.valueOf(leeInt(sc));
+											}
+											
+											while (!(textoConfirmado.equals("s") || textoConfirmado.equals("n"))) {
+												System.out.println(
+														"¿Está seguro de que quiere llevar a cabo la modificación? (s/n): ");
+												textoConfirmado = sc.nextLine();
+											}
+
+											confirmado = (textoConfirmado.equals("s")) ? true : false;
+
+											operacionRealizada = ModificarDatos.modificarDato(conexion, nombreTabla,
+													nombreColumnaModificada, nombreDatoNuevo, nombreColumnaFiltro,
+													nombreDatoFiltro, confirmado);
+
+											if (operacionRealizada) {
+												System.out.println("Dato modificado correctamente en la Tabla '" + nombreTabla + "'");
+												System.out.println("El comando ejecutado ha sido: UPDATE " + nombreTabla
+														+ " SET " + nombreColumnaModificada + " = " + nombreDatoNuevo
+														+ " WHERE " + nombreColumnaFiltro + " = " + nombreDatoFiltro + ";");
+												System.out.println();
+											}
+											
+											opcionSubmenuC = 0;
+											opcionSubmenuB = 0;
+											opcionSubmenuA = 0;
+											confirmado = false;
+											operacionRealizada = false;
+											nombreTabla = "";
+											nombreColumnaModificada = "";
+											nombreDatoNuevo = "";
+											nombreColumnaFiltro = "";
+											nombreDatoFiltro = "";
+											fechaDia = 0;
+											fechaMes = 0;
+											fechaAnnio = 0;
+											break;
+										case 2:
+											nombreColumnaFiltro = "Nombre";
+
+											while (nombreDatoFiltro == null || nombreDatoFiltro.equals("")) {
+												System.out.println("Escriba el actual Nombre del Alumno: ");
+												nombreDatoFiltro = sc.nextLine();
+											}
+											
+											while (!(textoConfirmado.equals("s") || textoConfirmado.equals("n"))) {
+												System.out.println(
+														"¿Está seguro de que quiere llevar a cabo la modificación? (s/n): ");
+												textoConfirmado = sc.nextLine();
+											}
+
+											confirmado = (textoConfirmado.equals("s")) ? true : false;
+
+											operacionRealizada = ModificarDatos.modificarDato(conexion, nombreTabla,
+													nombreColumnaModificada, nombreDatoNuevo, nombreColumnaFiltro,
+													nombreDatoFiltro, confirmado);
+
+											if (operacionRealizada) {
+												System.out.println("Dato modificado correctamente en la Tabla '" + nombreTabla + "'");
+												System.out.println("El comando ejecutado ha sido: UPDATE " + nombreTabla
+														+ " SET " + nombreColumnaModificada + " = " + nombreDatoNuevo
+														+ " WHERE " + nombreColumnaFiltro + " = " + nombreDatoFiltro + ";");
+												System.out.println();
+											}
+											
+											opcionSubmenuC = 0;
+											opcionSubmenuB = 0;
+											opcionSubmenuA = 0;
+											confirmado = false;
+											operacionRealizada = false;
+											nombreTabla = "";
+											nombreColumnaModificada = "";
+											nombreDatoNuevo = "";
+											nombreColumnaFiltro = "";
+											nombreDatoFiltro = "";
+											fechaDia = 0;
+											fechaMes = 0;
+											fechaAnnio = 0;
+											
+											break;
+										case 3:
+											nombreColumnaFiltro = "Apellidos";
+
+											while (nombreDatoFiltro == null || nombreDatoFiltro.equals("")) {
+												System.out.println("Escriba los actuales Apellidos del Alumno: ");
+												nombreDatoFiltro = sc.nextLine();
+											}
+											
+											while (!(textoConfirmado.equals("s") || textoConfirmado.equals("n"))) {
+												System.out.println(
+														"¿Está seguro de que quiere llevar a cabo la modificación? (s/n): ");
+												textoConfirmado = sc.nextLine();
+											}
+
+											confirmado = (textoConfirmado.equals("s")) ? true : false;
+
+											operacionRealizada = ModificarDatos.modificarDato(conexion, nombreTabla,
+													nombreColumnaModificada, nombreDatoNuevo, nombreColumnaFiltro,
+													nombreDatoFiltro, confirmado);
+
+											if (operacionRealizada) {
+												System.out.println("Dato modificado correctamente en la Tabla '" + nombreTabla + "'");
+												System.out.println("El comando ejecutado ha sido: UPDATE " + nombreTabla
+														+ " SET " + nombreColumnaModificada + " = " + nombreDatoNuevo
+														+ " WHERE " + nombreColumnaFiltro + " = " + nombreDatoFiltro + ";");
+												System.out.println();
+											}
+											
+											opcionSubmenuC = 0;
+											opcionSubmenuB = 0;
+											opcionSubmenuA = 0;
+											confirmado = false;
+											operacionRealizada = false;
+											nombreTabla = "";
+											nombreColumnaModificada = "";
+											nombreDatoNuevo = "";
+											nombreColumnaFiltro = "";
+											nombreDatoFiltro = "";
+											fechaDia = 0;
+											fechaMes = 0;
+											fechaAnnio = 0;
+											break;
+										case 4:
+											nombreColumnaFiltro = "FechaNacimiento";
+
+											while (nombreDatoFiltro == null || nombreDatoFiltro.equals("")) {
+												while (fechaDia < 1 || fechaDia > 31) {
+													System.out.print(
+															"Introduzca el actual día de FechaNacimiento del Alumno (entre 1 y 31): ");
+													fechaDia = leeInt(sc);
+												}
+												while (fechaMes < 1 || fechaMes > 12) {
+													System.out.print(
+															"Introduzca el actual mes de FechaNacimiento del Alumno (entre 1 y 12): ");
+													fechaMes = leeInt(sc);
+												}
+
+												while (fechaAnnio <= 0) {
+													System.out.print(
+															"Introduzca el actual año de FechaNacimiento del Alumno (mayor que 0): ");
+													fechaAnnio = leeInt(sc);
+												}
+												
+												if (fechaAnnio < 1000) {
+													nombreDatoFiltro += "0";
+													if (fechaAnnio < 100) {
+														nombreDatoFiltro += "0";
+														if (fechaAnnio < 10) {
+															nombreDatoFiltro += "0";
+														}
+													}
+												}
+												nombreDatoFiltro += fechaAnnio + "-";
+												
+												if (fechaMes < 10) {
+													nombreDatoFiltro += "0";
+												}
+												nombreDatoFiltro += fechaMes + "-";
+												
+												if (fechaDia < 10) {
+													nombreDatoFiltro += "0";
+												}
+												nombreDatoFiltro += fechaDia;
+											}
+											
+											while (!(textoConfirmado.equals("s") || textoConfirmado.equals("n"))) {
+												System.out.println(
+														"¿Está seguro de que quiere llevar a cabo la modificación? (s/n): ");
+												textoConfirmado = sc.nextLine();
+											}
+
+											confirmado = (textoConfirmado.equals("s")) ? true : false;
+
+											operacionRealizada = ModificarDatos.modificarDato(conexion, nombreTabla,
+													nombreColumnaModificada, nombreDatoNuevo, nombreColumnaFiltro,
+													nombreDatoFiltro, confirmado);
+
+											if (operacionRealizada) {
+												System.out.println("Dato modificado correctamente en la Tabla '" + nombreTabla + "'");
+												System.out.println("El comando ejecutado ha sido: UPDATE " + nombreTabla
+														+ " SET " + nombreColumnaModificada + " = " + nombreDatoNuevo
+														+ " WHERE " + nombreColumnaFiltro + " = " + nombreDatoFiltro + ";");
+												System.out.println();
+											}
+											
+											opcionSubmenuC = 0;
+											opcionSubmenuB = 0;
+											opcionSubmenuA = 0;
+											confirmado = false;
+											operacionRealizada = false;
+											nombreTabla = "";
+											nombreColumnaModificada = "";
+											nombreDatoNuevo = "";
+											nombreColumnaFiltro = "";
+											nombreDatoFiltro = "";
+											fechaDia = 0;
+											fechaMes = 0;
+											fechaAnnio = 0;
+
+											break;
+										
+										case 0:
+											nombreDatoNuevo = "";
+											break;
+										default:
+											System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para
+																							// el
+																							// "error"
+											System.out.println("Opción no disponible, elija del 0 al 4");
+											System.out.println();
+											break;
+										} // CIERRE switch Submenu C
+									} // CIERRE while Submenu C
+									break;
+								case 3:
+									nombreColumnaModificada = "Apellidos";
+
+									while (nombreDatoNuevo == null || nombreDatoNuevo.equals("")) {
+										System.out.println("Escriba los nuevos Apellidos del Alumno: ");
+										nombreDatoNuevo = sc.nextLine();
+									}
+									
+									opcionSubmenuC = -1;
+									while (opcionSubmenuC != 0) {
+										Menus.submenuFiltrarColumnasAlumnos();
+										opcionSubmenuC = leeInt(sc);
+										System.out.println();
+
+										switch (opcionSubmenuC) {
+										case 1:
+											nombreColumnaFiltro = "idAlumno";
+
+											while (nombreDatoFiltro == null || nombreDatoFiltro.equals("")
+													|| Integer.valueOf(nombreDatoFiltro) < 0) {
+												System.out.println(
+														"Escriba el actual idAlumno del Alumno (mayor que 0): ");
+												nombreDatoFiltro = String.valueOf(leeInt(sc));
+											}
+											
+											while (!(textoConfirmado.equals("s") || textoConfirmado.equals("n"))) {
+												System.out.println(
+														"¿Está seguro de que quiere llevar a cabo la modificación? (s/n): ");
+												textoConfirmado = sc.nextLine();
+											}
+
+											confirmado = (textoConfirmado.equals("s")) ? true : false;
+
+											operacionRealizada = ModificarDatos.modificarDato(conexion, nombreTabla,
+													nombreColumnaModificada, nombreDatoNuevo, nombreColumnaFiltro,
+													nombreDatoFiltro, confirmado);
+
+											if (operacionRealizada) {
+												System.out.println("Dato modificado correctamente en la Tabla '" + nombreTabla + "'");
+												System.out.println("El comando ejecutado ha sido: UPDATE " + nombreTabla
+														+ " SET " + nombreColumnaModificada + " = " + nombreDatoNuevo
+														+ " WHERE " + nombreColumnaFiltro + " = " + nombreDatoFiltro + ";");
+												System.out.println();
+											}
+											
+											opcionSubmenuC = 0;
+											opcionSubmenuB = 0;
+											opcionSubmenuA = 0;
+											confirmado = false;
+											operacionRealizada = false;
+											nombreTabla = "";
+											nombreColumnaModificada = "";
+											nombreDatoNuevo = "";
+											nombreColumnaFiltro = "";
+											nombreDatoFiltro = "";
+											fechaDia = 0;
+											fechaMes = 0;
+											fechaAnnio = 0;
+											break;
+										case 2:
+											nombreColumnaFiltro = "Nombre";
+
+											while (nombreDatoFiltro == null || nombreDatoFiltro.equals("")) {
+												System.out.println("Escriba el actual Nombre del Profesor: ");
+												nombreDatoFiltro = sc.nextLine();
+											}
+											
+											while (!(textoConfirmado.equals("s") || textoConfirmado.equals("n"))) {
+												System.out.println(
+														"¿Está seguro de que quiere llevar a cabo la modificación? (s/n): ");
+												textoConfirmado = sc.nextLine();
+											}
+
+											confirmado = (textoConfirmado.equals("s")) ? true : false;
+
+											operacionRealizada = ModificarDatos.modificarDato(conexion, nombreTabla,
+													nombreColumnaModificada, nombreDatoNuevo, nombreColumnaFiltro,
+													nombreDatoFiltro, confirmado);
+
+											if (operacionRealizada) {
+												System.out.println("Dato modificado correctamente en la Tabla '" + nombreTabla + "'");
+												System.out.println("El comando ejecutado ha sido: UPDATE " + nombreTabla
+														+ " SET " + nombreColumnaModificada + " = " + nombreDatoNuevo
+														+ " WHERE " + nombreColumnaFiltro + " = " + nombreDatoFiltro + ";");
+												System.out.println();
+											}
+											
+											opcionSubmenuC = 0;
+											opcionSubmenuB = 0;
+											opcionSubmenuA = 0;
+											confirmado = false;
+											operacionRealizada = false;
+											nombreTabla = "";
+											nombreColumnaModificada = "";
+											nombreDatoNuevo = "";
+											nombreColumnaFiltro = "";
+											nombreDatoFiltro = "";
+											fechaDia = 0;
+											fechaMes = 0;
+											fechaAnnio = 0;
+											
+											break;
+										case 3:
+											nombreColumnaFiltro = "Apellidos";
+
+											while (nombreDatoFiltro == null || nombreDatoFiltro.equals("")) {
+												System.out.println("Escriba los actuales Apellidos del Alumno: ");
+												nombreDatoFiltro = sc.nextLine();
+											}
+											
+											while (!(textoConfirmado.equals("s") || textoConfirmado.equals("n"))) {
+												System.out.println(
+														"¿Está seguro de que quiere llevar a cabo la modificación? (s/n): ");
+												textoConfirmado = sc.nextLine();
+											}
+
+											confirmado = (textoConfirmado.equals("s")) ? true : false;
+
+											operacionRealizada = ModificarDatos.modificarDato(conexion, nombreTabla,
+													nombreColumnaModificada, nombreDatoNuevo, nombreColumnaFiltro,
+													nombreDatoFiltro, confirmado);
+
+											if (operacionRealizada) {
+												System.out.println("Dato modificado correctamente en la Tabla '" + nombreTabla + "'");
+												System.out.println("El comando ejecutado ha sido: UPDATE " + nombreTabla
+														+ " SET " + nombreColumnaModificada + " = " + nombreDatoNuevo
+														+ " WHERE " + nombreColumnaFiltro + " = " + nombreDatoFiltro + ";");
+												System.out.println();
+											}
+											
+											opcionSubmenuC = 0;
+											opcionSubmenuB = 0;
+											opcionSubmenuA = 0;
+											confirmado = false;
+											operacionRealizada = false;
+											nombreTabla = "";
+											nombreColumnaModificada = "";
+											nombreDatoNuevo = "";
+											nombreColumnaFiltro = "";
+											nombreDatoFiltro = "";
+											fechaDia = 0;
+											fechaMes = 0;
+											fechaAnnio = 0;
+											break;
+										case 4:
+											nombreColumnaFiltro = "FechaNacimiento";
+
+											while (nombreDatoFiltro == null || nombreDatoFiltro.equals("")) {
+												while (fechaDia < 1 || fechaDia > 31) {
+													System.out.print(
+															"Introduzca el actual día de FechaNacimiento del Alumno (entre 1 y 31): ");
+													fechaDia = leeInt(sc);
+												}
+												while (fechaMes < 1 || fechaMes > 12) {
+													System.out.print(
+															"Introduzca el actual mes de FechaNacimiento del Alumno (entre 1 y 12): ");
+													fechaMes = leeInt(sc);
+												}
+
+												while (fechaAnnio <= 0) {
+													System.out.print(
+															"Introduzca el actual año de FechaNacimiento del Alumno (mayor que 0): ");
+													fechaAnnio = leeInt(sc);
+												}
+												
+												if (fechaAnnio < 1000) {
+													nombreDatoFiltro += "0";
+													if (fechaAnnio < 100) {
+														nombreDatoFiltro += "0";
+														if (fechaAnnio < 10) {
+															nombreDatoFiltro += "0";
+														}
+													}
+												}
+												nombreDatoFiltro += fechaAnnio + "-";
+												
+												if (fechaMes < 10) {
+													nombreDatoFiltro += "0";
+												}
+												nombreDatoFiltro += fechaMes + "-";
+												
+												if (fechaDia < 10) {
+													nombreDatoFiltro += "0";
+												}
+												nombreDatoFiltro += fechaDia;
+											}
+											
+											while (!(textoConfirmado.equals("s") || textoConfirmado.equals("n"))) {
+												System.out.println(
+														"¿Está seguro de que quiere llevar a cabo la modificación? (s/n): ");
+												textoConfirmado = sc.nextLine();
+											}
+
+											confirmado = (textoConfirmado.equals("s")) ? true : false;
+
+											operacionRealizada = ModificarDatos.modificarDato(conexion, nombreTabla,
+													nombreColumnaModificada, nombreDatoNuevo, nombreColumnaFiltro,
+													nombreDatoFiltro, confirmado);
+
+											if (operacionRealizada) {
+												System.out.println("Dato modificado correctamente en la Tabla '" + nombreTabla + "'");
+												System.out.println("El comando ejecutado ha sido: UPDATE " + nombreTabla
+														+ " SET " + nombreColumnaModificada + " = " + nombreDatoNuevo
+														+ " WHERE " + nombreColumnaFiltro + " = " + nombreDatoFiltro + ";");
+												System.out.println();
+											}
+											
+											opcionSubmenuC = 0;
+											opcionSubmenuB = 0;
+											opcionSubmenuA = 0;
+											confirmado = false;
+											operacionRealizada = false;
+											nombreTabla = "";
+											nombreColumnaModificada = "";
+											nombreDatoNuevo = "";
+											nombreColumnaFiltro = "";
+											nombreDatoFiltro = "";
+											fechaDia = 0;
+											fechaMes = 0;
+											fechaAnnio = 0;
+
+											break;
+										
+										case 0:
+											nombreDatoNuevo = "";
+											break;
+										default:
+											System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para
+																							// el
+																							// "error"
+											System.out.println("Opción no disponible, elija del 0 al 4");
+											System.out.println();
+											break;
+										} // CIERRE switch Submenu C
+									} // CIERRE while Submenu C
+									break;
+								case 4:
+									nombreColumnaModificada = "FechaNacimiento";
+
+									while (nombreDatoNuevo == null || nombreDatoNuevo.equals("")) {
+										while (fechaDia < 1 || fechaDia > 31) {
+											System.out.print(
+													"Introduzca el nuevo día de FechaNacimiento del Alumno (entre 1 y 31): ");
+											fechaDia = leeInt(sc);
+										}
+										while (fechaMes < 1 || fechaMes > 12) {
+											System.out.print(
+													"Introduzca el nuevo mes de FechaNacimiento del Alumno (entre 1 y 12): ");
+											fechaMes = leeInt(sc);
+										}
+
+										while (fechaAnnio <= 0) {
+											System.out.print(
+													"Introduzca el nuevo año de FechaNacimiento del Alumno (mayor que 0): ");
+											fechaAnnio = leeInt(sc);
+										}
+										
+										if (fechaAnnio < 1000) {
+											nombreDatoFiltro += "0";
+											if (fechaAnnio < 100) {
+												nombreDatoFiltro += "0";
+												if (fechaAnnio < 10) {
+													nombreDatoFiltro += "0";
+												}
+											}
+										}
+										nombreDatoFiltro += fechaAnnio + "-";
+										
+										if (fechaMes < 10) {
+											nombreDatoFiltro += "0";
+										}
+										nombreDatoFiltro += fechaMes + "-";
+										
+										if (fechaDia < 10) {
+											nombreDatoFiltro += "0";
+										}
+										nombreDatoFiltro += fechaDia;
+
+										fechaDia = 0;
+										fechaMes = 0;
+										fechaAnnio = 0;
+									}
+									
+									opcionSubmenuC = -1;
+									while (opcionSubmenuC != 0) {
+										Menus.submenuFiltrarColumnasAlumnos();
+										opcionSubmenuC = leeInt(sc);
+										System.out.println();
+
+										switch (opcionSubmenuC) {
+										case 1:
+											nombreColumnaFiltro = "idAlumno";
+
+											while (nombreDatoFiltro == null || nombreDatoFiltro.equals("")
+													|| Integer.valueOf(nombreDatoFiltro) < 0) {
+												System.out.println(
+														"Escriba el actual idAlumno del Alumno (mayor que 0): ");
+												nombreDatoFiltro = String.valueOf(leeInt(sc));
+											}
+											
+											while (!(textoConfirmado.equals("s") || textoConfirmado.equals("n"))) {
+												System.out.println(
+														"¿Está seguro de que quiere llevar a cabo la modificación? (s/n): ");
+												textoConfirmado = sc.nextLine();
+											}
+
+											confirmado = (textoConfirmado.equals("s")) ? true : false;
+
+											operacionRealizada = ModificarDatos.modificarDato(conexion, nombreTabla,
+													nombreColumnaModificada, nombreDatoNuevo, nombreColumnaFiltro,
+													nombreDatoFiltro, confirmado);
+
+											if (operacionRealizada) {
+												System.out.println("Dato modificado correctamente en la Tabla '" + nombreTabla + "'");
+												System.out.println("El comando ejecutado ha sido: UPDATE " + nombreTabla
+														+ " SET " + nombreColumnaModificada + " = " + nombreDatoNuevo
+														+ " WHERE " + nombreColumnaFiltro + " = " + nombreDatoFiltro + ";");
+												System.out.println();
+											}
+											
+											opcionSubmenuC = 0;
+											opcionSubmenuB = 0;
+											opcionSubmenuA = 0;
+											confirmado = false;
+											operacionRealizada = false;
+											nombreTabla = "";
+											nombreColumnaModificada = "";
+											nombreDatoNuevo = "";
+											nombreColumnaFiltro = "";
+											nombreDatoFiltro = "";
+											fechaDia = 0;
+											fechaMes = 0;
+											fechaAnnio = 0;
+											break;
+										case 2:
+											nombreColumnaFiltro = "Nombre";
+
+											while (nombreDatoFiltro == null || nombreDatoFiltro.equals("")) {
+												System.out.println("Escriba el actual Nombre del Alumno: ");
+												nombreDatoFiltro = sc.nextLine();
+											}
+											
+											while (!(textoConfirmado.equals("s") || textoConfirmado.equals("n"))) {
+												System.out.println(
+														"¿Está seguro de que quiere llevar a cabo la modificación? (s/n): ");
+												textoConfirmado = sc.nextLine();
+											}
+
+											confirmado = (textoConfirmado.equals("s")) ? true : false;
+
+											operacionRealizada = ModificarDatos.modificarDato(conexion, nombreTabla,
+													nombreColumnaModificada, nombreDatoNuevo, nombreColumnaFiltro,
+													nombreDatoFiltro, confirmado);
+
+											if (operacionRealizada) {
+												System.out.println("Dato modificado correctamente en la Tabla '" + nombreTabla + "'");
+												System.out.println("El comando ejecutado ha sido: UPDATE " + nombreTabla
+														+ " SET " + nombreColumnaModificada + " = " + nombreDatoNuevo
+														+ " WHERE " + nombreColumnaFiltro + " = " + nombreDatoFiltro + ";");
+												System.out.println();
+											}
+											
+											opcionSubmenuC = 0;
+											opcionSubmenuB = 0;
+											opcionSubmenuA = 0;
+											confirmado = false;
+											operacionRealizada = false;
+											nombreTabla = "";
+											nombreColumnaModificada = "";
+											nombreDatoNuevo = "";
+											nombreColumnaFiltro = "";
+											nombreDatoFiltro = "";
+											fechaDia = 0;
+											fechaMes = 0;
+											fechaAnnio = 0;
+											
+											break;
+										case 3:
+											nombreColumnaFiltro = "Apellidos";
+
+											while (nombreDatoFiltro == null || nombreDatoFiltro.equals("")) {
+												System.out.println("Escriba los actuales Apellidos del Alumno: ");
+												nombreDatoFiltro = sc.nextLine();
+											}
+											
+											while (!(textoConfirmado.equals("s") || textoConfirmado.equals("n"))) {
+												System.out.println(
+														"¿Está seguro de que quiere llevar a cabo la modificación? (s/n): ");
+												textoConfirmado = sc.nextLine();
+											}
+
+											confirmado = (textoConfirmado.equals("s")) ? true : false;
+
+											operacionRealizada = ModificarDatos.modificarDato(conexion, nombreTabla,
+													nombreColumnaModificada, nombreDatoNuevo, nombreColumnaFiltro,
+													nombreDatoFiltro, confirmado);
+
+											if (operacionRealizada) {
+												System.out.println("Dato modificado correctamente en la Tabla '" + nombreTabla + "'");
+												System.out.println("El comando ejecutado ha sido: UPDATE " + nombreTabla
+														+ " SET " + nombreColumnaModificada + " = " + nombreDatoNuevo
+														+ " WHERE " + nombreColumnaFiltro + " = " + nombreDatoFiltro + ";");
+												System.out.println();
+											}
+											
+											opcionSubmenuC = 0;
+											opcionSubmenuB = 0;
+											opcionSubmenuA = 0;
+											confirmado = false;
+											operacionRealizada = false;
+											nombreTabla = "";
+											nombreColumnaModificada = "";
+											nombreDatoNuevo = "";
+											nombreColumnaFiltro = "";
+											nombreDatoFiltro = "";
+											fechaDia = 0;
+											fechaMes = 0;
+											fechaAnnio = 0;
+											break;
+										case 4:
+											nombreColumnaFiltro = "FechaNacimiento";
+
+											while (nombreDatoFiltro == null || nombreDatoFiltro.equals("")) {
+												while (fechaDia < 1 || fechaDia > 31) {
+													System.out.print(
+															"Introduzca el actual día de FechaNacimiento del Alumno (entre 1 y 31): ");
+													fechaDia = leeInt(sc);
+												}
+												while (fechaMes < 1 || fechaMes > 12) {
+													System.out.print(
+															"Introduzca el actual mes de FechaNacimiento del Alumno (entre 1 y 12): ");
+													fechaMes = leeInt(sc);
+												}
+
+												while (fechaAnnio <= 0) {
+													System.out.print(
+															"Introduzca el actual año de FechaNacimiento del Alumno (mayor que 0): ");
+													fechaAnnio = leeInt(sc);
+												}
+												
+												if (fechaAnnio < 1000) {
+													nombreDatoFiltro += "0";
+													if (fechaAnnio < 100) {
+														nombreDatoFiltro += "0";
+														if (fechaAnnio < 10) {
+															nombreDatoFiltro += "0";
+														}
+													}
+												}
+												nombreDatoFiltro += fechaAnnio + "-";
+												
+												if (fechaMes < 10) {
+													nombreDatoFiltro += "0";
+												}
+												nombreDatoFiltro += fechaMes + "-";
+												
+												if (fechaDia < 10) {
+													nombreDatoFiltro += "0";
+												}
+												nombreDatoFiltro += fechaDia;
+											}
+											
+											while (!(textoConfirmado.equals("s") || textoConfirmado.equals("n"))) {
+												System.out.println(
+														"¿Está seguro de que quiere llevar a cabo la modificación? (s/n): ");
+												textoConfirmado = sc.nextLine();
+											}
+
+											confirmado = (textoConfirmado.equals("s")) ? true : false;
+
+											operacionRealizada = ModificarDatos.modificarDato(conexion, nombreTabla,
+													nombreColumnaModificada, nombreDatoNuevo, nombreColumnaFiltro,
+													nombreDatoFiltro, confirmado);
+
+											if (operacionRealizada) {
+												System.out.println("Dato modificado correctamente en la Tabla '" + nombreTabla + "'");
+												System.out.println("El comando ejecutado ha sido: UPDATE " + nombreTabla
+														+ " SET " + nombreColumnaModificada + " = " + nombreDatoNuevo
+														+ " WHERE " + nombreColumnaFiltro + " = " + nombreDatoFiltro + ";");
+												System.out.println();
+											}
+											
+											opcionSubmenuC = 0;
+											opcionSubmenuB = 0;
+											opcionSubmenuA = 0;
+											confirmado = false;
+											operacionRealizada = false;
+											nombreTabla = "";
+											nombreColumnaModificada = "";
+											nombreDatoNuevo = "";
+											nombreColumnaFiltro = "";
+											nombreDatoFiltro = "";
+											fechaDia = 0;
+											fechaMes = 0;
+											fechaAnnio = 0;
+
+											break;
+										
+
+										case 0:
+											nombreDatoNuevo = "";
+											break;
+										default:
+											System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para
+																							// el
+																							// "error"
+											System.out.println("Opción no disponible, elija del 0 al 4");
+											System.out.println();
+											break;
+										} // CIERRE switch Submenu C
+									} // CIERRE while Submenu C
+
+									break;
+								
+								case 0:
+									break;
+
+								default:
+									System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el
+																					// "error"
+									System.out.println("Opción no disponible, elija del 0 al 4");
+									System.out.println();
+									break;
+								} // CIERRE switch Submenu B
+
+							} // CIERRE while Submenu B
+
 							break;
 						case 3:
 							nombreTabla = "Matriculas";
