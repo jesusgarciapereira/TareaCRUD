@@ -1609,7 +1609,30 @@ public class Principal {
 									System.out.print("Introduzca el año de FechaNacimiento del Alumno (mayor que 0): ");
 									fechaAnnio = leeInt(sc);
 								}
-								campos[2] = fechaAnnio + "-" + fechaMes + "-" + fechaDia;
+								
+								if (fechaAnnio < 1000) {
+									nombreDatoFiltro += "0";
+									if (fechaAnnio < 100) {
+										nombreDatoFiltro += "0";
+										if (fechaAnnio < 10) {
+											nombreDatoFiltro += "0";
+										}
+									}
+								}
+								
+								campos[2] = fechaAnnio + "-";
+
+								if (fechaMes < 10) {
+									campos[2] += "0";
+								}
+								campos[2] += fechaMes + "-";
+
+								if (fechaDia < 10) {
+									campos[2] += "0";
+								}
+								campos[2] += fechaDia;
+								
+								// campos[2] = fechaAnnio + "-" + fechaMes + "-" + fechaDia;
 							}
 							System.out.println();
 

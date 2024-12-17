@@ -75,9 +75,16 @@ public class InsertarDatos {
 				System.out.println("Sugerencia: Introduzca un idProfesor presente en la Tabla 'Profesores' y un idAlumno presente en la Tabla 'Alumnos'");
 			
 			}
+			else if (e.getSQLState().equals("22001")) {
+				System.out.println("Se ha intentado insertar una Fecha de Nacimiento incorrecta en la Tabla '" + nombreTabla + "'");
+				System.out.println(
+						"Consejo: Asegúrese de que el mes correspondiente no exceda en días y ojo a los años bisiestos");			
+			}
 			else {
 				System.out.println("Se ha producido un error");
 				System.out.println("Reinicie la App y MySQL Workbench si lo tiene abierto");
+				System.out.println(e.getMessage());
+				System.out.println("Estado SQL " + e.getSQLState());
 			}
 			
 			

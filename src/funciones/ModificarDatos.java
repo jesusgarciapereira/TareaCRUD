@@ -313,6 +313,8 @@ public class ModificarDatos {
 			} else {
 				System.out.println("Se ha producido un error");
 				System.out.println("Reinicie la App y MySQL Workbench si lo tiene abierto");
+				System.out.println(e.getMessage());
+				System.out.println("Estado SQL " + e.getSQLState());
 			}
 
 //			 Para averiguar lo que debe salir 
