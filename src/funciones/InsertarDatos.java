@@ -19,7 +19,6 @@ public class InsertarDatos {
 	 * @param campos      Array de tipo String con cada uno de los campos a insertar
 	 * @return `true` si el dato se inserto con exito; `false` si ocurrio algún
 	 *         error.
-	 * @throws SQLException En caso de errores relacionados con la conexion o SQL.
 	 */
 	public static boolean insertarDato(Connection conn, String nombreTabla, String[] campos) {
 
@@ -67,25 +66,24 @@ public class InsertarDatos {
 
 				System.out.println(
 						"Sugerencia: Primero, siga los pasos de la opción 2 (Crear Tablas) y una vez creadas, se podrán insertar los datos con la opción 5 (Insertar Datos)");
+			}
 
-			}
-			
 			else if (e.getSQLState().equals("23000")) {
-				System.out.println("Violación de restricción de clave foránea definida en la Tabla '" + nombreTabla + "'");
-				System.out.println("Sugerencia: Introduzca un idProfesor presente en la Tabla 'Profesores' y un idAlumno presente en la Tabla 'Alumnos'");
-			
-			}
-			else if (e.getSQLState().equals("22001")) {
-				System.out.println("Se ha intentado insertar una Fecha de Nacimiento incorrecta en la Tabla '" + nombreTabla + "'");
 				System.out.println(
-						"Consejo: Asegúrese de que el mes correspondiente no exceda en días y ojo a los años bisiestos");			
-			}
-			else {
+						"Violación de restricción de clave foránea definida en la Tabla '" + nombreTabla + "'");
+				System.out.println(
+						"Sugerencia: Introduzca un idProfesor presente en la Tabla 'Profesores' y un idAlumno presente en la Tabla 'Alumnos'");
+
+			} else if (e.getSQLState().equals("22001")) {
+				System.out.println("Se ha intentado insertar una Fecha de Nacimiento incorrecta en la Tabla '"
+						+ nombreTabla + "'");
+				System.out.println(
+						"Consejo: Asegúrese de que el mes correspondiente no exceda en días y ojo a los años bisiestos");
+			} else {
 				System.out.println("Se ha producido un error");
 				System.out.println("Reinicie la App y MySQL Workbench si lo tiene abierto");
 			}
-			
-			
+
 //			 Para averiguar lo que debe salir 
 //		System.out.println(e.getMessage());
 //		System.out.println("Estado SQL " + e.getSQLState());
@@ -103,7 +101,6 @@ public class InsertarDatos {
 
 			}
 		}
-
 		// Retorna el estado de la insercion.
 		return insercionCompletada;
 	}

@@ -10,7 +10,14 @@ import java.sql.SQLException;
  */
 public class ListarTablas {
 
+	/**
+     * Metodo para listar todas las filas de una tabla en la base de datos.
+     * 
+     * @param conn       Objeto Connection que representa la conexion a la base de datos.
+     * @param nombreTabla Nombre de la tabla que se desea listar.
+     */
 	public static void listarTodo(Connection conn, String nombreTabla) {
+		
 		// Declaracion de objetos necesarios para la ejecucion de la consulta.
 		PreparedStatement stmt = null;
 		ResultSet resultado = null;
@@ -27,7 +34,6 @@ public class ListarTablas {
 			resultado = stmt.executeQuery();
 
 			// Muestra el nombre de la tabla a listar
-
 			System.out.println(!nombreTabla.equals("Alumnos") ? "--------------" : "-----------");
 			System.out.println("| " + nombreTabla + " |");
 			System.out.println(!nombreTabla.equals("Alumnos") ? "--------------" : "-----------");
@@ -112,8 +118,18 @@ public class ListarTablas {
 		}
 	}
 
+	/**
+     * Metodo para listar datos de una tabla aplicando un filtro especifico.
+     * 
+     * @param conn               Objeto Connection que representa la conexion a la base de datos.
+     * @param nombreTabla        Nombre de la tabla a consultar.
+     * @param nombreColumnaFiltro Nombre de la columna sobre la que se aplicara el filtro.
+     * @param opcionFiltro       Operador del filtro (por ejemplo, '=', 'LIKE', etc.).
+     * @param nombreDatoFiltro   Valor del filtro a aplicar.
+     */
 	public static void listarFiltrado(Connection conn, String nombreTabla, String nombreColumnaFiltro,
 			String opcionFiltro, String nombreDatoFiltro) {
+		
 		// Declaracion de objetos necesarios para la ejecucion de la consulta.
 		PreparedStatement stmt = null;
 		ResultSet resultado = null;
@@ -130,6 +146,7 @@ public class ListarTablas {
 			// Ejecutamos la consulta y la almacenamos al ResultSet.
 			resultado = stmt.executeQuery();
 
+			// Muestra el nombre de la tabla a listar
 			System.out.println(!nombreTabla.equals("Alumnos") ? "--------------" : "-----------");
 			System.out.println("| " + nombreTabla + " |");
 			System.out.println(!nombreTabla.equals("Alumnos") ? "--------------" : "-----------");

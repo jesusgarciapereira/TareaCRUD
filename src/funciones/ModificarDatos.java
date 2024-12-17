@@ -29,6 +29,22 @@ public class ModificarDatos {
 	 *         algun error.
 	 * @throws SQLException En caso de errores relacionados con la conexion o SQL.
 	 */
+
+	/**
+	 * Modifica los datos de una tabla de la base de datos segun los parametros
+	 * proporcionados.
+	 * 
+	 * @param conn                    Conexion activa a la base de datos.
+	 * @param nombreTabla             Nombre de la tabla.
+	 * @param nombreColumnaModificada Nombre de la columna con modificacion
+	 * @param nombreDatoNuevo         Nombre del valor nuevo
+	 * @param nombreColumnaFiltro     Nombre de la columna que se usara como filtro
+	 * @param nombreDatoFiltro        Nombre del valor que se usara como filtro
+	 * @param confirmado              Declaracion del usuario que confirma o
+	 *                                revierte la transaccion.
+	 * @return `true` si los datos se modificaron con exito; `false` si ocurrio
+	 *         algun error.
+	 */
 	public static boolean modificarDato(Connection conn, String nombreTabla, String nombreColumnaModificada,
 			String nombreDatoNuevo, String nombreColumnaFiltro, String nombreDatoFiltro, boolean confirmado) {
 
@@ -277,14 +293,10 @@ public class ModificarDatos {
 			if (confirmado) {
 				conn.commit(); // Confirmamos la transaccion
 				modificadoCompleto = true; // Marca el actualizado como exitoso.
-				// System.out.println("Cambios confirmados");
-//				System.out.println("Cambios confirmados. Filas afectadas: " +
-//				filasAfectadas);
-
 			} else {
 				conn.rollback(); // Revertimos la transaccion
-				// System.out.println("Cambios revertidos.");
 			}
+			
 			// Captura errores relacionados con la ejecucion de la consulta SQL.
 		} catch (SQLException e) {
 			if (!confirmado) {
@@ -309,12 +321,10 @@ public class ModificarDatos {
 					System.out.println(
 							"Sugerencia: Asegúrese de que el nuevo idProfesor esté presente en la Tabla 'Profesores' y/o el nuevo idAlumno esté presente en la Tabla 'Alumnos'");
 				}
-
 			} else {
 				System.out.println("Se ha producido un error");
 				System.out.println("Reinicie la App y MySQL Workbench si lo tiene abierto");
-				System.out.println(e.getMessage());
-				System.out.println("Estado SQL " + e.getSQLState());
+
 			}
 
 //			 Para averiguar lo que debe salir 
@@ -331,7 +341,6 @@ public class ModificarDatos {
 			} catch (SQLException se) {
 				System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
 				System.out.println("No se ha podido cerrar el Statement.");
-
 			}
 		}
 

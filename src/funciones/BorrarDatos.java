@@ -14,58 +14,47 @@ import entidades.Profesor;
  * Clase que gestiona el borrado de datos en una base de datos MySQL.
  */
 public class BorrarDatos {
-
+	
 	/**
 	 * Borra todos los datos de una tabla de la base de datos segun los parametros
 	 * proporcionados.
-	 * 
-	 * @param conn        Conexion activa a la base de datos.
+	 * @param conn Conexion activa a la base de datos.
 	 * @param nombreTabla Nombre de la tabla.
-	 * @param confirmar   Declaracion del usuario que confirma o revierte la
+	 * @param confirmado Declaracion del usuario que confirma o revierte la
 	 *                    transaccion.
 	 * @return `true` si los datos se borraron con exito; `false` si ocurrio algun
 	 *         error.
-	 * @throws SQLException En caso de errores relacionados con la conexion o SQL.
 	 */
 	public static boolean borrarTodosDatos(Connection conn, String nombreTabla, boolean confirmado) {
 
 		// Declaracion de objetos necesarios para la ejecucion de la consulta.
 		Statement stmt = null;
 		String sql = ""; // Variable para almacenar la consulta SQL.
-		int filasAfectadas;
 
 		boolean borradoCompletado = false; // Indicador de exito en el borrado de campos.
 
 		try {
-
 			// Inicializa el objeto Statement para ejecutar consultas SQL.
 			stmt = conn.createStatement();
 
 			// Selecciona la consulta SQL
 			sql += "DELETE FROM " + nombreTabla + ";";
-
 			
 			// Segun la confirmacion del usuario
 			if (confirmado) {
 				// Ejecuta la consulta SQL para borrar todos los campos.
 				stmt.executeUpdate(sql);
 				borradoCompletado = true; // Marca el borrado como exitoso.
-				// System.out.println("Cambios confirmados");
-				// System.out.println("Cambios confirmados. Filas afectadas: " +
-				// filasAfectadas);
 
 			} else {
 				System.out.println("\u001B[91mOperación cancelada \u001B[0m"); // Color personalizado para el "error"
-
 			}
 			
 			// Captura errores relacionados con la ejecucion de la consulta SQL.
 		} catch (SQLException e) {
 			if (!confirmado) {
-
 				System.out.println("De todas maneras, esta operación no podría realizarse");
 			}
-
 			System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
 
 			if (e.getSQLState().equals("23000")) {
@@ -78,13 +67,11 @@ public class BorrarDatos {
 			} else {
 				System.out.println("Se ha producido un error");
 				System.out.println("Reinicie la App y MySQL Workbench si lo tiene abierto");
-				System.out.println(e.getMessage());
-				System.out.println("Estado SQL " + e.getSQLState());
 			}
 
 //			 Para averiguar lo que debe salir 
-			System.out.println(e.getMessage());
-			System.out.println("Estado SQL " + e.getSQLState());
+//			System.out.println(e.getMessage());
+//			System.out.println("Estado SQL " + e.getSQLState());
 		} finally {
 			try {
 				// Verifica si el objeto stmt no es nulo antes de cerrarlo para evitar
@@ -103,19 +90,18 @@ public class BorrarDatos {
 		return borradoCompletado;
 
 	}
-
+	
 	/**
 	 * Borra un dato concreto de una tabla de la base de datos segun los parametros
 	 * proporcionados.
-	 * 
-	 * @param conn          Conexion activa a la base de datos.
-	 * @param nombreTabla   Nombre de la tabla.
+	 * @param conn Conexion activa a la base de datos.
+	 * @param nombreTabla Nombre de la tabla. Valores validos: "Profesores",
+	 *                    "Alumnos", "Matriculas".
 	 * @param nombreColumnaFiltro Nombre de la columna en la que se realizara el filtro.
-	 * @param nombreDatoFiltro    Valor especifico que se busca en la columna.
-	 * @param confirmar     Declaracion del usuario que confirma o revierte la
+	 * @param nombreDatoFiltro Valor especifico que se busca en la columna.
+	 * @param confirmado Declaracion del usuario que confirma o revierte la
 	 *                      transaccion.
 	 * @return `true` si el dato se borro con exito; `false` si ocurrio algun error.
-	 * @throws SQLException En caso de errores relacionados con la conexion o SQL.
 	 */
 	public static boolean borrarDatoConcreto(Connection conn, String nombreTabla, String nombreColumnaFiltro,
 			String nombreDatoFiltro, boolean confirmado)  {
@@ -123,12 +109,10 @@ public class BorrarDatos {
 		// Declaracion de objetos necesarios para la ejecucion de la consulta.
 		PreparedStatement stmt = null;
 		String sql = ""; // Variable para almacenar la consulta SQL.
-		int filasAfectadas;
 
 		boolean borradoCompletado = false; // Indicador de exito en el borrado de campos.
 
 		try {
-
 			// Selecciona la consulta SQL
 			sql += "DELETE FROM " + nombreTabla + " WHERE " + nombreColumnaFiltro + " = ?;";
 
@@ -250,27 +234,20 @@ public class BorrarDatos {
 
 				System.out.println("El nombre de la tabla especificado no es valido.");
 				break;
-			}
-
-			
+			}		
 
 			// Segun la confirmacion del usuario
 			if (confirmado) {
 				// Ejecuta la sentencia SQL
 				stmt.execute();
 				borradoCompletado = true; // Marca el borrado como exitoso.
-				// System.out.println("Cambios confirmados");
-				// System.out.println("Cambios confirmados. Filas afectadas: " +
-				// filasAfectadas);
-
 			} else {
 				System.out.println("\u001B[91mOperación cancelada \u001B[0m"); // Color personalizado para el "error"
-
 			}
+			
 			// Captura errores relacionados con la ejecucion de la consulta SQL.
 		} catch (SQLException e) {
 			if (!confirmado) {
-
 				System.out.println("De todas maneras, esta operación no podría realizarse");
 			}
 
@@ -282,17 +259,14 @@ public class BorrarDatos {
 				System.out.println(
 						"Sugerencia: Borre todos los datos asociados de la Tabla 'Matriculas' y luego intentar borrar los datos de la Tabla '"
 								+ nombreTabla + "'");
-
 			} else {
 				System.out.println("Se ha producido un error");
 				System.out.println("Reinicie la App y MySQL Workbench si lo tiene abierto");
-				System.out.println(e.getMessage());
-				System.out.println("Estado SQL " + e.getSQLState());
 			}
 
 //			 Para averiguar lo que debe salir 
-			System.out.println(e.getMessage());
-			System.out.println("Estado SQL " + e.getSQLState());
+//			System.out.println(e.getMessage());
+//			System.out.println("Estado SQL " + e.getSQLState());
 		} finally {
 			try {
 				// Verifica si el objeto stmt no es nulo antes de cerrarlo para evitar
@@ -304,66 +278,10 @@ public class BorrarDatos {
 			} catch (SQLException se) {
 				System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
 				System.out.println("No se ha podido cerrar el Statement.");
-
 			}
 		}
-
 		// Retorna si el borrado fue exitoso o no.
 		return borradoCompletado;
-
 	}
 }
 
-// Concatena los campos en la consulta SQL segun el nombre de la tabla
-// especificado.
-//switch (nombreTabla) {
-//case "Profesores":
-//	switch (filtro) {
-//	case "Nombre":
-//		sql += "WHERE " + filtro + " =?;";
-//		break;
-//	case "Apellidos":
-//		sql += "WHERE " + filtro + " =?;";
-//		break;
-//	case "FechaNacimiento":
-//		sql += "WHERE " + filtro + " =?;";
-//		break;
-//	case "Antiguedad":
-//		sql += "WHERE " + filtro + " =?;";
-//		break;
-//	default:
-//		System.err.println("Error: El nombre del campo especificado no es válido.");
-//		break;
-//	}
-//case "Alumnos":
-//	switch (filtro) {
-//	case "Nombre":
-//		sql += "WHERE " + filtro + " =?;";
-//		break;
-//	case "Apellidos":
-//		sql += "WHERE " + filtro + " =?;";
-//		break;
-//	case "FechaNacimiento":
-//		sql += "WHERE " + filtro + " =?;";
-//		break;
-//	default:
-//		System.err.println("Error: El nombre del campo especificado no es válido.");
-//		break;
-//	}
-//case "Matriculas":
-//	switch (filtro) {
-//	case "Asignatura":
-//		sql += "WHERE " + filtro + " =?;";
-//		break;
-//	case "Curso":
-//		sql += "WHERE " + filtro + " =?;";
-//		break;
-//	default:
-//		System.err.println("Error: El nombre del campo especificado no es válido.");
-//		break;
-//	}
-//	// Si el nombre no es valido.
-//default:
-//	System.err.println("Error: El nombre de la tabla especificado no es válido.");
-//
-//}

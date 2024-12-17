@@ -5,20 +5,19 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * Clase que gestiona la creación de tablas en una base de datos MySQL.
+ * Clase que gestiona la creacion de tablas en una base de datos MySQL.
  */
 public class CrearTablas {
 
 	/**
 	 * Crea una tabla en la base de datos segun el nombre proporcionado.
-	 * 
-	 * @param conn        Conexion activa a la base de datos.
+	 * @param conn Conexion activa a la base de datos.
 	 * @param nombreTabla Nombre de la tabla a crear. Valores validos: "Profesores",
 	 *                    "Alumnos", "Matriculas".
 	 * @return `true` si la tabla se creo con exito; `false` si ocurrio algún error.
-	 * @throws SQLException En caso de errores relacionados con la conexion o SQL.
 	 */
 	public static boolean crearTabla(Connection conn, String nombreTabla) {
+		
 		// Declaracion de objetos necesarios para la ejecución de la consulta.
 		Statement stmt = null;
 		String sql = ""; // Variable para almacenar la consulta SQL.
