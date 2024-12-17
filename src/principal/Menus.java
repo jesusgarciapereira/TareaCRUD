@@ -5,6 +5,17 @@ package principal;
  */
 public class Menus {
 	
+	
+	static void subMenuBorrarDatos() {
+		System.out.println("Borrar Datos:");
+		System.out.println("==============");
+		System.out.println("1. Borrar todos los datos.");
+		System.out.println("2. Borrar los datos de Tabla en concreto.");
+		System.out.println("0. Volver al Menú anterior.");
+		System.out.println();
+		System.out.print("Escriba una opción: ");
+	}
+	
 	static void submenuModificarColumnasProfesores() {
 		System.out.println("Modificado de Tabla 'Profesores:");
 		System.out.println("===============================");
@@ -166,7 +177,7 @@ public class Menus {
 	}
 
 	/**
-	 * Submenu de Crear Tablas
+	 * Submenu de Listar Tablas
 	 */
 	static void subMenuListarTablas() {
 		System.out.println("Listar Tablas:");
