@@ -6309,12 +6309,245 @@ public class Principal {
 													nombreTabla = "";
 													nombreColumnaFiltro = "";
 													nombreDatoFiltro = "";
-//													fechaDia = 0;
-//													fechaMes = 0;
-//													fechaAnnio = 0;
+													fechaDia = 0;
+													fechaMes = 0;
+													fechaAnnio = 0;
 													textoConfirmado = "";
 													break;
-												case 0:
+													
+												case 2:
+													nombreColumnaFiltro = "Nombre";
+
+													while (nombreDatoFiltro == null || nombreDatoFiltro.equals("")) {
+														System.out.print("Escriba el Nombre del Profesor que quiera borrar: ");
+														nombreDatoFiltro = sc.nextLine();
+													}
+
+													System.out.println();
+
+													while (!(textoConfirmado.equals("s") || textoConfirmado.equals("n"))) {
+														System.out.print(
+																"¿Está seguro de que quiere borrar este dato de la Tabla '"
+																		+ nombreTabla + "'? (s/n): ");
+														textoConfirmado = sc.nextLine();
+													}
+
+													System.out.println();
+
+													confirmado = (textoConfirmado.equals("s")) ? true : false;
+
+													operacionRealizada = BorrarDatos.borrarDatoConcreto(conexion,
+															nombreTabla, nombreColumnaFiltro, nombreDatoFiltro,
+															confirmado);
+
+													if (operacionRealizada) {
+														System.out.println("El comando ejecutado ha sido: DELETE FROM "
+																+ nombreTabla + " WHERE " + nombreColumnaFiltro + " = '"
+																+ nombreDatoFiltro + "';");	
+													}
+
+													opcionSubmenuD = 0;
+													opcionSubmenuC = 0;
+													opcionSubmenuB = 0;
+													opcionSubmenuA = 0;
+													confirmado = false;
+													operacionRealizada = false;
+													nombreTabla = "";
+													nombreColumnaFiltro = "";
+													nombreDatoFiltro = "";
+													fechaDia = 0;
+													fechaMes = 0;
+													fechaAnnio = 0;
+													textoConfirmado = "";
+													break;
+												case 3:
+													nombreColumnaFiltro = "Apellidos";
+
+													while (nombreDatoFiltro == null || nombreDatoFiltro.equals("")) {
+														System.out.print("Escriba los Apellidos del Profesor que quiera borrar: ");
+														nombreDatoFiltro = sc.nextLine();
+													}
+
+													System.out.println();
+
+													while (!(textoConfirmado.equals("s") || textoConfirmado.equals("n"))) {
+														System.out.print(
+																"¿Está seguro de que quiere borrar este dato de la Tabla '"
+																		+ nombreTabla + "'? (s/n): ");
+														textoConfirmado = sc.nextLine();
+													}
+
+													System.out.println();
+
+													confirmado = (textoConfirmado.equals("s")) ? true : false;
+
+													operacionRealizada = BorrarDatos.borrarDatoConcreto(conexion,
+															nombreTabla, nombreColumnaFiltro, nombreDatoFiltro,
+															confirmado);
+
+													if (operacionRealizada) {
+														System.out.println("El comando ejecutado ha sido: DELETE FROM "
+																+ nombreTabla + " WHERE " + nombreColumnaFiltro + " = '"
+																+ nombreDatoFiltro + "';");	
+													}
+
+													opcionSubmenuD = 0;
+													opcionSubmenuC = 0;
+													opcionSubmenuB = 0;
+													opcionSubmenuA = 0;
+													confirmado = false;
+													operacionRealizada = false;
+													nombreTabla = "";
+													nombreColumnaFiltro = "";
+													nombreDatoFiltro = "";
+													fechaDia = 0;
+													fechaMes = 0;
+													fechaAnnio = 0;
+													textoConfirmado = "";
+													break;
+												case 4:
+													nombreColumnaFiltro = "FechaNacimiento";
+
+													while (nombreDatoFiltro == null || nombreDatoFiltro.equals("")) {
+														while (fechaDia < 1 || fechaDia > 31) {
+															System.out.print(
+																	"Introduzca el día de FechaNacimiento del Profesor que quiera borrar (entre 1 y 31): ");
+															fechaDia = leeInt(sc);
+														}
+														while (fechaMes < 1 || fechaMes > 12) {
+															System.out.print(
+																	"Introduzca el mes de FechaNacimiento del Profesor que quiera borrar (entre 1 y 12): ");
+															fechaMes = leeInt(sc);
+														}
+
+														while (fechaAnnio <= 0) {
+															System.out.print(
+																	"Introduzca el año de FechaNacimiento del Profesor que quiera borrar (mayor que 0): ");
+															fechaAnnio = leeInt(sc);
+														}
+
+														if (fechaAnnio < 1000) {
+															nombreDatoFiltro += "0";
+															if (fechaAnnio < 100) {
+																nombreDatoFiltro += "0";
+																if (fechaAnnio < 10) {
+																	nombreDatoFiltro += "0";
+																}
+															}
+														}
+														nombreDatoFiltro += fechaAnnio + "-";
+
+														if (fechaMes < 10) {
+															nombreDatoFiltro += "0";
+														}
+														nombreDatoFiltro += fechaMes + "-";
+
+														if (fechaDia < 10) {
+															nombreDatoFiltro += "0";
+														}
+														nombreDatoFiltro += fechaDia;
+													}
+
+													System.out.println();
+
+													while (!(textoConfirmado.equals("s") || textoConfirmado.equals("n"))) {
+														System.out.print(
+																"¿Está seguro de que quiere borrar este dato de la Tabla '"
+																		+ nombreTabla + "'? (s/n): ");
+														textoConfirmado = sc.nextLine();
+													}
+
+													System.out.println();
+
+													confirmado = (textoConfirmado.equals("s")) ? true : false;
+
+													try {
+														operacionRealizada = BorrarDatos.borrarDatoConcreto(conexion,
+																nombreTabla, nombreColumnaFiltro, nombreDatoFiltro,
+																confirmado);
+													} catch (DateTimeException dte) {
+														System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado
+																										// para el "error"
+														System.out.println("Ha introducido una fecha incorrecta.");
+														System.out.println(
+																"Consejo: Asegúrese de que el mes correspondiente no exceda en días y ojo a los años bisiestos");
+
+													}
+
+													if (operacionRealizada) {
+														System.out.println("El comando ejecutado ha sido: DELETE FROM "
+																+ nombreTabla + " WHERE " + nombreColumnaFiltro + " = '"
+																+ nombreDatoFiltro + "';");	
+													}
+
+													System.out.println();
+
+													opcionSubmenuD = 0;
+													opcionSubmenuC = 0;
+													opcionSubmenuB = 0;
+													opcionSubmenuA = 0;
+													confirmado = false;
+													operacionRealizada = false;
+													nombreTabla = "";
+													nombreColumnaFiltro = "";
+													nombreDatoFiltro = "";
+													fechaDia = 0;
+													fechaMes = 0;
+													fechaAnnio = 0;
+													textoConfirmado = "";
+
+													break;
+												case 5:
+													nombreColumnaFiltro = "Antiguedad";
+
+													while (nombreDatoFiltro == null || nombreDatoFiltro.equals("")
+															|| Integer.valueOf(nombreDatoFiltro) < 0) {
+														System.out.print(
+																"Escriba la Antiguedad del Profesor que quiera borrar (mayor o igual que 0): ");
+														nombreDatoFiltro = String.valueOf(leeInt(sc));
+													}
+
+													System.out.println();
+
+													while (!(textoConfirmado.equals("s") || textoConfirmado.equals("n"))) {
+														System.out.print(
+																"¿Está seguro de que quiere borrar este dato de la Tabla '"
+																		+ nombreTabla + "'? (s/n): ");
+														textoConfirmado = sc.nextLine();
+													}
+
+													System.out.println();
+
+													confirmado = (textoConfirmado.equals("s")) ? true : false;
+
+													operacionRealizada = BorrarDatos.borrarDatoConcreto(conexion,
+															nombreTabla, nombreColumnaFiltro, nombreDatoFiltro,
+															confirmado);
+
+													if (operacionRealizada) {
+														System.out.println("El comando ejecutado ha sido: DELETE FROM "
+																+ nombreTabla + " WHERE " + nombreColumnaFiltro + " = '"
+																+ nombreDatoFiltro + "';");	
+													}
+													
+													System.out.println();
+
+													opcionSubmenuD = 0;
+													opcionSubmenuC = 0;
+													opcionSubmenuB = 0;
+													opcionSubmenuA = 0;
+													confirmado = false;
+													operacionRealizada = false;
+													nombreTabla = "";
+													nombreColumnaFiltro = "";
+													nombreDatoFiltro = "";
+													fechaDia = 0;
+													fechaMes = 0;
+													fechaAnnio = 0;
+													textoConfirmado = "";
+													break;
+
+												case 0:											
 													break;
 												default:
 													System.out.print("\u001B[91mError: \u001B[0m"); // Color
