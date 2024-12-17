@@ -5,12 +5,33 @@ package principal;
  */
 public class Menus {
 	
+	static void submenuBorradoSeleccionCompletoFiltrado(String nombreTabla) {
+		System.out.println("Borrar Datos Tabla '" + nombreTabla + "':");
+		System.out.println("================================");
+		System.out.println("1. Completos.");
+		System.out.println("2. Filtrados.");
+		System.out.println("0. Volver al Menú anterior.");
+		System.out.println();
+		System.out.print("Escriba una opción: ");
+	}
+	
+	static void subMenuEliminarDatosTablaConcreta() {
+		System.out.println("Borrar datos de Tabla en concreto:");
+		System.out.println("==================================");
+		System.out.println("1. Profesores.");
+		System.out.println("2. Alumnos.");
+		System.out.println("3. Matriculas.");
+		System.out.println("0. Volver al Menú anterior.");
+		System.out.println();
+		System.out.print("Escriba una opción: ");
+	}
+	
 	
 	static void subMenuBorrarDatos() {
 		System.out.println("Borrar Datos:");
-		System.out.println("==============");
+		System.out.println("=============");
 		System.out.println("1. Borrar todos los datos.");
-		System.out.println("2. Borrar los datos de Tabla en concreto.");
+		System.out.println("2. Borrar datos de Tabla en concreto.");
 		System.out.println("0. Volver al Menú anterior.");
 		System.out.println();
 		System.out.print("Escriba una opción: ");
@@ -18,7 +39,7 @@ public class Menus {
 	
 	static void submenuModificarColumnasProfesores() {
 		System.out.println("Modificado de Tabla 'Profesores:");
-		System.out.println("===============================");
+		System.out.println("================================");
 		System.out.println("1. idProfesor.");
 		System.out.println("2. Nombre.");
 		System.out.println("3. Apellidos.");
@@ -31,7 +52,7 @@ public class Menus {
 
 	static void submenuModificarColumnasAlumnos() {
 		System.out.println("Modificado de Tabla 'Alumnos:");
-		System.out.println("============================");
+		System.out.println("=============================");
 		System.out.println("1. idAlumno.");
 		System.out.println("2. Nombre.");
 		System.out.println("3. Apellidos.");
@@ -43,7 +64,7 @@ public class Menus {
 
 	static void submenuModificarColumnasMatriculas() {
 		System.out.println("Modificado de Tabla 'Matriculas:");
-		System.out.println("===============================");
+		System.out.println("================================");
 		System.out.println("1. idMatricula.");
 		System.out.println("2. idProfesor.");
 		System.out.println("3. idAlumno.");
@@ -59,7 +80,7 @@ public class Menus {
 	 */
 	static void subMenuModificarDatos() {
 		System.out.println("Modificar Datos:");
-		System.out.println("===============");
+		System.out.println("================");
 		System.out.println("1. Profesores.");
 		System.out.println("2. Alumnos.");
 		System.out.println("3. Matriculas.");
@@ -149,7 +170,7 @@ public class Menus {
 		System.out.print("Escriba una opción: ");
 	}
 
-	static void submenuCompletoOFiltrado(String nombreTabla) {
+	static void submenuListadoSeleccionCompletoFiltrado(String nombreTabla) {
 		System.out.println("Listar Tabla '" + nombreTabla + "':");
 		System.out.println("=========================");
 		System.out.println("1. Completa.");

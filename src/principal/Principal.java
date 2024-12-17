@@ -6,6 +6,7 @@ import java.time.DateTimeException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import funciones.BorrarDatos;
 import funciones.BorrarTablas;
 import funciones.Conectar;
 import funciones.CrearTablas;
@@ -193,26 +194,40 @@ public class Principal {
 						switch (opcionSubmenuA) {
 						case 1:
 
-							nombreTabla = "Matriculas";
-							operacionRealizada = BorrarTablas.borrarTabla(conexion, nombreTabla);
-							System.out.print(
-									(operacionRealizada) ? "Tabla '" + nombreTabla + "' borrada con éxito\n" : "");
-
-							nombreTabla = "Profesores";
-							operacionRealizada = BorrarTablas.borrarTabla(conexion, nombreTabla);
-							System.out.print(
-									(operacionRealizada) ? "Tabla '" + nombreTabla + "' borrada con éxito\n" : "");
-
-							nombreTabla = "Alumnos";
-							operacionRealizada = BorrarTablas.borrarTabla(conexion, nombreTabla);
-							System.out.print(
-									(operacionRealizada) ? "Tabla '" + nombreTabla + "' borrada con éxito\n" : "");
+							while (!(textoConfirmado.equals("s") || textoConfirmado.equals("n"))) {
+								System.out.print(
+										"¿Está seguro de que quiere eliminar todas las Tablas? (se borrarán también los datos correspondientes) (s/n): ");
+								textoConfirmado = sc.nextLine();
+							}
 
 							System.out.println();
+
+							confirmado = (textoConfirmado.equals("s")) ? true : false;
+
+							if (confirmado) {
+								nombreTabla = "Matriculas";
+								operacionRealizada = BorrarTablas.borrarTabla(conexion, nombreTabla);
+								System.out.print(
+										(operacionRealizada) ? "Tabla '" + nombreTabla + "' borrada con éxito\n" : "");
+
+								nombreTabla = "Profesores";
+								operacionRealizada = BorrarTablas.borrarTabla(conexion, nombreTabla);
+								System.out.print(
+										(operacionRealizada) ? "Tabla '" + nombreTabla + "' borrada con éxito\n" : "");
+
+								nombreTabla = "Alumnos";
+								operacionRealizada = BorrarTablas.borrarTabla(conexion, nombreTabla);
+								System.out.print(
+										(operacionRealizada) ? "Tabla '" + nombreTabla + "' borrada con éxito\n" : "");
+
+								System.out.println();
+							}
 
 							opcionSubmenuA = 0;
 							operacionRealizada = false;
 							nombreTabla = "";
+							confirmado = false;
+							textoConfirmado = "";
 							break; // Cierre case 1 opcionSubmenuA
 						case 2:
 							opcionSubmenuB = -1;
@@ -245,16 +260,31 @@ public class Principal {
 									break;
 								} // Cierre del switch terciario
 
-								if (!nombreTabla.equals("")) {
-									operacionRealizada = BorrarTablas.borrarTabla(conexion, nombreTabla);
-									System.out.print(
-											(operacionRealizada) ? "Tabla '" + nombreTabla + "' borrada con éxito\n"
-													: "");
-									opcionSubmenuB = 0;
-									opcionSubmenuA = 0;
-									operacionRealizada = false;
-									nombreTabla = "";
+								while (!(textoConfirmado.equals("s") || textoConfirmado.equals("n"))) {
+									System.out.print("¿Está seguro de que quiere eliminar la Tabla '" + nombreTabla
+											+ "'? (se borrarán también los datos correspondientes) (s/n): ");
+									textoConfirmado = sc.nextLine();
 								}
+
+								System.out.println();
+
+								confirmado = (textoConfirmado.equals("s")) ? true : false;
+
+								if (confirmado) {
+									if (!nombreTabla.equals("")) {
+										operacionRealizada = BorrarTablas.borrarTabla(conexion, nombreTabla);
+										System.out.print(
+												(operacionRealizada) ? "Tabla '" + nombreTabla + "' borrada con éxito\n"
+														: "");
+										opcionSubmenuB = 0;
+										opcionSubmenuA = 0;
+										operacionRealizada = false;
+										nombreTabla = "";
+									}
+								}
+
+								confirmado = false;
+								textoConfirmado = "";
 
 							} // Cierre del while terciario
 							System.out.println();
@@ -342,7 +372,7 @@ public class Principal {
 									opcionSubmenuC = -1;
 
 									while (opcionSubmenuC != 0) {
-										Menus.submenuCompletoOFiltrado(nombreTabla);
+										Menus.submenuListadoSeleccionCompletoFiltrado(nombreTabla);
 										opcionSubmenuC = leeInt(sc);
 										System.out.println();
 
@@ -1609,7 +1639,7 @@ public class Principal {
 									System.out.print("Introduzca el año de FechaNacimiento del Alumno (mayor que 0): ");
 									fechaAnnio = leeInt(sc);
 								}
-								
+
 								if (fechaAnnio < 1000) {
 									nombreDatoFiltro += "0";
 									if (fechaAnnio < 100) {
@@ -1619,7 +1649,7 @@ public class Principal {
 										}
 									}
 								}
-								
+
 								campos[2] = fechaAnnio + "-";
 
 								if (fechaMes < 10) {
@@ -1631,7 +1661,7 @@ public class Principal {
 									campos[2] += "0";
 								}
 								campos[2] += fechaDia;
-								
+
 								// campos[2] = fechaAnnio + "-" + fechaMes + "-" + fechaDia;
 							}
 							System.out.println();
@@ -4673,7 +4703,8 @@ public class Principal {
 
 									while (nombreDatoNuevo == null || nombreDatoNuevo.equals("")
 											|| Integer.valueOf(nombreDatoNuevo) < 0) {
-										System.out.print("Escriba el nuevo idMatricula de la Matricula (mayor que 0): ");
+										System.out
+												.print("Escriba el nuevo idMatricula de la Matricula (mayor que 0): ");
 										nombreDatoNuevo = String.valueOf(leeInt(sc));
 									}
 
@@ -4733,7 +4764,7 @@ public class Principal {
 											nombreDatoNuevo = "";
 											nombreColumnaFiltro = "";
 											nombreDatoFiltro = "";
-	
+
 											textoConfirmado = "";
 											break;
 										case 2:
@@ -4783,7 +4814,7 @@ public class Principal {
 											nombreDatoNuevo = "";
 											nombreColumnaFiltro = "";
 											nombreDatoFiltro = "";
-	
+
 											textoConfirmado = "";
 											break;
 										case 3:
@@ -4833,7 +4864,7 @@ public class Principal {
 											nombreDatoNuevo = "";
 											nombreColumnaFiltro = "";
 											nombreDatoFiltro = "";
-	
+
 											textoConfirmado = "";
 											break;
 										case 4:
@@ -4881,7 +4912,7 @@ public class Principal {
 											nombreDatoNuevo = "";
 											nombreColumnaFiltro = "";
 											nombreDatoFiltro = "";
-											
+
 											textoConfirmado = "";
 											break;
 										case 5:
@@ -4931,7 +4962,7 @@ public class Principal {
 											nombreDatoNuevo = "";
 											nombreColumnaFiltro = "";
 											nombreDatoFiltro = "";
-	
+
 											textoConfirmado = "";
 											break;
 
@@ -5014,7 +5045,7 @@ public class Principal {
 											nombreDatoNuevo = "";
 											nombreColumnaFiltro = "";
 											nombreDatoFiltro = "";
-	
+
 											textoConfirmado = "";
 											break;
 										case 2:
@@ -5064,7 +5095,7 @@ public class Principal {
 											nombreDatoNuevo = "";
 											nombreColumnaFiltro = "";
 											nombreDatoFiltro = "";
-	
+
 											textoConfirmado = "";
 											break;
 										case 3:
@@ -5114,7 +5145,7 @@ public class Principal {
 											nombreDatoNuevo = "";
 											nombreColumnaFiltro = "";
 											nombreDatoFiltro = "";
-	
+
 											textoConfirmado = "";
 											break;
 										case 4:
@@ -5162,7 +5193,7 @@ public class Principal {
 											nombreDatoNuevo = "";
 											nombreColumnaFiltro = "";
 											nombreDatoFiltro = "";
-											
+
 											textoConfirmado = "";
 											break;
 										case 5:
@@ -5212,7 +5243,7 @@ public class Principal {
 											nombreDatoNuevo = "";
 											nombreColumnaFiltro = "";
 											nombreDatoFiltro = "";
-	
+
 											textoConfirmado = "";
 											break;
 
@@ -5230,7 +5261,7 @@ public class Principal {
 									} // CIERRE while Submenu C
 
 									break;
-									
+
 								case 3:
 									nombreColumnaModificada = "idAlumno";
 
@@ -5296,7 +5327,7 @@ public class Principal {
 											nombreDatoNuevo = "";
 											nombreColumnaFiltro = "";
 											nombreDatoFiltro = "";
-	
+
 											textoConfirmado = "";
 											break;
 										case 2:
@@ -5346,7 +5377,7 @@ public class Principal {
 											nombreDatoNuevo = "";
 											nombreColumnaFiltro = "";
 											nombreDatoFiltro = "";
-	
+
 											textoConfirmado = "";
 											break;
 										case 3:
@@ -5396,7 +5427,7 @@ public class Principal {
 											nombreDatoNuevo = "";
 											nombreColumnaFiltro = "";
 											nombreDatoFiltro = "";
-	
+
 											textoConfirmado = "";
 											break;
 										case 4:
@@ -5444,7 +5475,7 @@ public class Principal {
 											nombreDatoNuevo = "";
 											nombreColumnaFiltro = "";
 											nombreDatoFiltro = "";
-											
+
 											textoConfirmado = "";
 											break;
 										case 5:
@@ -5494,7 +5525,7 @@ public class Principal {
 											nombreDatoNuevo = "";
 											nombreColumnaFiltro = "";
 											nombreDatoFiltro = "";
-	
+
 											textoConfirmado = "";
 											break;
 
@@ -5576,7 +5607,7 @@ public class Principal {
 											nombreDatoNuevo = "";
 											nombreColumnaFiltro = "";
 											nombreDatoFiltro = "";
-	
+
 											textoConfirmado = "";
 											break;
 										case 2:
@@ -5626,7 +5657,7 @@ public class Principal {
 											nombreDatoNuevo = "";
 											nombreColumnaFiltro = "";
 											nombreDatoFiltro = "";
-	
+
 											textoConfirmado = "";
 											break;
 										case 3:
@@ -5676,7 +5707,7 @@ public class Principal {
 											nombreDatoNuevo = "";
 											nombreColumnaFiltro = "";
 											nombreDatoFiltro = "";
-	
+
 											textoConfirmado = "";
 											break;
 										case 4:
@@ -5724,7 +5755,7 @@ public class Principal {
 											nombreDatoNuevo = "";
 											nombreColumnaFiltro = "";
 											nombreDatoFiltro = "";
-											
+
 											textoConfirmado = "";
 											break;
 										case 5:
@@ -5774,7 +5805,7 @@ public class Principal {
 											nombreDatoNuevo = "";
 											nombreColumnaFiltro = "";
 											nombreDatoFiltro = "";
-	
+
 											textoConfirmado = "";
 											break;
 
@@ -5857,7 +5888,7 @@ public class Principal {
 											nombreDatoNuevo = "";
 											nombreColumnaFiltro = "";
 											nombreDatoFiltro = "";
-	
+
 											textoConfirmado = "";
 											break;
 										case 2:
@@ -5907,7 +5938,7 @@ public class Principal {
 											nombreDatoNuevo = "";
 											nombreColumnaFiltro = "";
 											nombreDatoFiltro = "";
-	
+
 											textoConfirmado = "";
 											break;
 										case 3:
@@ -5957,7 +5988,7 @@ public class Principal {
 											nombreDatoNuevo = "";
 											nombreColumnaFiltro = "";
 											nombreDatoFiltro = "";
-	
+
 											textoConfirmado = "";
 											break;
 										case 4:
@@ -6005,7 +6036,7 @@ public class Principal {
 											nombreDatoNuevo = "";
 											nombreColumnaFiltro = "";
 											nombreDatoFiltro = "";
-											
+
 											textoConfirmado = "";
 											break;
 										case 5:
@@ -6055,7 +6086,7 @@ public class Principal {
 											nombreDatoNuevo = "";
 											nombreColumnaFiltro = "";
 											nombreDatoFiltro = "";
-	
+
 											textoConfirmado = "";
 											break;
 
@@ -6110,8 +6141,119 @@ public class Principal {
 				}
 				break; // CIERRE 6. Modificar Datos.
 			case 7: // 7. Borrar Datos.
+				if (conexion != null) {
+					opcionSubmenuA = -1;
+					while (opcionSubmenuA != 0) {
+						Menus.subMenuBorrarDatos();
+						opcionSubmenuA = leeInt(sc);
+						System.out.println();
+
+						switch (opcionSubmenuA) {
+						case 1:
+
+							while (!(textoConfirmado.equals("s") || textoConfirmado.equals("n"))) {
+								System.out.print(
+										"¿Está seguro de que quiere llevar a cabo el borrado de todos los datos? (s/n): ");
+								textoConfirmado = sc.nextLine();
+							}
+
+							System.out.println();
+
+							confirmado = (textoConfirmado.equals("s")) ? true : false;
+
+							nombreTabla = "Matriculas";
+							operacionRealizada = BorrarDatos.borrarTodosDatos(conexion, nombreTabla, confirmado);
+							System.out.print((operacionRealizada)
+									? "Datos de la Tabla '" + nombreTabla + "' borrados con éxito\n"
+									: "");
+
+							nombreTabla = "Profesores";
+							operacionRealizada = BorrarDatos.borrarTodosDatos(conexion, nombreTabla, confirmado);
+							System.out.print((operacionRealizada)
+									? "Datos de la Tabla '" + nombreTabla + "' borrados con éxito\n"
+									: "");
+
+							nombreTabla = "Alumnos";
+							operacionRealizada = BorrarDatos.borrarTodosDatos(conexion, nombreTabla, confirmado);
+							System.out.print((operacionRealizada)
+									? "Datos de la Tabla '" + nombreTabla + "' borrados con éxito\n"
+									: "");
+
+							System.out.println();
+
+							opcionSubmenuA = 0;
+							operacionRealizada = false;
+							nombreTabla = "";
+							confirmado = false;
+							textoConfirmado = "";
+							break; // Cierre case 1 opcionSubmenuA
+						case 2:
+							opcionSubmenuB = -1;
+
+							while (opcionSubmenuB != 0) {
+
+								Menus.subMenuEliminarDatosTablaConcreta();
+								opcionSubmenuB = leeInt(sc);
+								System.out.println();
+
+								switch (opcionSubmenuB) {
+								case 1:
+									nombreTabla = "Profesores";
+									break;
+								case 2:
+									nombreTabla = "Alumnos";
+									break;
+								case 3:
+									nombreTabla = "Matriculas";
+									break;
+
+								case 0:
+									break;
+
+								default:
+									System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el
+																					// "error"
+									System.out.println("Opción no disponible, elija del 0 al 3");
+									System.out.println();
+									break;
+								} // Cierre del switch B
+
+								opcionSubmenuC = -1;
+
+								while (opcionSubmenuC != 0) {
+
+									Menus.submenuBorradoSeleccionCompletoFiltrado(nombreTabla);
+									opcionSubmenuC = leeInt(sc);
+									System.out.println();
+								} // Cierre del while C
+							} // Cierre del while B
+							System.out.println();
+							break;// Cierre case 2 opcionSubmenuA
+						case 0:
+							break;
+
+						default:
+							System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
+							System.out.println("Opción no disponible, elija del 0 al 2");
+							System.out.println();
+							break;
+
+						} // Cierre del switch secundario
+					} // Cierre del while secundario
+				} else {
+					System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el
+																	// "error"
+					System.out.println("No estás conectado a la Base de Datos");
+					System.out.println(
+							"Sugerencia: Primero, siga los pasos de la opción 1 (Conectar con la Base de Datos) e intente crear las Tablas de nuevo");
+
+					System.out.println();
+					opcionSubmenuB = 0;
+					opcionSubmenuA = 0;
+				}
+
 				break;// CIERRE 7. Borrar Datos.
-				
+
 			case 0: // 0. Salir del Programa
 				break; // CIERRE 0. Salir del Programa
 
