@@ -66,7 +66,7 @@ public class InsertarDatos {
 				System.out.println("La tabla '" + nombreTabla + "' no existe en la Base de Datos");
 
 				System.out.println(
-						"Sugerencia: Primero, siga los pasos de la opción 2 (Crear Tablas) y una vez creadas, se podrán mostrar con la opción 4 (Listar Tablas)");
+						"Sugerencia: Primero, siga los pasos de la opción 2 (Crear Tablas) y una vez creadas, se podrán insertar los datos con la opción 5 (Insertar Datos)");
 
 			}
 			
@@ -74,6 +74,10 @@ public class InsertarDatos {
 				System.out.println("Violación de restricción de clave foránea definida en la Tabla '" + nombreTabla + "'");
 				System.out.println("Sugerencia: Introduzca un idProfesor presente en la Tabla 'Profesores' y un idAlumno presente en la Tabla 'Alumnos'");
 			
+			}
+			else {
+				System.out.println("Se ha producido un error");
+				System.out.println("Reinicie la App y MySQL Workbench si lo tiene abierto");
 			}
 			
 			

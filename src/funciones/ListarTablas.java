@@ -88,6 +88,10 @@ public class ListarTablas {
 						"Sugerencia: Primero, siga los pasos de la opción 2 (Crear Tablas) y una vez creadas, se podrán mostrar con la opción 4 (Listar Tablas)");
 
 			}
+			else {
+				System.out.println("Se ha producido un error");
+				System.out.println("Reinicie la App y MySQL Workbench si lo tiene abierto");
+			}
 //			 Para averiguar lo que debe salir 
 //			System.out.println(e.getMessage());
 //			System.out.println("Estado SQL " + e.getSQLState());
@@ -182,6 +186,9 @@ public class ListarTablas {
 				System.out.println(
 						"Sugerencia: Primero, siga los pasos de la opción 2 (Crear Tablas) y una vez creadas, se podrán mostrar con la opción 4 (Listar Tablas)");
 
+			}else {
+				System.out.println("Se ha producido un error");
+				System.out.println("Reinicie la App y MySQL Workbench si lo tiene abierto");
 			}
 //		 Para averiguar lo que debe salir 
 //		System.out.println(e.getMessage());

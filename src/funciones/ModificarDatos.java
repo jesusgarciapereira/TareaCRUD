@@ -278,8 +278,8 @@ public class ModificarDatos {
 				conn.commit(); // Confirmamos la transaccion
 				modificadoCompleto = true; // Marca el actualizado como exitoso.
 				// System.out.println("Cambios confirmados");
-				// System.out.println("Cambios confirmados. Filas afectadas: " +
-				// filasAfectadas);
+//				System.out.println("Cambios confirmados. Filas afectadas: " +
+//				filasAfectadas);
 
 			} else {
 				conn.rollback(); // Revertimos la transaccion
@@ -287,9 +287,33 @@ public class ModificarDatos {
 			}
 			// Captura errores relacionados con la ejecucion de la consulta SQL.
 		} catch (SQLException e) {
+			if (!confirmado) {
+				System.out.print("\u001B[91mOperación cancelada: \u001B[0m"); // Color personalizado para el "error"
+
+				System.out.println("De todas maneras, esta operación no podría realizarse");
+			}
+			System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
+			if (e.getSQLState().equals("42S02")) {
+				System.out.println("La tabla '" + nombreTabla + "' no existe en la Base de Datos");
+
+				System.out.println(
+						"Sugerencia: Primero, siga los pasos de la opción 2 (Crear Tablas) y una vez creadas, se podrán modificar los datos con la opción 6 (Insertar Datos)");
+
+			} else if (e.getSQLState().equals("23000")) {
+				System.out.println("Violación de restricción de clave foránea definida en la Tabla 'Matriculas'");
+					System.out.println("Sugerencia: Modifique o borre los " + nombreColumnaModificada
+							+ " de la Tabla 'Matriculas' antes de modificar el " + nombreColumnaModificada
+							+ " de la Tabla '" + nombreTabla + "'");
+
+			}
+			else {
+				System.out.println("Se ha producido un error");
+				System.out.println("Reinicie la App y MySQL Workbench si lo tiene abierto");
+			}
+
 //			 Para averiguar lo que debe salir 
-		System.out.println(e.getMessage());
-		System.out.println("Estado SQL " + e.getSQLState());
+			System.out.println(e.getMessage());
+			System.out.println("Estado SQL " + e.getSQLState());
 		} finally {
 			try {
 				// Verifica si el objeto stmt no es nulo antes de cerrarlo para evitar

@@ -72,6 +72,10 @@ public class CrearTablas {
 				System.out.println("No se pudo crear la tabla '" + nombreTabla + "' porque tiene relaciones con tablas maestras que aún no existen");
 				System.out.println("Sugerencia: Crear primero la tabla 'Profesores' y la tabla 'Alumnos'");
 			}
+			else {
+				System.out.println("Se ha producido un error");
+				System.out.println("Reinicie la App y MySQL Workbench si lo tiene abierto");
+			}
 //				 Para averiguar lo que debe salir 
 //			System.out.println(e.getMessage());
 //			System.out.println("Estado SQL " + e.getSQLState());

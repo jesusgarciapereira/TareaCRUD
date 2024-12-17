@@ -43,6 +43,10 @@ public class BorrarTablas {
 				System.out.println("No se pudo borrar la tabla '" + nombreTabla + "' porque está referenciada en otra tabla");
 				System.out.println("Sugerencia: Borrar primero la tabla 'Matriculas'");
 			}
+			else {
+				System.out.println("Se ha producido un error");
+				System.out.println("Reinicie la App y MySQL Workbench si lo tiene abierto");
+			}
 //				 Para averiguar lo que debe salir 
 //			System.out.println(e.getMessage());
 //			System.out.println("Estado SQL " + e.getSQLState());

@@ -46,6 +46,10 @@ public class Conectar {
 			else if (e.getSQLState().equals("08001") || e.getSQLState().equals("28000")) {
 				System.out.println("Dirección, usuario y/o contraseña incorrectos.");
 			}
+			else {
+				System.out.println("Se ha producido un error");
+				System.out.println("Reinicie la App y MySQL Workbench si lo tiene abierto");
+			}
 
 //			 Para averiguar lo que debe salir 
 //			 System.out.println(e.getMessage());

@@ -27,7 +27,7 @@ public class BorrarDatos {
 	 *         error.
 	 * @throws SQLException En caso de errores relacionados con la conexion o SQL.
 	 */
-	public static boolean borrarTodosDatos(Connection conn, String nombreTabla, boolean confirmar) {
+	public static boolean borrarTodosDatos(Connection conn, String nombreTabla, boolean confirmado) {
 
 		// Declaracion de objetos necesarios para la ejecucion de la consulta.
 		Statement stmt = null;
@@ -51,7 +51,7 @@ public class BorrarDatos {
 			stmt.executeUpdate(sql);
 
 			// Segun la confirmacion del usuario
-			if (confirmar) {
+			if (confirmado) {
 				conn.commit(); // Confirmamos la transaccion
 				borradoCompletado = true; // Marca el borrado como exitoso.
 				// System.out.println("Cambios confirmados");
@@ -64,6 +64,12 @@ public class BorrarDatos {
 			}
 			// Captura errores relacionados con la ejecucion de la consulta SQL.
 		} catch (SQLException e) {
+			if (!confirmado) {
+				System.out.print("\u001B[91mOperación cancelada: \u001B[0m"); // Color personalizado para el "error"
+
+				System.out.println("De todas maneras, esta operación no podría realizarse");
+			}
+
 //			 Para averiguar lo que debe salir 
 //		System.out.println(e.getMessage());
 //		System.out.println("Estado SQL " + e.getSQLState());
@@ -100,7 +106,7 @@ public class BorrarDatos {
 	 * @throws SQLException En caso de errores relacionados con la conexion o SQL.
 	 */
 	public static boolean borrarDatoConcreto(Connection conn, String nombreTabla, String nombreColumna,
-			String nombreDato, boolean confirmar) throws SQLException {
+			String nombreDato, boolean confirmado) throws SQLException {
 
 		// Declaracion de objetos necesarios para la ejecucion de la consulta.
 		PreparedStatement stmt = null;
@@ -151,7 +157,7 @@ public class BorrarDatos {
 					profesor.setAntiguedad(Integer.parseInt(nombreDato));
 					stmt.setInt(1, profesor.getAntiguedad()); // Asigna el valor al PreparedStatement
 					break;
-				default:			
+				default:
 					System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
 
 					// Si el nombre de columna no es valido
@@ -241,7 +247,7 @@ public class BorrarDatos {
 			stmt.execute();
 
 			// Segun la confirmacion del usuario
-			if (confirmar) {
+			if (confirmado) {
 				conn.commit(); // Confirmamos la transaccion
 				borradoCompletado = true; // Marca el borrado como exitoso.
 				// System.out.println("Cambios confirmados");
@@ -254,6 +260,22 @@ public class BorrarDatos {
 			}
 			// Captura errores relacionados con la ejecucion de la consulta SQL.
 		} catch (SQLException e) {
+			if (!confirmado) {
+				System.out.print("\u001B[91mOperación cancelada: \u001B[0m"); // Color personalizado para el "error"
+
+				System.out.println("De todas maneras, esta operación no podría realizarse");
+			}
+			System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
+			if (e.getSQLState().equals("42S02")) {
+				System.out.println("La tabla '" + nombreTabla + "' no existe en la Base de Datos");
+
+				System.out.println(
+						"Sugerencia: Primero, siga los pasos de la opción 2 (Crear Tablas) y una vez creadas, se podrán borrar los datos con la opción 7 (Borrar Datos)");
+
+			} else {
+				System.out.println("Se ha producido un error");
+				System.out.println("Reinicie la App y MySQL Workbench si lo tiene abierto");
+			}
 //			 Para averiguar lo que debe salir 
 //		System.out.println(e.getMessage());
 //		System.out.println("Estado SQL " + e.getSQLState());

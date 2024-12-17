@@ -55,7 +55,7 @@ public class Menus {
 		System.out.println("0. Volver al Menú anterior.");
 		System.out.println();
 		System.out.println(
-				"Consejo: Antes de Modificar Datos de una Tabla, asegúrate de que dicha Tabla existe eligiendo primero la opción 4 del Menú Principal (Listar Tablas)");
+				"Consejo: Antes de Modificar Datos de una Tabla, asegúrese de que dicha Tabla existe eligiendo primero la opción 4 del Menú Principal (Listar Tablas)");
 		
 		System.out.print("Escriba una opción: ");
 	}
