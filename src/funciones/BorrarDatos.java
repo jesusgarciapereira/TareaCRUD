@@ -38,41 +38,53 @@ public class BorrarDatos {
 
 		try {
 
-			// Desactivar el modo de autocommit para manejar transacciones manualmente
-			conn.setAutoCommit(false);
-
 			// Inicializa el objeto Statement para ejecutar consultas SQL.
 			stmt = conn.createStatement();
 
 			// Selecciona la consulta SQL
 			sql += "DELETE FROM " + nombreTabla + ";";
 
-			// Ejecuta la consulta SQL para borrar todos los campos.
-			stmt.executeUpdate(sql);
-
+			
 			// Segun la confirmacion del usuario
 			if (confirmado) {
-				conn.commit(); // Confirmamos la transaccion
+				// Ejecuta la consulta SQL para borrar todos los campos.
+				stmt.executeUpdate(sql);
 				borradoCompletado = true; // Marca el borrado como exitoso.
 				// System.out.println("Cambios confirmados");
 				// System.out.println("Cambios confirmados. Filas afectadas: " +
 				// filasAfectadas);
 
 			} else {
-				conn.rollback(); // Revertimos la transaccion
-				// System.out.println("Cambios revertidos.");
+				System.out.println("\u001B[91mOperación cancelada \u001B[0m"); // Color personalizado para el "error"
+
 			}
+			
 			// Captura errores relacionados con la ejecucion de la consulta SQL.
 		} catch (SQLException e) {
 			if (!confirmado) {
-				System.out.print("\u001B[91mOperación cancelada: \u001B[0m"); // Color personalizado para el "error"
 
 				System.out.println("De todas maneras, esta operación no podría realizarse");
 			}
 
+			System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
+
+			if (e.getSQLState().equals("23000")) {
+				System.out.println("Violación de restricción de clave foránea definida en la Tabla 'Matriculas'");
+
+				System.out.println(
+						"Sugerencia: Borre todos los datos asociados de la Tabla 'Matriculas' y luego intentar borrar los datos de la Tabla '"
+								+ nombreTabla + "'");
+
+			} else {
+				System.out.println("Se ha producido un error");
+				System.out.println("Reinicie la App y MySQL Workbench si lo tiene abierto");
+				System.out.println(e.getMessage());
+				System.out.println("Estado SQL " + e.getSQLState());
+			}
+
 //			 Para averiguar lo que debe salir 
-		System.out.println(e.getMessage());
-		System.out.println("Estado SQL " + e.getSQLState());
+			System.out.println(e.getMessage());
+			System.out.println("Estado SQL " + e.getSQLState());
 		} finally {
 			try {
 				// Verifica si el objeto stmt no es nulo antes de cerrarlo para evitar
@@ -98,15 +110,15 @@ public class BorrarDatos {
 	 * 
 	 * @param conn          Conexion activa a la base de datos.
 	 * @param nombreTabla   Nombre de la tabla.
-	 * @param nombreColumna Nombre de la columna en la que se realizara el filtro.
-	 * @param nombreDato    Valor especifico que se busca en la columna.
+	 * @param nombreColumnaFiltro Nombre de la columna en la que se realizara el filtro.
+	 * @param nombreDatoFiltro    Valor especifico que se busca en la columna.
 	 * @param confirmar     Declaracion del usuario que confirma o revierte la
 	 *                      transaccion.
 	 * @return `true` si el dato se borro con exito; `false` si ocurrio algun error.
 	 * @throws SQLException En caso de errores relacionados con la conexion o SQL.
 	 */
-	public static boolean borrarDatoConcreto(Connection conn, String nombreTabla, String nombreColumna,
-			String nombreDato, boolean confirmado) throws SQLException {
+	public static boolean borrarDatoConcreto(Connection conn, String nombreTabla, String nombreColumnaFiltro,
+			String nombreDatoFiltro, boolean confirmado)  {
 
 		// Declaracion de objetos necesarios para la ejecucion de la consulta.
 		PreparedStatement stmt = null;
@@ -117,11 +129,8 @@ public class BorrarDatos {
 
 		try {
 
-			// Desactivar el modo de autocommit para manejar transacciones manualmente
-			conn.setAutoCommit(false);
-
 			// Selecciona la consulta SQL
-			sql += "DELETE FROM " + nombreTabla + " WHERE " + nombreColumna + " = ?;";
+			sql += "DELETE FROM " + nombreTabla + " WHERE " + nombreColumnaFiltro + " = ?;";
 
 			// Pasamos la consulta al objeto PreparedStatement
 			stmt = conn.prepareStatement(sql);
@@ -133,28 +142,28 @@ public class BorrarDatos {
 				Profesor profesor = new Profesor();
 
 				// Segun el nombre de la columna, establece el valor que se va a buscar
-				switch (nombreColumna) {
+				switch (nombreColumnaFiltro) {
 				case "idProfesor":
 					// Convierte el dato a un numero entero
-					profesor.setIdProfesor(Integer.parseInt(nombreDato));
+					profesor.setIdProfesor(Integer.parseInt(nombreDatoFiltro));
 					stmt.setInt(1, profesor.getIdProfesor()); // Asigna el valor al PreparedStatement
 					break;
 				case "Nombre":
-					profesor.setNombre(nombreDato);
+					profesor.setNombre(nombreDatoFiltro);
 					stmt.setString(1, profesor.getNombre()); // Asigna el valor al PreparedStatement
 					break;
 				case "Apellidos":
-					profesor.setApellidos(nombreDato);
+					profesor.setApellidos(nombreDatoFiltro);
 					stmt.setString(1, profesor.getApellidos()); // Asigna el valor al PreparedStatement
 					break;
 				case "FechaNacimiento":
 					// Convierte la fecha de nacimiento de String a LocalDate
-					profesor.setFechaNacimiento(LocalDate.parse(nombreDato)); // 2000-05-15
+					profesor.setFechaNacimiento(LocalDate.parse(nombreDatoFiltro)); // 2000-05-15
 					stmt.setString(1, profesor.getFechaNacimiento().toString()); // Asigna el valor al PreparedStatement
 					break;
 				case "Antiguedad":
 					// Convierte el dato a un numero entero
-					profesor.setAntiguedad(Integer.parseInt(nombreDato));
+					profesor.setAntiguedad(Integer.parseInt(nombreDatoFiltro));
 					stmt.setInt(1, profesor.getAntiguedad()); // Asigna el valor al PreparedStatement
 					break;
 				default:
@@ -170,23 +179,23 @@ public class BorrarDatos {
 				Alumno alumno = new Alumno();
 
 				// Segun el nombre de la columna, establece el valor que se va a buscar
-				switch (nombreColumna) {
+				switch (nombreColumnaFiltro) {
 				case "idAlumno":
 					// Convierte el dato a un numero entero
-					alumno.setIdAlumno(Integer.parseInt(nombreDato));
+					alumno.setIdAlumno(Integer.parseInt(nombreDatoFiltro));
 					stmt.setInt(1, alumno.getIdAlumno()); // Asigna el valor al PreparedStatement
 					break;
 				case "Nombre":
-					alumno.setNombre(nombreDato);
+					alumno.setNombre(nombreDatoFiltro);
 					stmt.setString(1, alumno.getNombre()); // Asigna el valor al PreparedStatement
 					break;
 				case "Apellidos":
-					alumno.setApellidos(nombreDato);
+					alumno.setApellidos(nombreDatoFiltro);
 					stmt.setString(1, alumno.getApellidos()); // Asigna el valor al PreparedStatement
 					break;
 				case "FechaNacimiento":
 					// Convierte la fecha de nacimiento de String a LocalDate
-					alumno.setFechaNacimiento(LocalDate.parse(nombreDato)); // 2000-05-15
+					alumno.setFechaNacimiento(LocalDate.parse(nombreDatoFiltro)); // 2000-05-15
 					stmt.setString(1, alumno.getFechaNacimiento().toString()); // Asigna el valor al PreparedStatement
 					break;
 				default:
@@ -202,29 +211,29 @@ public class BorrarDatos {
 				Matricula matricula = new Matricula();
 
 				// Segun el nombre de la columna, establece el valor que se va a buscar
-				switch (nombreColumna) {
+				switch (nombreColumnaFiltro) {
 				case "idMatricula":
 					// Convierte el dato a un numero entero
-					matricula.setIdMatricula(Integer.parseInt(nombreDato));
+					matricula.setIdMatricula(Integer.parseInt(nombreDatoFiltro));
 					stmt.setInt(1, matricula.getIdMatricula()); // Asigna el valor al PreparedStatement
 					break;
 				case "idProfesor":
 					// Convierte el dato a un numero entero
-					matricula.setIdProfesor(Integer.parseInt(nombreDato));
+					matricula.setIdProfesor(Integer.parseInt(nombreDatoFiltro));
 					stmt.setInt(1, matricula.getIdProfesor()); // Asigna el valor al PreparedStatement
 					break;
 				case "idAlumno":
 					// Convierte el dato a un numero entero
-					matricula.setIdAlumno(Integer.parseInt(nombreDato));
+					matricula.setIdAlumno(Integer.parseInt(nombreDatoFiltro));
 					stmt.setInt(1, matricula.getIdAlumno()); // Asigna el valor al PreparedStatement
 					break;
 				case "Asignatura":
-					matricula.setAsignatura(nombreDato);
+					matricula.setAsignatura(nombreDatoFiltro);
 					stmt.setString(1, matricula.getAsignatura()); // Asigna el valor al PreparedStatement
 					break;
 				case "Curso":
 					// Convierte el curso de String a Integer
-					matricula.setCurso(Integer.parseInt(nombreDato));
+					matricula.setCurso(Integer.parseInt(nombreDatoFiltro));
 					stmt.setInt(1, matricula.getCurso()); // Asigna el valor al PreparedStatement
 					break;
 				default:
@@ -243,42 +252,47 @@ public class BorrarDatos {
 				break;
 			}
 
-			// Ejecuta la sentencia SQL
-			stmt.execute();
+			
 
 			// Segun la confirmacion del usuario
 			if (confirmado) {
-				conn.commit(); // Confirmamos la transaccion
+				// Ejecuta la sentencia SQL
+				stmt.execute();
 				borradoCompletado = true; // Marca el borrado como exitoso.
 				// System.out.println("Cambios confirmados");
 				// System.out.println("Cambios confirmados. Filas afectadas: " +
 				// filasAfectadas);
 
 			} else {
-				conn.rollback(); // Revertimos la transaccion
-				// System.out.println("Cambios revertidos.");
+				System.out.println("\u001B[91mOperación cancelada \u001B[0m"); // Color personalizado para el "error"
+
 			}
 			// Captura errores relacionados con la ejecucion de la consulta SQL.
 		} catch (SQLException e) {
 			if (!confirmado) {
-				System.out.print("\u001B[91mOperación cancelada: \u001B[0m"); // Color personalizado para el "error"
 
 				System.out.println("De todas maneras, esta operación no podría realizarse");
 			}
+
 			System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el "error"
-			if (e.getSQLState().equals("42S02")) {
-				System.out.println("La tabla '" + nombreTabla + "' no existe en la Base de Datos");
+
+			 if (e.getSQLState().equals("23000")) {
+				System.out.println("Violación de restricción de clave foránea definida en la Tabla 'Matriculas'");
 
 				System.out.println(
-						"Sugerencia: Primero, siga los pasos de la opción 2 (Crear Tablas) y una vez creadas, se podrán borrar los datos con la opción 7 (Borrar Datos)");
+						"Sugerencia: Borre todos los datos asociados de la Tabla 'Matriculas' y luego intentar borrar los datos de la Tabla '"
+								+ nombreTabla + "'");
 
 			} else {
 				System.out.println("Se ha producido un error");
 				System.out.println("Reinicie la App y MySQL Workbench si lo tiene abierto");
+				System.out.println(e.getMessage());
+				System.out.println("Estado SQL " + e.getSQLState());
 			}
+
 //			 Para averiguar lo que debe salir 
-		System.out.println(e.getMessage());
-		System.out.println("Estado SQL " + e.getSQLState());
+			System.out.println(e.getMessage());
+			System.out.println("Estado SQL " + e.getSQLState());
 		} finally {
 			try {
 				// Verifica si el objeto stmt no es nulo antes de cerrarlo para evitar

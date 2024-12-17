@@ -6225,6 +6225,126 @@ public class Principal {
 									Menus.submenuBorradoSeleccionCompletoFiltrado(nombreTabla);
 									opcionSubmenuC = leeInt(sc);
 									System.out.println();
+
+									switch (opcionSubmenuC) {
+									case 1:
+
+										while (!(textoConfirmado.equals("s") || textoConfirmado.equals("n"))) {
+											System.out.print(
+													"¿Está seguro de que quiere borrar todos los datos de la Tabla '"
+															+ nombreTabla + "'? (s/n): ");
+											textoConfirmado = sc.nextLine();
+										}
+
+										System.out.println();
+
+										confirmado = (textoConfirmado.equals("s")) ? true : false;
+
+										operacionRealizada = BorrarDatos.borrarTodosDatos(conexion, nombreTabla,
+												confirmado);
+										System.out.print((operacionRealizada)
+												? "Datos de la Tabla '" + nombreTabla + "' borrados con éxito\n"
+												: "");
+
+										opcionSubmenuC = 0;
+										opcionSubmenuB = 0;
+										opcionSubmenuA = 0;
+										operacionRealizada = false;
+										nombreTabla = "";
+										confirmado = false;
+										textoConfirmado = "";
+
+										break;
+									case 2:
+
+										switch (nombreTabla) {
+										case "Profesores":
+											opcionSubmenuD = -1;
+											while (opcionSubmenuD != 0) {
+												Menus.submenuFiltrarColumnasProfesores();
+												opcionSubmenuD = leeInt(sc);
+												System.out.println();
+
+												switch (opcionSubmenuD) {
+												case 1:
+													nombreColumnaFiltro = "idProfesor";
+
+													while (nombreDatoFiltro == null || nombreDatoFiltro.equals("")
+															|| Integer.valueOf(nombreDatoFiltro) < 0) {
+														System.out.print(
+																"Escriba el idProfesor del Profesor que quiera borrar (mayor que 0): ");
+														nombreDatoFiltro = String.valueOf(leeInt(sc));
+													}
+
+													System.out.println();
+
+													while (!(textoConfirmado.equals("s")
+															|| textoConfirmado.equals("n"))) {
+														System.out.print(
+																"¿Está seguro de que quiere borrar este dato de la Tabla '"
+																		+ nombreTabla + "'? (s/n): ");
+														textoConfirmado = sc.nextLine();
+													}
+
+													System.out.println();
+
+													confirmado = (textoConfirmado.equals("s")) ? true : false;
+
+													operacionRealizada = BorrarDatos.borrarDatoConcreto(conexion,
+															nombreTabla, nombreColumnaFiltro, nombreDatoFiltro,
+															confirmado);
+
+													if (operacionRealizada) {
+														System.out.println("El comando ejecutado ha sido: DELETE FROM "
+																+ nombreTabla + " WHERE " + nombreColumnaFiltro + " = "
+																+ nombreDatoFiltro + ";");	
+													}
+
+													opcionSubmenuD = 0;
+													opcionSubmenuC = 0;
+													opcionSubmenuB = 0;
+													opcionSubmenuA = 0;
+													confirmado = false;
+													operacionRealizada = false;
+													nombreTabla = "";
+													nombreColumnaFiltro = "";
+													nombreDatoFiltro = "";
+//													fechaDia = 0;
+//													fechaMes = 0;
+//													fechaAnnio = 0;
+													textoConfirmado = "";
+													break;
+												case 0:
+													break;
+												default:
+													System.out.print("\u001B[91mError: \u001B[0m"); // Color
+																									// personalizado
+																									// para el "error"
+													System.out.println("Opción no disponible, elija del 0 al 2");
+													System.out.println();
+													break;
+												}
+
+											} // CIERRE while D
+											break;
+
+										default:
+											break;
+										}
+
+										break;
+
+									case 0:
+										break;
+
+									default:
+										System.out.print("\u001B[91mError: \u001B[0m"); // Color personalizado para el
+																						// "error"
+										System.out.println("Opción no disponible, elija del 0 al 2");
+										System.out.println();
+										break;
+									}
+
 								} // Cierre del while C
 							} // Cierre del while B
 							System.out.println();
