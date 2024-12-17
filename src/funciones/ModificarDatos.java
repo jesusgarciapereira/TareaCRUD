@@ -301,19 +301,23 @@ public class ModificarDatos {
 
 			} else if (e.getSQLState().equals("23000")) {
 				System.out.println("Violación de restricción de clave foránea definida en la Tabla 'Matriculas'");
+				if (!nombreTabla.equals("Matriculas")) {
 					System.out.println("Sugerencia: Modifique o borre los " + nombreColumnaModificada
 							+ " de la Tabla 'Matriculas' antes de modificar el " + nombreColumnaModificada
 							+ " de la Tabla '" + nombreTabla + "'");
+				} else {
+					System.out.println(
+							"Sugerencia: Asegúrese de que el nuevo idProfesor esté presente en la Tabla 'Profesores' y/o el nuevo idAlumno esté presente en la Tabla 'Alumnos'");
+				}
 
-			}
-			else {
+			} else {
 				System.out.println("Se ha producido un error");
 				System.out.println("Reinicie la App y MySQL Workbench si lo tiene abierto");
 			}
 
 //			 Para averiguar lo que debe salir 
-			System.out.println(e.getMessage());
-			System.out.println("Estado SQL " + e.getSQLState());
+//			System.out.println(e.getMessage());
+//			System.out.println("Estado SQL " + e.getSQLState());
 		} finally {
 			try {
 				// Verifica si el objeto stmt no es nulo antes de cerrarlo para evitar
