@@ -20,21 +20,22 @@ public class Principal {
 
 	public static void main(String[] args) {
 
+		String url = "";
+		String usuario = "";
+		String contrasennia = "";
+		Connection conexion = null;
+
+		// Para que esté conectada siempre, borrala despues
+		// conexion =
+		// Conectar.conectar("jdbc:mysql://dns11036.phdns11.es:3306/ad2425_jgarcia",
+		// "jgarcia", "12345");
+
 		int opcionMenu;
 		int opcionSubmenuA;
 		int opcionSubmenuB;
 		int opcionSubmenuC;
 		int opcionSubmenuD;
 		int opcionSubmenuE;
-		int opcionSubmenuF;
-		int opcionSubmenuG;
-
-		String url = "";
-		String usuario = "";
-		String contrasennia = "";
-		Connection conexion = null;
-		// Para que esté conectada siempre, borrala despues
-		// conexion = Conectar.conectar("jdbc:mysql://dns11036.phdns11.es:3306/ad2425_jgarcia", "jgarcia", "12345");
 
 		String nombreTabla = "";
 		String nombreColumnaFiltro = "";
@@ -6188,7 +6189,6 @@ public class Principal {
 							textoConfirmado = "";
 							break; // Cierre case 1 opcionSubmenuA
 						case 2:
-			
 
 							while (nombreTabla.equals("")) {
 
@@ -6219,7 +6219,7 @@ public class Principal {
 									break;
 								} // Cierre del switch B
 							} // Cierre del while B
-							
+
 							opcionSubmenuC = -1;
 
 							while (opcionSubmenuC != 0) {
@@ -7173,20 +7173,4 @@ public class Principal {
 		// Devolverá el valor escrito por teclado, o -1 si no es del tipo correcto
 		return intDevuelto;
 	}
-	/*
-	 * private static String leerPasswordManual() { StringBuilder password = new
-	 * StringBuilder();
-	 * 
-	 * try { while (true) { char c = (char) System.in.read(); // Lee un carácter
-	 * 
-	 * // Detecta Enter para finalizar la captura if (c == '\n' || c == '\r') {
-	 * break; }
-	 * 
-	 * // Muestra un punto por cada carácter ingresado System.out.print("•");
-	 * 
-	 * // Almacena el carácter real password.append(c); } } catch (IOException e) {
-	 * System.out.println("\nError al leer la entrada. Inténtelo de nuevo."); }
-	 * 
-	 * return password.toString(); }
-	 */
 }
