@@ -51,7 +51,6 @@ public class ModificarDatos {
 		// Declaracion de objetos necesarios para la ejecucion de la consulta.
 		PreparedStatement stmt = null;
 		String sql = ""; // Variable para almacenar la consulta SQL.
-		int filasAfectadas;
 
 		boolean modificadoCompleto = false; // Indicador de exito en la modificacion de campos.
 

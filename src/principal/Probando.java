@@ -9,6 +9,9 @@ import funciones.Conectar;
 import funciones.ListarTablas;
 import funciones.ModificarDatos;
 
+/**
+ * Una clase para que el programador ejecute y pruebe todas las funciones
+ */
 public class Probando {
 
 	public static void main(String[] args) {

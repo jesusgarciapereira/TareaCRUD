@@ -5,6 +5,10 @@ package principal;
  */
 public class Menus {
 	
+	/**
+	 * Submenu que permite borrar datos completos o filtrados de una tabla.
+	 * @param nombreTabla Nombre de la tabla.
+	 */
 	static void submenuBorradoSeleccionCompletoFiltrado(String nombreTabla) {
 		System.out.println("Borrar Datos Tabla '" + nombreTabla + "':");
 		System.out.println("================================");
@@ -15,6 +19,9 @@ public class Menus {
 		System.out.print("Escriba una opción: ");
 	}
 	
+	/**
+	 * Submenu que permite seleccionar una tabla especifica para eliminar sus datos.
+	 */
 	static void subMenuEliminarDatosTablaConcreta() {
 		System.out.println("Borrar datos de Tabla en concreto:");
 		System.out.println("==================================");
@@ -26,7 +33,9 @@ public class Menus {
 		System.out.print("Escriba una opción: ");
 	}
 	
-	
+	/**
+	 * Submenu para borrar datos de las tablas.
+	 */
 	static void subMenuBorrarDatos() {
 		System.out.println("Borrar Datos:");
 		System.out.println("=============");
@@ -37,9 +46,12 @@ public class Menus {
 		System.out.print("Escriba una opción: ");
 	}
 	
+	/**
+	 * Submenu que permite modificar columnas de la tabla 'Profesores'.
+	 */
 	static void submenuModificarColumnasProfesores() {
-		System.out.println("Modificado de Tabla 'Profesores:");
-		System.out.println("================================");
+		System.out.println("Modificado de Tabla 'Profesores':");
+		System.out.println("=================================");
 		System.out.println("1. idProfesor.");
 		System.out.println("2. Nombre.");
 		System.out.println("3. Apellidos.");
@@ -49,10 +61,13 @@ public class Menus {
 		System.out.println();
 		System.out.print("Escriba una opción: ");
 	}
-
+	
+	/**
+	 * Submenu que permite modificar columnas de la tabla 'Alumnos'.
+	 */
 	static void submenuModificarColumnasAlumnos() {
-		System.out.println("Modificado de Tabla 'Alumnos:");
-		System.out.println("=============================");
+		System.out.println("Modificado de Tabla 'Alumnos':");
+		System.out.println("==============================");
 		System.out.println("1. idAlumno.");
 		System.out.println("2. Nombre.");
 		System.out.println("3. Apellidos.");
@@ -62,8 +77,11 @@ public class Menus {
 		System.out.print("Escriba una opción: ");
 	}
 
+	/**
+	 * Submenu que permite modificar columnas de la tabla 'Matriculas'.
+	 */
 	static void submenuModificarColumnasMatriculas() {
-		System.out.println("Modificado de Tabla 'Matriculas:");
+		System.out.println("Modificado de Tabla 'Matriculas':");
 		System.out.println("================================");
 		System.out.println("1. idMatricula.");
 		System.out.println("2. idProfesor.");
@@ -109,6 +127,9 @@ public class Menus {
 		System.out.print("Escriba una opción: ");
 	}
 
+	/**
+	 * Submenu que permite seleccionar opciones de filtro para columnas de tipo VARCHAR.
+	 */
 	static void submenuOpcionFiltroVARCHAR() {
 		System.out.println("Opción filtro:");
 		System.out.println("==============");
@@ -119,6 +140,9 @@ public class Menus {
 		System.out.print("Escriba una opción: ");
 	}
 
+	/**
+	 * Submenu que permite seleccionar opciones de filtro para columnas de tipo INT.
+	 */
 	static void submenuOpcionFiltroINT() {
 		System.out.println("Opción filtro:");
 		System.out.println("==============");
@@ -132,9 +156,12 @@ public class Menus {
 		System.out.print("Escriba una opción: ");
 	}
 
+	/**
+	 * Submenu para filtrar columnas de la tabla 'Profesores'
+	 */
 	static void submenuFiltrarColumnasProfesores() {
-		System.out.println("Filtrado de Tabla 'Profesores:");
-		System.out.println("==============================");
+		System.out.println("Filtrado de Tabla 'Profesores':");
+		System.out.println("===============================");
 		System.out.println("1. idProfesor.");
 		System.out.println("2. Nombre.");
 		System.out.println("3. Apellidos.");
@@ -144,10 +171,13 @@ public class Menus {
 		System.out.println();
 		System.out.print("Escriba una opción: ");
 	}
-
+	
+	/**
+	 * Submenu para filtrar columnas de la tabla 'Alumnos'
+	 */
 	static void submenuFiltrarColumnasAlumnos() {
-		System.out.println("Filtrado de Tabla 'Alumnos:");
-		System.out.println("===========================");
+		System.out.println("Filtrado de Tabla 'Alumnos':");
+		System.out.println("============================");
 		System.out.println("1. idAlumno.");
 		System.out.println("2. Nombre.");
 		System.out.println("3. Apellidos.");
@@ -157,9 +187,12 @@ public class Menus {
 		System.out.print("Escriba una opción: ");
 	}
 
+	/**
+	 * Submenu para filtrar columnas de la tabla 'Matriculas'
+	 */
 	static void submenuFiltrarColumnasMatriculas() {
-		System.out.println("Filtrado de Tabla 'Matriculas:");
-		System.out.println("==============================");
+		System.out.println("Filtrado de Tabla 'Matriculas':");
+		System.out.println("===============================");
 		System.out.println("1. idMatricula.");
 		System.out.println("2. idProfesor.");
 		System.out.println("3. idAlumno.");
@@ -170,6 +203,10 @@ public class Menus {
 		System.out.print("Escriba una opción: ");
 	}
 
+	/**
+	 * Submenu para seleccionar el tipo de listado: completo o filtrado
+	 * @param nombreTabla Nombre de la tabla
+	 */
 	static void submenuListadoSeleccionCompletoFiltrado(String nombreTabla) {
 		System.out.println("Listar Tabla '" + nombreTabla + "':");
 		System.out.println("=========================");
@@ -250,8 +287,6 @@ public class Menus {
 		System.out.println();
 		System.out.print("Escriba una opción: ");
 	}
-
-	// Pendiente
 
 	/**
 	 * Submenu de eliminar Tablas
