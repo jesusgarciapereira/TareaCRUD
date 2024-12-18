@@ -34,7 +34,7 @@ public class Principal {
 		String contrasennia = "";
 		Connection conexion = null;
 		// Para que esté conectada siempre, borrala despues
-		conexion = Conectar.conectar("jdbc:mysql://dns11036.phdns11.es:3306/ad2425_jgarcia", "jgarcia", "12345");
+		// conexion = Conectar.conectar("jdbc:mysql://dns11036.phdns11.es:3306/ad2425_jgarcia", "jgarcia", "12345");
 
 		String nombreTabla = "";
 		String nombreColumnaFiltro = "";
