@@ -176,7 +176,7 @@ public class Principal {
 																	// "error"
 					System.out.println("No estás conectado a la Base de Datos");
 					System.out.println(
-							"Sugerencia: Primero, siga los pasos de la opción 1 (Conectar con la Base de Datos) e intente crear las Tablas de nuevo");
+							"Sugerencia: Primero, siga los pasos de la opción 1 (Conectar con la Base de Datos) e inténtelo de nuevo");
 
 					System.out.println();
 					opcionSubmenuB = 0;
@@ -306,8 +306,7 @@ public class Principal {
 																	// "error"
 					System.out.println("No estás conectado a la Base de Datos");
 					System.out.println(
-							"Sugerencia: Primero, siga los pasos de la opción 1 (Conectar con la Base de Datos) e intente crear las Tablas de nuevo");
-
+							"Sugerencia: Primero, siga los pasos de la opción 1 (Conectar con la Base de Datos) e inténtelo de nuevo");
 					System.out.println();
 					opcionSubmenuB = 0;
 					opcionSubmenuA = 0;
@@ -1541,8 +1540,7 @@ public class Principal {
 																	// "error"
 					System.out.println("No estás conectado a la Base de Datos");
 					System.out.println(
-							"Sugerencia: Primero, siga los pasos de la opción 1 (Conectar con la Base de Datos) e intente crear las Tablas de nuevo");
-
+							"Sugerencia: Primero, siga los pasos de la opción 1 (Conectar con la Base de Datos) e inténtelo de nuevo");
 					System.out.println();
 					opcionSubmenuB = 0;
 					opcionSubmenuA = 0;
@@ -1735,8 +1733,7 @@ public class Principal {
 																	// "error"
 					System.out.println("No estás conectado a la Base de Datos");
 					System.out.println(
-							"Sugerencia: Primero, siga los pasos de la opción 1 (Conectar con la Base de Datos) e intente crear las Tablas de nuevo");
-
+							"Sugerencia: Primero, siga los pasos de la opción 1 (Conectar con la Base de Datos) e inténtelo de nuevo");
 					System.out.println();
 					opcionSubmenuB = 0;
 					opcionSubmenuA = 0;
@@ -6134,8 +6131,7 @@ public class Principal {
 					// "error"
 					System.out.println("No estás conectado a la Base de Datos");
 					System.out.println(
-							"Sugerencia: Primero, siga los pasos de la opción 1 (Conectar con la Base de Datos) e intente crear las Tablas de nuevo");
-
+							"Sugerencia: Primero, siga los pasos de la opción 1 (Conectar con la Base de Datos) e inténtelo de nuevo");
 					System.out.println();
 					opcionSubmenuB = 0;
 					opcionSubmenuA = 0;
@@ -7107,8 +7103,7 @@ public class Principal {
 																	// "error"
 					System.out.println("No estás conectado a la Base de Datos");
 					System.out.println(
-							"Sugerencia: Primero, siga los pasos de la opción 1 (Conectar con la Base de Datos) e intente crear las Tablas de nuevo");
-
+							"Sugerencia: Primero, siga los pasos de la opción 1 (Conectar con la Base de Datos) e inténtelo de nuevo");
 					System.out.println();
 					opcionSubmenuB = 0;
 					opcionSubmenuA = 0;
